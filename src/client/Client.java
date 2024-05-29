@@ -3,14 +3,16 @@ package client;
 import utils.ColorManager;
 import utils.FileOperations;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.Set;
 
 public class Client {
-    private static final String ID_FILE = "client_ids.txt";
-    private static final Set<String> ids = FileOperations.loadLines(ID_FILE);
+    private static final String CLIENTS_DIRECTORY = "clients/";
 
     private final String id;
+    private final String filePath;
     private Person bride;
     private Person groom;
     private ContactInformation brideContactInfo;
@@ -24,6 +26,27 @@ public class Client {
         this.groomContactInfo = groomContactInfo;
         this.budget = budget;
         this.id = generateUniqueId();
+        this.filePath = CLIENTS_DIRECTORY + id + ".txt";
+        saveToFile();
+    }
+
+    private void saveToFile() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write(getPlainTextRepresentation());
+        } catch (IOException e) {
+            System.out.println(ColorManager.RED + "Failed to save client information to file." + ColorManager.RESET);
+        }
+    }
+
+    private String getPlainTextRepresentation() {
+        return "---------------------------------------------------------------------" + "\n" +
+                "Client ID: " + id + "\n" + "\n" +
+                "Bride Contact Info: " + "\n" +
+                brideContactInfo.toPlainTextString() + "\n" + "\n" +
+                "Groom Contact Info: " + "\n" +
+                groomContactInfo.toPlainTextString() + "\n" + "\n" +
+                "Budget: " + budget + "\n" +
+                "---------------------------------------------------------------------";
     }
 
     private String generateInitials(ContactInformation contactInfo) {
@@ -44,14 +67,7 @@ public class Client {
         String groomInitials = generateInitials(groomContactInfo);
         String groomPhoneLast4 = generatePhoneLast4(groomContactInfo);
 
-        String generatedId = "id" + brideInitials + bridePhoneLast4 + groomInitials + groomPhoneLast4;
-
-        if (FileOperations.checkAndSaveLine(ids, generatedId, ID_FILE)) {
-            return generatedId;
-        } else {
-            System.out.println(ColorManager.RED + "The ID " + generatedId + " is already taken." + ColorManager.RESET);
-            return null;
-        }
+        return "id" + brideInitials + bridePhoneLast4 + groomInitials + groomPhoneLast4;
     }
 
     public String getId() {

@@ -46,6 +46,13 @@ public class ContactInformation {
         this.city = city;
     }
 
+    public String toPlainTextString() {
+        return "Name: " + person.getFirstName() + " " + person.getLastName() + "\n" +
+                "Email: " + email + "\n" +
+                "Phone: " + phone + "\n" +
+                "City: " + city + "\n";
+    }
+
     @Override
     public String toString() {
         return "Name: " + ColorManager.PINK + person + ColorManager.RESET + "'\n"+
