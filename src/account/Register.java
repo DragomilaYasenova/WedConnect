@@ -2,48 +2,27 @@ package account;
 
 import client.Client;
 import utils.ColorManager;
-import utils.FileOperations;
 
-import java.util.Scanner;
 import java.util.Set;
 
 public class Register {
-    private static final String ACCOUNTS_FILE = "accounts_list.txt";
-    private static final Set<String> accounts = FileOperations.loadLines(ACCOUNTS_FILE);
+    private final AccountStorage accountStorage;
+    private final PasswordManager passwordManager;
     private String email;
     private String password;
     private String confirmPassword;
     private Client client;
 
-    public Register(String email, String password, String confirmPassword) {
+    public Register(AccountStorage accountStorage, PasswordManager passwordManager, String email, String password, String confirmPassword) {
+        this.accountStorage = accountStorage;
+        this.passwordManager = passwordManager;
         this.email = email;
         this.password = password;
         this.confirmPassword = confirmPassword;
     }
 
-    public String enterValidPassword(Scanner scanner) {
-        String password;
-        String confirmPassword;
-
-        do {
-            System.out.println("Enter your password: ");
-            password = scanner.nextLine();
-            System.out.println("Enter your password again: ");
-            confirmPassword = scanner.nextLine();
-
-            if (!password.equals(confirmPassword)) {
-                System.out.println(ColorManager.RED + "Passwords do not match. Please try again." + ColorManager.RESET + "\n");
-            }
-        } while (!password.equals(confirmPassword));
-
-        this.password = password;
-        this.confirmPassword = confirmPassword;
-
-        return password;
-    }
-
-
     public void saveAccount() {
+        Set<String> accounts = accountStorage.loadAccounts();
         String emailInfo = email.trim();
         for (String account : accounts) {
             String existingEmail = account.split(":")[0].trim();
@@ -53,14 +32,13 @@ public class Register {
             }
         }
 
-        String accountInfo = emailInfo + " : " + password;
-        FileOperations.saveLine(ACCOUNTS_FILE, accountInfo);
-        accounts.add(accountInfo);
-        System.out.println(ColorManager.GREEN + "Account successfully registered." + ColorManager.RESET + "\n");
-    }
-
-    public boolean arePasswordsMatching() {
-        return password.equals(confirmPassword);
+        if (passwordManager.passwordsMatch(password, confirmPassword)) {
+            String accountInfo = emailInfo + " : " + password;
+            accountStorage.saveAccount(accountInfo);
+            System.out.println(ColorManager.GREEN + "Account successfully registered." + ColorManager.RESET + "\n");
+        } else {
+            System.out.println(ColorManager.RED + "Passwords do not match." + ColorManager.RESET + "\n");
+        }
     }
 
     public String getEmail() {
@@ -83,9 +61,8 @@ public class Register {
         return confirmPassword;
     }
 
-    public String setConfirmPassword(String confirmPassword) {
+    public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
-        return confirmPassword;
     }
 
     public Client getClient() {
@@ -94,10 +71,6 @@ public class Register {
 
     public void setClient(Client client) {
         this.client = client;
-    }
-
-    public static String getAccountsFile() {
-        return ACCOUNTS_FILE;
     }
 
     @Override

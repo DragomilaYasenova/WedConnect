@@ -1,4 +1,4 @@
-package restaurant;
+package restaurant.amenity;
 
 public enum Amenity {
     BEACH,

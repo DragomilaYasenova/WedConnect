@@ -1,2 +1,0 @@
-test@asd : asd
-test2@asd : asd

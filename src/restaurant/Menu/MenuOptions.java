@@ -1,4 +1,4 @@
-package restaurant;
+package restaurant.Menu;
 
 public enum MenuOptions {
     STANDARD,

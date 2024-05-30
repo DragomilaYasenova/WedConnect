@@ -14,7 +14,6 @@ public class FileOperations {
                 lines.add(line.trim());
             }
         } catch (IOException ignored) {
-
         }
         return lines;
     }

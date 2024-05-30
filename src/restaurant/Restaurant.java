@@ -1,21 +1,27 @@
 package restaurant;
+import restaurant.Menu.MenuManager;
+import restaurant.Menu.MenuOptions;
+import restaurant.amenity.Amenity;
+import restaurant.amenity.AmenityManager;
+import restaurant.date.DateManager;
+import restaurant.hall.HallManager;
 import utils.ColorManager;
 
 import java.util.*;
 
 public class Restaurant {
     private String name;
-    private Set<Amenity> amenity;
-    private Set<MenuOptions> menuOptions;
-    private Map<String, Integer> hallsMaxCapacity;
-    private List<String> takenDates;
+    private AmenityManager amenityManager;
+    private MenuManager menuManager;
+    private HallManager hallManager;
+    private DateManager dateManager;
 
-    public Restaurant(String name) {
+    public Restaurant(String name, AmenityManager amenityManager, MenuManager menuManager, HallManager hallManager, DateManager dateManager) {
         this.name = name;
-        this.amenity = new LinkedHashSet<>();
-        this.menuOptions = new LinkedHashSet<>();
-        this.hallsMaxCapacity = new LinkedHashMap<>();
-        this.takenDates = new ArrayList<>();
+        this.amenityManager = amenityManager;
+        this.menuManager = menuManager;
+        this.hallManager = hallManager;
+        this.dateManager = dateManager;
     }
 
     public String getName() {
@@ -26,71 +32,26 @@ public class Restaurant {
         this.name = name;
     }
 
-    public Set<Amenity> getAmenity() {
-        return amenity;
+    public AmenityManager getAmenityManager() {
+        return amenityManager;
     }
 
-    public void setAmenity(Set<Amenity> amenity) {
-        this.amenity = amenity;
+    public MenuManager getMenuManager() {
+        return menuManager;
     }
 
-    public Set<MenuOptions> getMenuOptions() {
-        return menuOptions;
+    public HallManager getHallManager() {
+        return hallManager;
     }
 
-    public void setMenuOptions(Set<MenuOptions> menuOptions) {
-        this.menuOptions = menuOptions;
+    public DateManager getDateManager() {
+        return dateManager;
     }
-
-    public Map<String, Integer> getHallsMaxCapacity() {
-        return hallsMaxCapacity;
-    }
-
-    public void setHallsMaxCapacity(Map<String, Integer> hallsMaxCapacity) {
-        this.hallsMaxCapacity = hallsMaxCapacity;
-    }
-
-    public List<String> getTakenDates() {
-        return takenDates;
-    }
-
-    public void setTakenDates(List<String> takenDates) {
-        this.takenDates = takenDates;
-    }
-
-    public void addAmenity(Amenity type) {
-        amenity.add(type);
-    }
-
-    public void removeAmenity(Amenity type) {
-        amenity.remove(type);
-    }
-
-    public void addHall(String hallName, int maxCapacity) {
-        hallsMaxCapacity.put(hallName, maxCapacity);
-    }
-
-    public void removeHall(String hallName) {
-        hallsMaxCapacity.remove(hallName);
-    }
-
-    public void addMenuOptions(MenuOptions options) {
-        menuOptions.add(options);
-    }
-
-    public void removeMenuOptions(MenuOptions options) {
-        menuOptions.remove(options);
-    }
-
-    public void printTakenDates() {
-        System.out.println("Taken dates: " + takenDates);
-    }
-
     @Override
     public String toString() {
         return "Restaurant '" + ColorManager.CYAN + name + ColorManager.RESET + "'\n" +
-                "Amenity: " + ColorManager.CYAN + amenity + ColorManager.RESET + "\n" +
-                "Halls Capacity: " + ColorManager.CYAN + hallsMaxCapacity + ColorManager.RESET + "\n" +
-                "Menu Options: " + ColorManager.CYAN + menuOptions + ColorManager.RESET;
+                "Amenity: " + ColorManager.CYAN + amenityManager.getAmenities() + ColorManager.RESET + "\n" +
+                "Halls Capacity: " + ColorManager.CYAN + hallManager.getHallsMaxCapacity() + ColorManager.RESET + "\n" +
+                "Menu Options: " + ColorManager.CYAN + menuManager.getMenuOptions() + ColorManager.RESET;
     }
 }

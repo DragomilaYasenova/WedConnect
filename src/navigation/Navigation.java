@@ -14,14 +14,14 @@ import java.util.Scanner;
 
 public class Navigation {
     private final Scanner scanner;
-    private final Map<String, Register> accounts;
+    private final AccountService accountService;
+    private final ClientService clientService;
     private Register loggedInAccount;
-    private final Login login;
 
-    public Navigation(Scanner scanner) {
+    public Navigation(Scanner scanner, AccountService accountService, ClientService clientService) {
         this.scanner = scanner;
-        this.accounts = new HashMap<>();
-        this.login = new Login(accounts);
+        this.accountService = accountService;
+        this.clientService = clientService;
     }
 
     public void menu() {
@@ -33,14 +33,7 @@ public class Navigation {
                     3. Exit
                     """);
 
-            int choice;
-            try {
-                choice = Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println(ColorManager.RED + "Invalid choice. Please enter a number." + ColorManager.RESET);
-                continue;
-            }
-
+            int choice = getChoice();
             switch (choice) {
                 case 1:
                     registerMenu();
@@ -57,44 +50,64 @@ public class Navigation {
         }
     }
 
-    private void loginMenu() {
-        loggedInAccount = login.loginMenu(scanner);
-        if (loggedInAccount != null) {
-            accountMenu();
+    private int getChoice() {
+        while (true) {
+            try {
+                return Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println(ColorManager.RED + "Invalid input. Please enter a number." + ColorManager.RESET);
+            }
         }
     }
 
-    public void registerMenu() {
+    private void registerMenu() {
         System.out.println("Enter your email: ");
         String email = scanner.nextLine();
+        System.out.println("Enter your password: ");
+        String password = scanner.nextLine();
 
-        Register register = new Register(email, "", "");
-        String password = register.enterValidPassword(scanner);
-        register.setPassword(password);
-        register.saveAccount();
-        accounts.put(email, register);
+        while (true) {
+            System.out.println("Confirm your password: ");
+            String confirmPassword = scanner.nextLine();
+
+            if (password.equals(confirmPassword)) {
+                accountService.register(email, password, confirmPassword);
+                break;
+            } else {
+                System.out.println(ColorManager.RED + "Passwords do not match. Please try again." + ColorManager.RESET);
+            }
+        }
+    }
+
+    private void loginMenu() {
+        loggedInAccount = accountService.login(scanner);
+        if (loggedInAccount != null) {
+            System.out.println(ColorManager.GREEN + "Login successful!" + ColorManager.RESET);
+            accountMenu();
+        } else {
+            System.out.println(ColorManager.RED + "Login failed." + ColorManager.RESET);
+        }
     }
 
     public void accountMenu() {
         while (true) {
-            System.out.println(ColorManager.PURPLE + "Account Menu" + ColorManager.RESET + "\n" +
-                    "Choose what you want to do: " + "\n" +
-                    "1. Add Client Information" + "\n" +
-                    "2. Logout" + "\n");
+            System.out.println("""
+                    Choose what you want to do:\s
+                    1. Add Client Information
+                    2. View Profile
+                    3. Edit Profile
+                    3. Logout
+                    """);
 
-            int choice;
-            try {
-                choice = Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println(ColorManager.RED + "Invalid choice. Please enter a number." + ColorManager.RESET + "\n");
-                continue;
-            }
-
+            int choice = getChoice();
             switch (choice) {
                 case 1:
-                    addInformationToAccount();
+                    clientService.addClientMenu(scanner, loggedInAccount);
                     break;
                 case 2:
+                    viewProfile();
+                    break;
+                case 3:
                     loggedInAccount = null;
                     System.out.println(ColorManager.GREEN + "Logged out successfully!" + ColorManager.RESET + "\n");
                     return;
@@ -104,46 +117,12 @@ public class Navigation {
         }
     }
 
-    public void addInformationToAccount() {
-        if (loggedInAccount == null) {
-            System.out.println(ColorManager.RED + "You need to log in first." + ColorManager.RESET + "\n");
-            return;
+
+    private void viewProfile() {
+        if (loggedInAccount != null && loggedInAccount.getClient() != null) {
+            System.out.println(loggedInAccount.getClient());
+        } else {
+            System.out.println(ColorManager.RED + "Profile not found." + ColorManager.RESET);
         }
-
-        System.out.println("Enter bride's first name: ");
-        String brideFirstName = scanner.nextLine();
-        System.out.println("Enter bride's last name: ");
-        String brideLastName = scanner.nextLine();
-        Person bride = new Person(brideFirstName, brideLastName);
-
-        System.out.println("Enter groom's first name: ");
-        String groomFirstName = scanner.nextLine();
-        System.out.println("Enter groom's last name: ");
-        String groomLastName = scanner.nextLine();
-        Person groom = new Person(groomFirstName, groomLastName);
-
-        System.out.println("Enter bride's email: ");
-        String brideEmail = scanner.nextLine();
-        System.out.println("Enter bride's phone: ");
-        String bridePhone = scanner.nextLine();
-        System.out.println("Enter bride's city: ");
-        String brideCity = scanner.nextLine();
-        ContactInformation brideContactInfo = new ContactInformation(bride, brideEmail, bridePhone, brideCity);
-
-        System.out.println("Enter groom's email: ");
-        String groomEmail = scanner.nextLine();
-        System.out.println("Enter groom's phone: ");
-        String groomPhone = scanner.nextLine();
-        System.out.println("Enter groom's city: ");
-        String groomCity = scanner.nextLine();
-        ContactInformation groomContactInfo = new ContactInformation(groom, groomEmail, groomPhone, groomCity);
-
-        System.out.println("Enter budget: ");
-        BigDecimal budget = new BigDecimal(scanner.nextLine());
-
-        Client client = new Client(bride, groom, brideContactInfo, groomContactInfo, budget);
-        loggedInAccount.setClient(client);
-        System.out.println(ColorManager.GREEN + "Client information added successfully!" + ColorManager.RESET);
-        System.out.println(client);
     }
 }
