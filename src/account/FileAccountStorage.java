@@ -14,6 +14,7 @@ public class FileAccountStorage extends AccountStorage {
 
     @Override
     public void saveAccount(String accountInfo) {
-        FileOperations.saveLine(ACCOUNTS_FILE, accountInfo);
+        Set<String> accounts = loadAccounts();
+        FileOperations.checkAndSaveLine(ACCOUNTS_FILE, accountInfo, accounts);
     }
 }

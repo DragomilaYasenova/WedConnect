@@ -22,6 +22,7 @@ public class AccountService {
     }
 
     private void loadAccounts() {
+        accounts.clear();
         Set<String> accountInfo = accountStorage.loadAccounts();
         for (String info : accountInfo) {
             String[] parts = info.split(":");
@@ -43,6 +44,8 @@ public class AccountService {
         String email = scanner.nextLine();
         System.out.println("Enter your password: ");
         String password = scanner.nextLine();
+
+        loadAccounts();
 
         Register account = accounts.get(email);
         if (account != null && account.getPassword().equals(password)) {

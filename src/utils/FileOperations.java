@@ -13,7 +13,8 @@ public class FileOperations {
             while ((line = reader.readLine()) != null) {
                 lines.add(line.trim());
             }
-        } catch (IOException ignored) {
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return lines;
     }
@@ -27,13 +28,10 @@ public class FileOperations {
         }
     }
 
-    public static boolean checkAndSaveLine(Set<String> lines, String newLine, String fileName) {
-        if (lines.contains(newLine)) {
-            return false;
-        } else {
+    public static void checkAndSaveLine(String fileName, String newLine, Set<String> lines) {
+        if (!lines.contains(newLine)) {
             saveLine(fileName, newLine);
             lines.add(newLine);
-            return true;
         }
     }
 }
