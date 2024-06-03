@@ -1,8 +1,11 @@
 package navigation;
 
-import account.AccountStorage;
+import account.AccountLoader;
+import account.Login;
+import account.storage.AccountStorage;
 import account.PasswordManager;
 import account.Register;
+import utils.ColorManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,45 +16,28 @@ public class AccountService {
     private final AccountStorage accountStorage;
     private final PasswordManager passwordManager;
     private final Map<String, Register> accounts;
+    private final Login login;
 
     public AccountService(AccountStorage accountStorage, PasswordManager passwordManager) {
         this.accountStorage = accountStorage;
         this.passwordManager = passwordManager;
         this.accounts = new HashMap<>();
+        this.login = new Login(accounts, accountStorage, passwordManager);
         loadAccounts();
     }
 
     private void loadAccounts() {
         accounts.clear();
-        Set<String> accountInfo = accountStorage.loadAccounts();
-        for (String info : accountInfo) {
-            String[] parts = info.split(":");
-            if (parts.length == 2) {
-                String email = parts[0].trim();
-                String password = parts[1].trim();
-                accounts.put(email, new Register(accountStorage, passwordManager, email, password, password));
-            }
-        }
+        accounts.putAll(AccountLoader.loadAccounts(accountStorage, passwordManager));
     }
 
     public void register(String email, String password, String confirmPassword) {
         Register register = new Register(accountStorage, passwordManager, email, password, confirmPassword);
         register.saveAccount();
+        loadAccounts();
     }
 
     public Register login(Scanner scanner) {
-        System.out.println("Enter your email: ");
-        String email = scanner.nextLine();
-        System.out.println("Enter your password: ");
-        String password = scanner.nextLine();
-
-        loadAccounts();
-
-        Register account = accounts.get(email);
-        if (account != null && account.getPassword().equals(password)) {
-            return account;
-        } else {
-            return null;
-        }
+        return login.login(scanner);
     }
 }

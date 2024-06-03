@@ -1,6 +1,6 @@
 package test.account;
 
-import account.InMemoryAccountStorage;
+import account.storage.InMemoryAccountStorage;
 import account.PasswordManager;
 import account.Register;
 import org.junit.jupiter.api.BeforeEach;

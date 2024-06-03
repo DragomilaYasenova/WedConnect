@@ -1,15 +1,19 @@
 ---------------------------------------------------------------------
-Client ID: idKK1234KF7890
+Client ID: idRI1234KK7890
 
 Bride Contact Info: 
-Name: Kiki Kikozova
-Email: kiki@asd
+Name: Rebeka Ivanova
+Email: rebeka@asd
 Phone: 0800001234
 City: Sofia
+
+
 Groom Contact Info: 
-Name: Koko Filipov
-Email: koko@asd
+Name: Kiko Kolev
+Email: kiko@asd
 Phone: 0800007890
 City: Sofia
-Budget: 10000000
+
+
+Budget: 100000000
 ---------------------------------------------------------------------

@@ -3,6 +3,7 @@ package navigation;
 import account.Register;
 import client.*;
 import utils.ColorManager;
+import utils.FileOperations;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
@@ -53,6 +54,11 @@ public class ClientService {
         BigDecimal budget = new BigDecimal(scanner.nextLine());
 
         Client client = new Client(bride, groom, brideContactInfo, groomContactInfo, budget, idGenerator);
+
+
+        String clientId = idGenerator.generateUniqueId(brideContactInfo, groomContactInfo);
+        loggedInAccount.setClientId(clientId);
+        loggedInAccount.saveAccount();
 
         loggedInAccount.setClient(client);
         clientFileSaver.saveClientToFile(client, "./clients/");

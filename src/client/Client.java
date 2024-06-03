@@ -29,9 +29,9 @@ public class Client {
         return "---------------------------------------------------------------------" + "\n" +
                 "Client ID: " + id + "\n" + "\n" +
                 "Bride Contact Info: " + "\n" +
-                brideContactInfo.toPlainTextString() + "\n" + "\n" +
+                brideContactInfo.toString() + "\n" + "\n" +
                 "Groom Contact Info: " + "\n" +
-                groomContactInfo.toPlainTextString() + "\n" + "\n" +
+                groomContactInfo.toString() + "\n" + "\n" +
                 "Budget: " + budget + "\n" +
                 "---------------------------------------------------------------------";
     }

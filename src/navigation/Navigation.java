@@ -1,15 +1,10 @@
 package navigation;
 
-import account.Login;
 import account.Register;
 import client.Client;
-import client.ContactInformation;
-import client.Person;
 import utils.ColorManager;
+import utils.FileOperations;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Navigation {
@@ -95,7 +90,6 @@ public class Navigation {
                     Choose what you want to do:\s
                     1. Add Client Information
                     2. View Profile
-                    3. Edit Profile
                     3. Logout
                     """);
 
@@ -105,7 +99,11 @@ public class Navigation {
                     clientService.addClientMenu(scanner, loggedInAccount);
                     break;
                 case 2:
-                    viewProfile();
+                    if (loggedInAccount != null) {
+                        viewProfile("./clients/" + loggedInAccount.getClientIdFromFile() + ".txt");
+                    } else {
+                        System.out.println(ColorManager.RED + "No logged in account found." + ColorManager.RESET + "\n");
+                    }
                     break;
                 case 3:
                     loggedInAccount = null;
@@ -117,12 +115,13 @@ public class Navigation {
         }
     }
 
-
-    private void viewProfile() {
-        if (loggedInAccount != null && loggedInAccount.getClient() != null) {
-            System.out.println(loggedInAccount.getClient());
+    private void viewProfile(String fileName) {
+        String fileContent = FileOperations.readFile(fileName);
+        if (fileContent != null && !fileContent.isEmpty()) {
+            System.out.println("Profile Information:");
+            System.out.println(fileContent);
         } else {
-            System.out.println(ColorManager.RED + "Profile not found." + ColorManager.RESET);
+            System.out.println(ColorManager.RED + "Profile information not found." + ColorManager.RESET);
         }
     }
 }

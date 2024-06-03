@@ -1,5 +1,6 @@
-package account;
+package account.storage;
 
+import account.storage.AccountStorage;
 import utils.FileOperations;
 
 import java.util.Set;

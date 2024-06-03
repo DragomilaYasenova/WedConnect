@@ -1,10 +1,12 @@
-package account;
+package account.storage;
+
+import account.storage.AccountStorage;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class InMemoryAccountStorage extends AccountStorage {
-    private Set<String> accounts = new HashSet<>();
+    private final Set<String> accounts = new HashSet<>();
 
     @Override
     public Set<String> loadAccounts() {

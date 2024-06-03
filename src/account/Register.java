@@ -1,9 +1,15 @@
 package account;
 
+import account.storage.AccountStorage;
 import client.Client;
+import exceptions.AccountAlreadyExistsException;
+import exceptions.PasswordsDoNotMatchException;
 import utils.ColorManager;
+import utils.FileOperations;
 
 import java.util.Set;
+
+import static utils.FileOperations.updateAccountInfo;
 
 public class Register {
     private final AccountStorage accountStorage;
@@ -12,6 +18,7 @@ public class Register {
     private String password;
     private String confirmPassword;
     private Client client;
+    private String clientId;
 
     public Register(AccountStorage accountStorage, PasswordManager passwordManager, String email, String password, String confirmPassword) {
         this.accountStorage = accountStorage;
@@ -22,23 +29,33 @@ public class Register {
     }
 
     public void saveAccount() {
-        Set<String> accounts = accountStorage.loadAccounts();
-        String emailInfo = email.trim();
-        for (String account : accounts) {
-            String existingEmail = account.split(":")[0].trim();
-            if (existingEmail.equals(emailInfo)) {
-                System.out.println(ColorManager.RED + "An account with email " + emailInfo + " is already registered." + ColorManager.RESET + "\n");
-                return;
+        if(clientId != null){
+            String fileName = "accounts_list.txt";
+            String oldLine = email + " : " + password + " : null";
+            String newLine = email + " : " + password + " : " + clientId;
+            updateAccountInfo(fileName, oldLine, newLine);
+        } else {
+            String emailInfo = email.trim();
+            try {
+                if (accountStorage.accountExists(emailInfo)) {
+                    throw new AccountAlreadyExistsException(emailInfo);
+                }
+
+                if (!passwordManager.passwordsMatch(password, confirmPassword)) {
+                    throw new PasswordsDoNotMatchException();
+                }
+
+                String accountInfo = emailInfo + " : " + password + " : " + clientId;
+                accountStorage.saveAccount(accountInfo);
+                System.out.println(ColorManager.GREEN + "Account successfully registered." + ColorManager.RESET + "\n");
+
+            } catch (AccountAlreadyExistsException | PasswordsDoNotMatchException e) {
+                System.out.println(ColorManager.RED + e.getMessage() + ColorManager.RESET + "\n");
+            } catch (Exception e) {
+                System.out.println(ColorManager.RED + "Error saving account: " + e.getMessage() + ColorManager.RESET + "\n");
             }
         }
 
-        if (passwordManager.passwordsMatch(password, confirmPassword)) {
-            String accountInfo = emailInfo + " : " + password;
-            accountStorage.saveAccount(accountInfo);
-            System.out.println(ColorManager.GREEN + "Account successfully registered." + ColorManager.RESET + "\n");
-        } else {
-            System.out.println(ColorManager.RED + "Passwords do not match." + ColorManager.RESET + "\n");
-        }
     }
 
     public String getEmail() {
@@ -73,13 +90,16 @@ public class Register {
         this.client = client;
     }
 
-    @Override
-    public String toString() {
-        return "Register{" +
-                "email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", confirmPassword='" + confirmPassword + '\'' +
-                ", client=" + client +
-                '}';
+    public String getClientIdFromFile() {
+        String fileName = "accounts_list.txt";
+        return FileOperations.readClientId(fileName, email, password);
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 }

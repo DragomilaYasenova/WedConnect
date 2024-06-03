@@ -1,4 +1,4 @@
-import account.FileAccountStorage;
+import account.storage.FileAccountStorage;
 import client.ClientFileSaver;
 import client.IdGenerator;
 import navigation.AccountService;
