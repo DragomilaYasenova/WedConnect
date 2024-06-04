@@ -1,7 +1,8 @@
 package navigation;
 
 import account.Register;
-import client.Client;
+import exceptions.account.AccountAlreadyExistsException;
+import exceptions.password.PasswordsDoNotMatchException;
 import utils.ColorManager;
 import utils.FileOperations;
 
@@ -19,7 +20,7 @@ public class Navigation {
         this.clientService = clientService;
     }
 
-    public void menu() {
+    public void menu() throws PasswordsDoNotMatchException, AccountAlreadyExistsException {
         while (true) {
             System.out.println("""
                     Choose what you want to do:\s
@@ -55,9 +56,9 @@ public class Navigation {
         }
     }
 
-    private void registerMenu() {
-        System.out.println("Enter your email: ");
-        String email = scanner.nextLine();
+    private void registerMenu() throws PasswordsDoNotMatchException, AccountAlreadyExistsException {
+        System.out.println("Enter your username: ");
+        String username = scanner.nextLine();
         System.out.println("Enter your password: ");
         String password = scanner.nextLine();
 
@@ -66,7 +67,7 @@ public class Navigation {
             String confirmPassword = scanner.nextLine();
 
             if (password.equals(confirmPassword)) {
-                accountService.register(email, password, confirmPassword);
+                accountService.register(username, password, confirmPassword);
                 break;
             } else {
                 System.out.println(ColorManager.RED + "Passwords do not match. Please try again." + ColorManager.RESET);
@@ -74,7 +75,7 @@ public class Navigation {
         }
     }
 
-    private void loginMenu() {
+    private void loginMenu() throws PasswordsDoNotMatchException, AccountAlreadyExistsException {
         loggedInAccount = accountService.login(scanner);
         if (loggedInAccount != null) {
             System.out.println(ColorManager.GREEN + "Login successful!" + ColorManager.RESET);
@@ -84,7 +85,7 @@ public class Navigation {
         }
     }
 
-    public void accountMenu() {
+    public void accountMenu() throws PasswordsDoNotMatchException, AccountAlreadyExistsException {
         while (true) {
             System.out.println("""
                     Choose what you want to do:\s

@@ -1,12 +1,14 @@
 package client;
 
+import validators.StringValidator;
+
 public class Person {
     private String firstName;
     private String lastName;
 
     public Person(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        setFirstName(firstName);
+        setLastName(lastName);
     }
 
     public String getFirstName() {
@@ -14,7 +16,11 @@ public class Person {
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        if (StringValidator.isValidString(firstName)) {
+            this.firstName = firstName;
+        } else {
+            throw new IllegalArgumentException("Invalid first name format");
+        }
     }
 
     public String getLastName() {
@@ -22,7 +28,11 @@ public class Person {
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        if (StringValidator.isValidString(lastName)) {
+            this.lastName = lastName;
+        } else {
+            throw new IllegalArgumentException("Invalid last name format");
+        }
     }
 
     @Override

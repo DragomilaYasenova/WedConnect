@@ -1,6 +1,9 @@
 import account.storage.FileAccountStorage;
 import client.ClientFileSaver;
 import client.IdGenerator;
+import exceptions.account.AccountAlreadyExistsException;
+import exceptions.password.PasswordCannotBeNullException;
+import exceptions.password.PasswordsDoNotMatchException;
 import navigation.AccountService;
 import navigation.ClientService;
 import navigation.Navigation;
@@ -10,7 +13,7 @@ import account.PasswordManager;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws PasswordsDoNotMatchException, AccountAlreadyExistsException, PasswordCannotBeNullException {
         Scanner scanner = new Scanner(System.in);
 
         FileAccountStorage accountStorage = new FileAccountStorage();

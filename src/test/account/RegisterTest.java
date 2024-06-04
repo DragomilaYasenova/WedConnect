@@ -3,6 +3,9 @@ package test.account;
 import account.storage.InMemoryAccountStorage;
 import account.PasswordManager;
 import account.Register;
+import exceptions.account.AccountAlreadyExistsException;
+import exceptions.password.PasswordCannotBeNullException;
+import exceptions.password.PasswordsDoNotMatchException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,10 +29,56 @@ class RegisterTest {
     }
 
     @Test
-    public void testSaveAccount() {
+    public void nullClientId() throws PasswordsDoNotMatchException, AccountAlreadyExistsException, PasswordCannotBeNullException {
+        register.setClientId(null);
+
         register.saveAccount();
 
         Set<String> accounts = accountStorage.loadAccounts();
-        assertTrue(accounts.contains("test@example.com : password123"));
+        assertTrue(accounts.stream().anyMatch(account -> account.equals("test@example.com : password123 : null")));
     }
+
+    @Test
+    public void successfulRegistration() throws PasswordsDoNotMatchException, AccountAlreadyExistsException, PasswordCannotBeNullException {
+        accountStorage.saveAccount("test@example.com : password123 : clientId");
+
+        register.saveAccount();
+
+        Set<String> accounts = accountStorage.loadAccounts();
+        assertTrue(accounts.stream().anyMatch(account -> account.equals("test@example.com : password123 : clientId")));
+    }
+
+    @Test
+    public void accountAlreadyExists() {
+        accountStorage.saveAccount("test@example.com : password123 : null");
+
+        Exception exception = assertThrows(AccountAlreadyExistsException.class, () -> {
+            register.saveAccount();
+        });
+
+        assertEquals("An account with email test@example.com is already registered.", exception.getMessage());
+    }
+
+    @Test
+    public void passwordsDoNotMatch() {
+        register = new Register(accountStorage, passwordManager, "test@example.com", "password123", "differentPassword");
+
+        Exception exception = assertThrows(PasswordsDoNotMatchException.class, () -> {
+            register.saveAccount();
+        });
+
+        assertEquals("Passwords do not match.", exception.getMessage());
+    }
+
+    @Test
+    public void nullPassword() {
+        register = new Register(accountStorage, passwordManager, "test@example.com", null, null);
+
+        Exception exception = assertThrows(PasswordCannotBeNullException.class, () -> {
+            register.saveAccount();
+        });
+
+        assertEquals("Password cannot be null.", exception.getMessage());
+    }
+
 }

@@ -2,68 +2,71 @@ package account;
 
 import account.storage.AccountStorage;
 import client.Client;
-import exceptions.AccountAlreadyExistsException;
-import exceptions.PasswordsDoNotMatchException;
+import exceptions.UsernameCannotBeNullException;
+import exceptions.account.AccountAlreadyExistsException;
+import exceptions.password.PasswordCannotBeNullException;
+import exceptions.password.PasswordsDoNotMatchException;
 import utils.ColorManager;
 import utils.FileOperations;
-
-import java.util.Set;
+import validators.UsernameValidator;
 
 import static utils.FileOperations.updateAccountInfo;
 
 public class Register {
     private final AccountStorage accountStorage;
     private final PasswordManager passwordManager;
-    private String email;
-    private String password;
+    private String username;
+    private String password = null;
     private String confirmPassword;
     private Client client;
     private String clientId;
 
-    public Register(AccountStorage accountStorage, PasswordManager passwordManager, String email, String password, String confirmPassword) {
+    public Register(AccountStorage accountStorage, PasswordManager passwordManager, String username, String password, String confirmPassword) {
         this.accountStorage = accountStorage;
         this.passwordManager = passwordManager;
-        this.email = email;
+        this.username = username;
         this.password = password;
         this.confirmPassword = confirmPassword;
     }
 
-    public void saveAccount() {
-        if(clientId != null){
+    public void saveAccount() throws AccountAlreadyExistsException, PasswordsDoNotMatchException, PasswordCannotBeNullException {
+        if (clientId != null) {
             String fileName = "accounts_list.txt";
-            String oldLine = email + " : " + password + " : null";
-            String newLine = email + " : " + password + " : " + clientId;
+            String oldLine = username + " : " + password + " : null";
+            String newLine = username + " : " + password + " : " + clientId;
             updateAccountInfo(fileName, oldLine, newLine);
         } else {
-            String emailInfo = email.trim();
-            try {
-                if (accountStorage.accountExists(emailInfo)) {
-                    throw new AccountAlreadyExistsException(emailInfo);
-                }
+            String usernameInfo = username.trim();
 
-                if (!passwordManager.passwordsMatch(password, confirmPassword)) {
-                    throw new PasswordsDoNotMatchException();
-                }
-
-                String accountInfo = emailInfo + " : " + password + " : " + clientId;
-                accountStorage.saveAccount(accountInfo);
-                System.out.println(ColorManager.GREEN + "Account successfully registered." + ColorManager.RESET + "\n");
-
-            } catch (AccountAlreadyExistsException | PasswordsDoNotMatchException e) {
-                System.out.println(ColorManager.RED + e.getMessage() + ColorManager.RESET + "\n");
-            } catch (Exception e) {
-                System.out.println(ColorManager.RED + "Error saving account: " + e.getMessage() + ColorManager.RESET + "\n");
+            if (accountStorage.accountExists(usernameInfo)) {
+                throw new AccountAlreadyExistsException("An account with username " + username + " is already registered.");
             }
+
+            if (passwordManager.nullPassword(password)) {
+                throw new PasswordCannotBeNullException("Password cannot be null.");
+            }
+
+            if (UsernameValidator.nullUsername(username)) {
+                throw new UsernameCannotBeNullException("Username cannot be null.");
+            }
+
+
+            if (!passwordManager.passwordsMatch(password, confirmPassword)) {
+                throw new PasswordsDoNotMatchException("Passwords do not match.");
+            }
+
+            String accountInfo = usernameInfo + " : " + password + " : " + clientId;
+            accountStorage.saveAccount(accountInfo);
+            System.out.println(ColorManager.GREEN + "Account successfully registered." + ColorManager.RESET + "\n");
         }
-
     }
 
-    public String getEmail() {
-        return email;
+    public String getuUername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -92,7 +95,7 @@ public class Register {
 
     public String getClientIdFromFile() {
         String fileName = "accounts_list.txt";
-        return FileOperations.readClientId(fileName, email, password);
+        return FileOperations.readClientId(fileName, username, password);
     }
 
     public String getClientId() {

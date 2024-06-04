@@ -7,54 +7,31 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Map;
 
 public class Client {
     private final String id;
-    private final Person bride;
-    private final Person groom;
-    private final ContactInformation brideContactInfo;
-    private final ContactInformation groomContactInfo;
+    private final Map<String, Object> brideInfo;
+    private final Map<String, Object> groomInfo;
     private final BigDecimal budget;
 
-    public Client(Person bride, Person groom, ContactInformation brideContactInfo, ContactInformation groomContactInfo, BigDecimal budget, IdGenerator idGenerator) {
-        this.bride = bride;
-        this.groom = groom;
-        this.brideContactInfo = brideContactInfo;
-        this.groomContactInfo = groomContactInfo;
+    public Client(Map<String, Object> brideInfo, Map<String, Object> groomInfo, BigDecimal budget, IdGenerator idGenerator) {
+        this.brideInfo = brideInfo;
+        this.groomInfo = groomInfo;
         this.budget = budget;
-        this.id = idGenerator.generateUniqueId(brideContactInfo, groomContactInfo);
+        this.id = idGenerator.generateUniqueId((ContactInformation) brideInfo.get("contactInfo"), (ContactInformation) groomInfo.get("contactInfo"));
     }
 
-    public String getPlainTextRepresentation() {
-        return "---------------------------------------------------------------------" + "\n" +
-                "Client ID: " + id + "\n" + "\n" +
-                "Bride Contact Info: " + "\n" +
-                brideContactInfo.toString() + "\n" + "\n" +
-                "Groom Contact Info: " + "\n" +
-                groomContactInfo.toString() + "\n" + "\n" +
-                "Budget: " + budget + "\n" +
-                "---------------------------------------------------------------------";
-    }
     public String getId() {
         return id;
     }
 
-    public Person getBride() {
-        return bride;
+    public Map<String, Object> getBrideInfo() {
+        return brideInfo;
     }
 
-    public Person getGroom() {
-        return groom;
-    }
-
-
-    public ContactInformation getBrideContactInfo() {
-        return brideContactInfo;
-    }
-
-
-    public ContactInformation getGroomContactInfo() {
-        return groomContactInfo;
+    public Map<String, Object> getGroomInfo() {
+        return groomInfo;
     }
 
     public BigDecimal getBudget() {
@@ -63,13 +40,20 @@ public class Client {
 
     @Override
     public String toString() {
-        return "---------------------------------------------------------------------" + "\n" +
-                "Client ID: " + ColorManager.YELLOW + id + ColorManager.RESET + "\n" + "\n" +
-                "Bride Contact Info: " + "\n" +
-                brideContactInfo + "\n" +
-                "Groom Contact Info: " + "\n" +
-                groomContactInfo + "\n" +
-                "Budget: " + ColorManager.YELLOW + budget + ColorManager.RESET + "\n" +
+
+        return "---------------------------------------------------------------------\n" +
+                "Client ID: " + id + "\n\n" +
+                "Bride Info: \n" +
+                "Name: " + brideInfo.get("person") + "\n" +
+                "Email: " + ((ContactInformation) brideInfo.get("contactInfo")).getEmail() + "\n" +
+                "Phone: " + ((ContactInformation) brideInfo.get("contactInfo")).getPhone() + "\n" +
+                "City: " + ((ContactInformation) brideInfo.get("contactInfo")).getCity() + "\n\n" +
+                "Groom Info: \n" +
+                "Name: " + groomInfo.get("person") + "\n" +
+                "Email: " + ((ContactInformation) groomInfo.get("contactInfo")).getEmail() + "\n" +
+                "Phone: " + ((ContactInformation) groomInfo.get("contactInfo")).getPhone() + "\n" +
+                "City: " + ((ContactInformation) groomInfo.get("contactInfo")).getCity() + "\n\n" +
+                "Budget: " + budget + "\n" +
                 "---------------------------------------------------------------------";
     }
 }

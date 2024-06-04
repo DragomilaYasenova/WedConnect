@@ -5,12 +5,13 @@ import account.Login;
 import account.storage.AccountStorage;
 import account.PasswordManager;
 import account.Register;
-import utils.ColorManager;
+import exceptions.account.AccountAlreadyExistsException;
+import exceptions.password.PasswordCannotBeNullException;
+import exceptions.password.PasswordsDoNotMatchException;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 
 public class AccountService {
     private final AccountStorage accountStorage;
@@ -31,7 +32,7 @@ public class AccountService {
         accounts.putAll(AccountLoader.loadAccounts(accountStorage, passwordManager));
     }
 
-    public void register(String email, String password, String confirmPassword) {
+    public void register(String email, String password, String confirmPassword) throws PasswordsDoNotMatchException, AccountAlreadyExistsException, PasswordCannotBeNullException {
         Register register = new Register(accountStorage, passwordManager, email, password, confirmPassword);
         register.saveAccount();
         loadAccounts();

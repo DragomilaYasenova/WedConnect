@@ -1,5 +1,8 @@
 package client;
 import utils.ColorManager;
+import validators.EmailValidator;
+import validators.PhoneNumberValidator;
+import validators.StringValidator;
 
 public class ContactInformation {
     private Person person;
@@ -9,9 +12,9 @@ public class ContactInformation {
 
     public ContactInformation(Person person, String email, String phone, String city) {
         this.person = person;
-        this.email = email;
-        this.phone = phone;
-        this.city = city;
+        setEmail(email);
+        setPhone(phone);
+        setCity(city);
     }
 
     public Person getPerson() {
@@ -27,7 +30,11 @@ public class ContactInformation {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        if (EmailValidator.isValidEmail(email)) {
+            this.email = email;
+        } else {
+            throw new IllegalArgumentException("Invalid email address");
+        }
     }
 
     public String getPhone() {
@@ -35,7 +42,11 @@ public class ContactInformation {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        if (PhoneNumberValidator.isValidPhoneNumber(phone)) {
+            this.phone = phone;
+        } else {
+            throw new IllegalArgumentException("Invalid phone number");
+        }
     }
 
     public String getCity() {
@@ -43,6 +54,9 @@ public class ContactInformation {
     }
 
     public void setCity(String city) {
+        if (!StringValidator.isValidString(city)) {
+            throw new IllegalArgumentException("Invalid city format");
+        }
         this.city = city;
     }
 

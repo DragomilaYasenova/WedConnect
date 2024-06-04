@@ -1,0 +1,15 @@
+---------------------------------------------------------------------
+Client ID: idDL1234KK7890
+
+Bride Info: {contactInfo=Name: Didi L
+Email: didi@asd.asd
+Phone: 0800001234
+City: Sofia
+, person=Didi L}
+Groom Info: {contactInfo=Name: Kiko K
+Email: kiko@asd.asd
+Phone: 0800007890
+City: Sofia
+, person=Kiko K}
+Budget: 1000000
+---------------------------------------------------------------------
