@@ -7,24 +7,12 @@ import exceptions.password.PasswordsDoNotMatchException;
 import navigation.AccountService;
 import navigation.ClientService;
 import navigation.Navigation;
-import restaurant.Menu.MenuManager;
-import restaurant.Menu.MenuManagerImpl;
-import restaurant.Menu.MenuOptions;
 import restaurant.Restaurant;
-import restaurant.amenity.Amenity;
-import restaurant.amenity.AmenityManager;
-import restaurant.amenity.AmenityManagerImpl;
-import restaurant.date.DateManager;
-import restaurant.date.DateManagerImpl;
-import restaurant.hall.HallManager;
-import restaurant.hall.HallManagerImpl;
 import utils.ColorManager;
 import account.PasswordManager;
 
-import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws PasswordsDoNotMatchException, AccountAlreadyExistsException, PasswordCannotBeNullException {

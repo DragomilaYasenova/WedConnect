@@ -41,4 +41,8 @@ public class AccountService {
     public Register login(Scanner scanner) {
         return login.login(scanner);
     }
+
+    public String getId() {
+        return login.getId();
+    }
 }

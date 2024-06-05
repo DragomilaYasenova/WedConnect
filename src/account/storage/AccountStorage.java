@@ -6,12 +6,12 @@ public abstract class AccountStorage {
     public abstract Set<String> loadAccounts();
     public abstract void saveAccount(String accountInfo);
 
-    public boolean accountExists(String email) {
+    public boolean accountExists(String username) {
         Set<String> accounts = loadAccounts();
-        String emailInfo = email.trim();
+        String usernameInfo = username.trim();
         for (String account : accounts) {
-            String existingEmail = account.split(":")[0].trim();
-            if (existingEmail.equals(emailInfo)) {
+            String existingUsername = account.split(":")[0].trim();
+            if (existingUsername.equals(usernameInfo)) {
                 return true;
             }
         }

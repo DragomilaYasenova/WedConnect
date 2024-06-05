@@ -16,7 +16,7 @@ public class Register {
     private final AccountStorage accountStorage;
     private final PasswordManager passwordManager;
     private String username;
-    private String password = null;
+    private String password;
     private String confirmPassword;
     private Client client;
     private String clientId;
@@ -61,7 +61,7 @@ public class Register {
         }
     }
 
-    public String getuUername() {
+    public String getUsername() {
         return username;
     }
 

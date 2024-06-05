@@ -17,6 +17,7 @@ public class RestaurantInitializer {
         AmenityManagerImpl amenityManager1 = new AmenityManagerImpl();
         amenityManager1.addAmenity(Amenity.HOTEL);
         amenityManager1.addAmenity(Amenity.BEACH);
+        amenityManager1.addAmenity(Amenity.POOL);
 
         MenuManagerImpl menuManager1 = new MenuManagerImpl();
         menuManager1.addMenuOption(MenuOptions.STANDARD);
@@ -27,7 +28,7 @@ public class RestaurantInitializer {
 
         DateManagerImpl dateManager1 = new DateManagerImpl();
 
-        Restaurant restaurant1 = new Restaurant("Restaurant 1", amenityManager1, menuManager1, hallManager1, dateManager1);
+        Restaurant restaurant1 = new Restaurant("Restaurant 1", amenityManager1, menuManager1, hallManager1, dateManager1,40);
         restaurants.add(restaurant1);
 
         // Restaurant 2
@@ -47,7 +48,7 @@ public class RestaurantInitializer {
 
         DateManagerImpl dateManager2 = new DateManagerImpl();
 
-        Restaurant restaurant2 = new Restaurant("Restaurant 2", amenityManager2, menuManager2, hallManager2, dateManager2);
+        Restaurant restaurant2 = new Restaurant("Restaurant 2", amenityManager2, menuManager2, hallManager2, dateManager2, 70);
         restaurants.add(restaurant2);
 
         // Restaurant 3
@@ -69,7 +70,7 @@ public class RestaurantInitializer {
 
         DateManagerImpl dateManager3 = new DateManagerImpl();
 
-        Restaurant restaurant3 = new Restaurant("Restaurant 3", amenityManager3, menuManager3, hallManager3, dateManager3);
+        Restaurant restaurant3 = new Restaurant("Restaurant 3", amenityManager3, menuManager3, hallManager3, dateManager3, 40);
         restaurants.add(restaurant3);
 
         // Restaurant 4
@@ -90,7 +91,7 @@ public class RestaurantInitializer {
 
         DateManagerImpl dateManager4 = new DateManagerImpl();
 
-        Restaurant restaurant4 = new Restaurant("Restaurant 4", amenityManager4, menuManager4, hallManager4, dateManager4);
+        Restaurant restaurant4 = new Restaurant("Restaurant 4", amenityManager4, menuManager4, hallManager4, dateManager4,100);
         restaurants.add(restaurant4);
 
         return restaurants;

@@ -11,13 +11,15 @@ public class Restaurant {
     private MenuManager menuManager;
     private HallManager hallManager;
     private DateManager dateManager;
+    private int pricePerPerson;
 
-    public Restaurant(String name, AmenityManager amenityManager, MenuManager menuManager, HallManager hallManager, DateManager dateManager) {
+    public Restaurant(String name, AmenityManager amenityManager, MenuManager menuManager, HallManager hallManager, DateManager dateManager, int pricePerPerson) {
         this.name = name;
         this.amenityManager = amenityManager;
         this.menuManager = menuManager;
         this.hallManager = hallManager;
         this.dateManager = dateManager;
+        this.pricePerPerson = pricePerPerson;
     }
 
     public String getName() {
@@ -42,6 +44,10 @@ public class Restaurant {
 
     public DateManager getDateManager() {
         return dateManager;
+    }
+
+    public int getPricePerPerson() {
+        return pricePerPerson;
     }
 
     @Override

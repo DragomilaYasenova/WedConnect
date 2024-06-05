@@ -11,9 +11,7 @@ import restaurant.amenity.Amenity;
 import utils.ColorManager;
 import utils.FileOperations;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Navigation {
     private final Scanner scanner;
@@ -22,11 +20,12 @@ public class Navigation {
     private Register loggedInAccount;
 
     private final RestaurantOfferAlgorithm offerAlgorithm;
-    private final List<MenuOptions> chosenMenuPreferences;
-    private final List<Amenity> chosenAmenityPreferences;
+    private final Set<MenuOptions> chosenMenuPreferences;
+    private final Set<Amenity> chosenAmenityPreferences;
     private static List<Restaurant> restaurants = null;
     private static String date;
     private static int numberOfGuests;
+    private static String id;
 
     public Navigation(Scanner scanner, AccountService accountService, ClientService clientService, List<Restaurant> restaurants) {
         this.scanner = scanner;
@@ -34,8 +33,8 @@ public class Navigation {
         this.clientService = clientService;
         this.restaurants = restaurants;
         this.offerAlgorithm = new RestaurantOfferAlgorithm();
-        this.chosenMenuPreferences = new ArrayList<>();
-        this.chosenAmenityPreferences = new ArrayList<>();
+        this.chosenMenuPreferences = new HashSet<>();
+        this.chosenAmenityPreferences = new HashSet<>();
     }
 
     public void menu() throws PasswordsDoNotMatchException, AccountAlreadyExistsException {
@@ -97,6 +96,7 @@ public class Navigation {
         loggedInAccount = accountService.login(scanner);
         if (loggedInAccount != null) {
             System.out.println(ColorManager.GREEN + "Login successful!" + ColorManager.RESET);
+            id = accountService.getId();
             accountMenu();
         } else {
             System.out.println(ColorManager.RED + "Login failed." + ColorManager.RESET);
@@ -263,7 +263,7 @@ public class Navigation {
             return;
         }
 
-        CustomerPreferences preferences = new CustomerPreferences(chosenMenuPreferences, chosenAmenityPreferences, date, numberOfGuests);
+        CustomerPreferences preferences = new CustomerPreferences(id, chosenMenuPreferences, chosenAmenityPreferences, date, numberOfGuests);
         List<Restaurant> suitableRestaurants = offerAlgorithm.offerRestaurants(preferences, restaurants);
 
         if (!suitableRestaurants.isEmpty()) {

@@ -1,6 +1,7 @@
 package account;
 
 import account.storage.AccountStorage;
+import utils.FileOperations;
 
 import java.util.Map;
 import java.util.Scanner;
@@ -9,6 +10,8 @@ public class Login {
     private final Map<String, Register> accounts;
     private final AccountStorage accountStorage;
     private final PasswordManager passwordManager;
+    private String username;
+    private String password;
 
     public Login(Map<String, Register> accounts, AccountStorage accountStorage, PasswordManager passwordManager) {
         this.accounts = accounts;
@@ -24,16 +27,25 @@ public class Login {
 
     public Register login(Scanner scanner) {
         System.out.println("Enter your username: ");
-        String email = scanner.nextLine();
+        username = scanner.nextLine();
         System.out.println("Enter your password: ");
-        String password = scanner.nextLine();
+        password = scanner.nextLine();
 
-        Register account = accounts.get(email);
+        Register account = accounts.get(username);
         if (account != null && account.getPassword().equals(password)) {
             return account;
         } else {
-            System.out.println("Login failed. Please check your email and password.");
+            System.out.println("Login failed. Please check your username and password.");
             return null;
         }
+    }
+
+    public String getClientIdFromFile() {
+        String fileName = "accounts_list.txt";
+        return FileOperations.readClientId(fileName, username, password);
+    }
+
+    public String getId() {
+        return getClientIdFromFile();
     }
 }

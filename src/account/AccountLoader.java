@@ -13,9 +13,9 @@ public class AccountLoader {
         for (String info : accountInfo) {
             String[] parts = info.split(":");
             if (parts.length == 3) {
-                String email = parts[0].trim();
+                String username = parts[0].trim();
                 String password = parts[1].trim();
-                accounts.put(email, new Register(accountStorage, passwordManager, email, password, password));
+                accounts.put(username, new Register(accountStorage, passwordManager, username, password, password));
             }
         }
         return accounts;

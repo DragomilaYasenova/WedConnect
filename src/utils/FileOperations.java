@@ -85,4 +85,21 @@ public class FileOperations {
         }
         return null;
     }
+
+    public static int extractBudgetFromFile(String fileName) {
+        int budget = 0;
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("Budget:")) {
+                    String budgetString = line.split(":")[1].trim();
+                    budget = Integer.parseInt(budgetString);
+                    break;
+                }
+            }
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return budget;
+    }
 }

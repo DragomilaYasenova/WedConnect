@@ -4,26 +4,29 @@ import restaurant.Menu.MenuOptions;
 import restaurant.amenity.Amenity;
 
 import java.util.List;
+import java.util.Set;
 
 public class CustomerPreferences {
-    private List<MenuOptions> menuPreferences;
-    private List<Amenity> amenityPreferences;
+    private String id;
+    private Set<MenuOptions> menuPreferences;
+    private Set<Amenity> amenityPreferences;
     private String date;
     private int numberOfGuests;
 
 
-    public CustomerPreferences(List<MenuOptions> menuPreferences, List<Amenity> amenityPreferences, String date, int numberOfGuests) {
+    public CustomerPreferences(String id, Set<MenuOptions> menuPreferences, Set<Amenity> amenityPreferences, String date, int numberOfGuests) {
+        this.id = id;
         this.menuPreferences = menuPreferences;
         this.amenityPreferences = amenityPreferences;
         this.date = date;
         this.numberOfGuests = numberOfGuests;
     }
 
-    public List<MenuOptions> getMenuPreferences() {
+    public Set<MenuOptions> getMenuPreferences() {
         return menuPreferences;
     }
 
-    public List<Amenity> getAmenityPreferences() {
+    public Set<Amenity> getAmenityPreferences() {
         return amenityPreferences;
     }
 
@@ -33,5 +36,9 @@ public class CustomerPreferences {
 
     public int getNumberOfGuests() {
         return numberOfGuests;
+    }
+
+    public String getId() {
+        return id;
     }
 }
