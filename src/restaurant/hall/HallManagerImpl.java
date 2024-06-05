@@ -10,7 +10,9 @@ public class HallManagerImpl implements HallManager {
 
     @Override
     public void addHall(String hallName, int maxCapacity) {
-        hallsMaxCapacity.put(hallName, maxCapacity);
+        if (maxCapacity > 10){
+            hallsMaxCapacity.put(hallName, maxCapacity);
+        }
     }
 
     @Override

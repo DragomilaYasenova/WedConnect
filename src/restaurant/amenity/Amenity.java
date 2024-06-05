@@ -1,6 +1,7 @@
 package restaurant.amenity;
 
 public enum Amenity {
+    HOTEL,
     BEACH,
     COUNTRYSIDE,
     POOL,
@@ -8,9 +9,5 @@ public enum Amenity {
     BALLROOM,
     TERRACE,
     ROOFTOP,
-    BANQUET_HALL,
-    COUNTRY_CLUB,
-    HOTEL,
-    CRUISE_SHIP,
-    OTHER;
+    BANQUET_HALL;
 }

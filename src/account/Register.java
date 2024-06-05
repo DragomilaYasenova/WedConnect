@@ -55,7 +55,7 @@ public class Register {
                 throw new PasswordsDoNotMatchException("Passwords do not match.");
             }
 
-            String accountInfo = usernameInfo + " : " + password + " : " + clientId;
+            String accountInfo = usernameInfo + " : " + password + " : " + "null";
             accountStorage.saveAccount(accountInfo);
             System.out.println(ColorManager.GREEN + "Account successfully registered." + ColorManager.RESET + "\n");
         }

@@ -1,13 +1,9 @@
 package restaurant;
+
 import restaurant.Menu.MenuManager;
-import restaurant.Menu.MenuOptions;
-import restaurant.amenity.Amenity;
 import restaurant.amenity.AmenityManager;
 import restaurant.date.DateManager;
 import restaurant.hall.HallManager;
-import utils.ColorManager;
-
-import java.util.*;
 
 public class Restaurant {
     private String name;
@@ -47,11 +43,12 @@ public class Restaurant {
     public DateManager getDateManager() {
         return dateManager;
     }
+
     @Override
     public String toString() {
-        return "Restaurant '" + ColorManager.CYAN + name + ColorManager.RESET + "'\n" +
-                "Amenity: " + ColorManager.CYAN + amenityManager.getAmenities() + ColorManager.RESET + "\n" +
-                "Halls Capacity: " + ColorManager.CYAN + hallManager.getHallsMaxCapacity() + ColorManager.RESET + "\n" +
-                "Menu Options: " + ColorManager.CYAN + menuManager.getMenuOptions() + ColorManager.RESET;
+        return "Restaurant '" + name + "'\n" +
+                "Amenities: " + amenityManager.getAmenities() + "\n" +
+                "Halls Capacity: " + hallManager.getHallsMaxCapacity() + "\n" +
+                "Menu Options: " + menuManager.getMenuOptions() + "\n";
     }
 }

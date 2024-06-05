@@ -1,11 +1,18 @@
 package navigation;
 
 import account.Register;
+import client.CustomerPreferences;
 import exceptions.account.AccountAlreadyExistsException;
 import exceptions.password.PasswordsDoNotMatchException;
+import restaurant.Menu.MenuOptions;
+import restaurant.Restaurant;
+import restaurant.RestaurantOfferAlgorithm;
+import restaurant.amenity.Amenity;
 import utils.ColorManager;
 import utils.FileOperations;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Navigation {
@@ -14,10 +21,21 @@ public class Navigation {
     private final ClientService clientService;
     private Register loggedInAccount;
 
-    public Navigation(Scanner scanner, AccountService accountService, ClientService clientService) {
+    private final RestaurantOfferAlgorithm offerAlgorithm;
+    private final List<MenuOptions> chosenMenuPreferences;
+    private final List<Amenity> chosenAmenityPreferences;
+    private static List<Restaurant> restaurants = null;
+    private static String date;
+    private static int numberOfGuests;
+
+    public Navigation(Scanner scanner, AccountService accountService, ClientService clientService, List<Restaurant> restaurants) {
         this.scanner = scanner;
         this.accountService = accountService;
         this.clientService = clientService;
+        this.restaurants = restaurants;
+        this.offerAlgorithm = new RestaurantOfferAlgorithm();
+        this.chosenMenuPreferences = new ArrayList<>();
+        this.chosenAmenityPreferences = new ArrayList<>();
     }
 
     public void menu() throws PasswordsDoNotMatchException, AccountAlreadyExistsException {
@@ -91,7 +109,9 @@ public class Navigation {
                     Choose what you want to do:\s
                     1. Add Client Information
                     2. View Profile
-                    3. Logout
+                    3. Choose Preferences
+                    4. Check Best Suitable Restaurant
+                    5. Logout
                     """);
 
             int choice = getChoice();
@@ -107,6 +127,12 @@ public class Navigation {
                     }
                     break;
                 case 3:
+                    choosePreferences();
+                    break;
+                case 4:
+                    checkBestSuitableRestaurant();
+                    break;
+                case 5:
                     loggedInAccount = null;
                     System.out.println(ColorManager.GREEN + "Logged out successfully!" + ColorManager.RESET + "\n");
                     return;
@@ -125,4 +151,128 @@ public class Navigation {
             System.out.println(ColorManager.RED + "Profile information not found." + ColorManager.RESET);
         }
     }
+
+    private void choosePreferences() {
+        boolean exitLoop = false;
+
+        System.out.println("""
+                Choose your amenity preferences:\s
+                1. Hotel
+                2. Beach
+                3. Countryside
+                4. Pool
+                5. Garden
+                6. Ballroom
+                7. Terrace
+                8. Rooftop
+                9. Banquet Hall
+                0 to exit
+                """);
+
+        while (!exitLoop) {
+            int amenityChoice = getChoice();
+            switch (amenityChoice) {
+                case 0:
+                    exitLoop = true;
+                    break;
+                case 1:
+                    chosenAmenityPreferences.add(Amenity.HOTEL);
+                    break;
+                case 2:
+                    chosenAmenityPreferences.add(Amenity.BEACH);
+                    break;
+                case 3:
+                    chosenAmenityPreferences.add(Amenity.COUNTRYSIDE);
+                    break;
+                case 4:
+                    chosenAmenityPreferences.add(Amenity.POOL);
+                    break;
+                case 5:
+                    chosenAmenityPreferences.add(Amenity.GARDEN);
+                    break;
+                case 6:
+                    chosenAmenityPreferences.add(Amenity.BALLROOM);
+                    break;
+                case 7:
+                    chosenAmenityPreferences.add(Amenity.TERRACE);
+                    break;
+                case 8:
+                    chosenAmenityPreferences.add(Amenity.ROOFTOP);
+                    break;
+                case 9:
+                    chosenAmenityPreferences.add(Amenity.BANQUET_HALL);
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+
+        exitLoop = false;
+
+        System.out.println("""
+                Choose your menu preferences:\s
+                1. Standard
+                2. Vegetarian
+                3. Vegan
+                4. Nut FREE
+                5. Dairy FREE
+                0 to exit
+                """);
+
+        while (!exitLoop) {
+            int menuChoice = getChoice();
+
+            switch (menuChoice) {
+                case 0:
+                    exitLoop = true;
+                    break;
+                case 1:
+                    chosenMenuPreferences.add(MenuOptions.STANDARD);
+                    break;
+                case 2:
+                    chosenMenuPreferences.add(MenuOptions.VEGETARIAN);
+                    break;
+                case 3:
+                    chosenMenuPreferences.add(MenuOptions.VEGAN);
+                    break;
+                case 4:
+                    chosenMenuPreferences.add(MenuOptions.NUT_FREE);
+                    break;
+                case 5:
+                    chosenMenuPreferences.add(MenuOptions.DAIRY_FREE);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+
+        System.out.println("Enter your preferred date (DDMMYYYY): ");
+        date = scanner.nextLine();
+
+        System.out.println("Enter the number of guests: ");
+        numberOfGuests = getChoice();
+
+        System.out.println("Preferences chosen successfully!");
+    }
+
+
+    private void checkBestSuitableRestaurant() {
+        if (chosenMenuPreferences.isEmpty() || chosenAmenityPreferences.isEmpty()) {
+            System.out.println("Please choose menu and amenity preferences first.");
+            return;
+        }
+
+        CustomerPreferences preferences = new CustomerPreferences(chosenMenuPreferences, chosenAmenityPreferences, date, numberOfGuests);
+        List<Restaurant> suitableRestaurants = offerAlgorithm.offerRestaurants(preferences, restaurants);
+
+        if (!suitableRestaurants.isEmpty()) {
+            Restaurant bestRestaurant = suitableRestaurants.get(0);
+            System.out.println("Best suitable restaurant: " + bestRestaurant.getName());
+
+        } else {
+            System.out.println("No suitable restaurant found based on your preferences.");
+        }
+    }
+
 }

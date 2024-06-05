@@ -23,7 +23,7 @@ public class Login {
     }
 
     public Register login(Scanner scanner) {
-        System.out.println("Enter your email: ");
+        System.out.println("Enter your username: ");
         String email = scanner.nextLine();
         System.out.println("Enter your password: ");
         String password = scanner.nextLine();
