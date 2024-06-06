@@ -1,6 +1,8 @@
 package test.client;
 
 import client.Person;
+import exceptions.client.InvalidFirstNameException;
+import exceptions.client.InvalidLastNameException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +33,7 @@ class PersonTest {
     void invalidFirstNameWithDigits() {
         String invalidFirstName = "123Jane";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+        Exception exception = assertThrows(InvalidFirstNameException.class, () -> {
             person.setFirstName(invalidFirstName);
         });
 
@@ -42,7 +44,7 @@ class PersonTest {
     void invalidLastNameWithDigits() {
         String invalidLastName = "Smith123";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+        Exception exception = assertThrows(InvalidLastNameException.class, () -> {
             person.setLastName(invalidLastName);
         });
 

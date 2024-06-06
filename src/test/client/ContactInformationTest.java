@@ -5,6 +5,9 @@ import static org.junit.Assert.assertThrows;
 
 import client.ContactInformation;
 import client.Person;
+import exceptions.client.InvalidCityFormatException;
+import exceptions.client.InvalidEmailAddressException;
+import exceptions.client.InvalidPhoneNumberException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,7 +34,7 @@ public class ContactInformationTest {
 
     @Test
     public void testInvalidEmail() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+        Exception exception = assertThrows(InvalidEmailAddressException.class, () -> {
             contactInfo = new ContactInformation(person, "janeexamplecom", "0800001234", "Sofia");
         });
 
@@ -40,7 +43,7 @@ public class ContactInformationTest {
 
     @Test
     public void testInvalidPhoneNumberOnlyLetters() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+        Exception exception = assertThrows(InvalidPhoneNumberException.class, () -> {
             contactInfo = new ContactInformation(person, "jane@example.com", "invalidphone", "Sofia");
         });
 
@@ -49,7 +52,7 @@ public class ContactInformationTest {
 
     @Test
     public void testInvalidPhoneNumberShorterThanExpected() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+        Exception exception = assertThrows(InvalidPhoneNumberException.class, () -> {
             contactInfo = new ContactInformation(person, "jane@example.com", "080000", "Sofia");
         });
 
@@ -58,7 +61,7 @@ public class ContactInformationTest {
 
     @Test
     public void testInvalidCityOnlyDigits() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+        Exception exception = assertThrows(InvalidCityFormatException.class, () -> {
             contactInfo = new ContactInformation(person, "jane@example.com", "0800001234", "12345");
         });
 
@@ -67,7 +70,7 @@ public class ContactInformationTest {
 
     @Test
     public void testInvalidCityEvenOneDigit() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+        Exception exception = assertThrows(InvalidCityFormatException.class, () -> {
             contactInfo = new ContactInformation(person, "jane@example.com", "0800001234", "So8fia");
         });
 

@@ -1,4 +1,7 @@
 package client;
+import exceptions.client.InvalidCityFormatException;
+import exceptions.client.InvalidEmailAddressException;
+import exceptions.client.InvalidPhoneNumberException;
 import utils.ColorManager;
 import validators.EmailValidator;
 import validators.PhoneNumberValidator;
@@ -33,7 +36,7 @@ public class ContactInformation {
         if (EmailValidator.isValidEmail(email)) {
             this.email = email;
         } else {
-            throw new IllegalArgumentException("Invalid email address");
+            throw new InvalidEmailAddressException("Invalid email address");
         }
     }
 
@@ -45,7 +48,7 @@ public class ContactInformation {
         if (PhoneNumberValidator.isValidPhoneNumber(phone)) {
             this.phone = phone;
         } else {
-            throw new IllegalArgumentException("Invalid phone number");
+            throw new InvalidPhoneNumberException("Invalid phone number");
         }
     }
 
@@ -55,7 +58,7 @@ public class ContactInformation {
 
     public void setCity(String city) {
         if (!StringValidator.isValidString(city)) {
-            throw new IllegalArgumentException("Invalid city format");
+            throw new InvalidCityFormatException("Invalid city format");
         }
         this.city = city;
     }

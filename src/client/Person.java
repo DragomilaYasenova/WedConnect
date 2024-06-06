@@ -1,5 +1,7 @@
 package client;
 
+import exceptions.client.InvalidFirstNameException;
+import exceptions.client.InvalidLastNameException;
 import validators.StringValidator;
 
 public class Person {
@@ -19,7 +21,7 @@ public class Person {
         if (StringValidator.isValidString(firstName)) {
             this.firstName = firstName;
         } else {
-            throw new IllegalArgumentException("Invalid first name format");
+            throw new InvalidFirstNameException("Invalid first name format");
         }
     }
 
@@ -31,7 +33,7 @@ public class Person {
         if (StringValidator.isValidString(lastName)) {
             this.lastName = lastName;
         } else {
-            throw new IllegalArgumentException("Invalid last name format");
+            throw new InvalidLastNameException("Invalid last name format");
         }
     }
 

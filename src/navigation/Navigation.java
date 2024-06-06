@@ -2,7 +2,11 @@ package navigation;
 
 import account.Register;
 import client.CustomerPreferences;
+import exceptions.InvalidNumberOfGuestsException;
+import exceptions.UsernameCannotBeNullException;
 import exceptions.account.AccountAlreadyExistsException;
+import exceptions.client.InvalidDateFormatException;
+import exceptions.password.PasswordCannotBeNullException;
 import exceptions.password.PasswordsDoNotMatchException;
 import restaurant.Menu.MenuOptions;
 import restaurant.Restaurant;
@@ -10,6 +14,7 @@ import restaurant.RestaurantOfferAlgorithm;
 import restaurant.amenity.Amenity;
 import utils.ColorManager;
 import utils.FileOperations;
+import validators.DateValidator;
 
 import java.util.*;
 
@@ -37,7 +42,7 @@ public class Navigation {
         this.chosenAmenityPreferences = new HashSet<>();
     }
 
-    public void menu() throws PasswordsDoNotMatchException, AccountAlreadyExistsException {
+    public void menu() {
         while (true) {
             System.out.println("""
                     Choose what you want to do:\s
@@ -73,7 +78,7 @@ public class Navigation {
         }
     }
 
-    private void registerMenu() throws PasswordsDoNotMatchException, AccountAlreadyExistsException {
+    private void registerMenu() {
         System.out.println("Enter your username: ");
         String username = scanner.nextLine();
         System.out.println("Enter your password: ");
@@ -84,15 +89,22 @@ public class Navigation {
             String confirmPassword = scanner.nextLine();
 
             if (password.equals(confirmPassword)) {
-                accountService.register(username, password, confirmPassword);
-                break;
+                try {
+                    accountService.register(username, password, confirmPassword);
+                    break;
+                } catch (UsernameCannotBeNullException | PasswordCannotBeNullException | AccountAlreadyExistsException e) {
+                    System.out.println(ColorManager.RED + e.getMessage() + ColorManager.RESET);
+                    return;
+                } catch (PasswordsDoNotMatchException e){
+                    System.out.println(ColorManager.RED + e.getMessage() + ColorManager.RESET);
+                }
             } else {
                 System.out.println(ColorManager.RED + "Passwords do not match. Please try again." + ColorManager.RESET);
             }
         }
     }
 
-    private void loginMenu() throws PasswordsDoNotMatchException, AccountAlreadyExistsException {
+    private void loginMenu() {
         loggedInAccount = accountService.login(scanner);
         if (loggedInAccount != null) {
             System.out.println(ColorManager.GREEN + "Login successful!" + ColorManager.RESET);
@@ -103,7 +115,7 @@ public class Navigation {
         }
     }
 
-    public void accountMenu() throws PasswordsDoNotMatchException, AccountAlreadyExistsException {
+    public void accountMenu() {
         while (true) {
             System.out.println("""
                     Choose what you want to do:\s
@@ -204,7 +216,7 @@ public class Navigation {
                     break;
 
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println(ColorManager.RED + "Invalid choice. Please try again." + ColorManager.RESET);
             }
         }
 
@@ -243,15 +255,36 @@ public class Navigation {
                     chosenMenuPreferences.add(MenuOptions.DAIRY_FREE);
                     break;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println(ColorManager.RED + "Invalid choice. Please try again." + ColorManager.RESET);
             }
         }
 
-        System.out.println("Enter your preferred date (DDMMYYYY): ");
-        date = scanner.nextLine();
+        while (true) {
+            System.out.println("Enter your preferred date (DDMMYYYY): ");
+            String inputDate = scanner.nextLine();
+            try {
+                DateValidator dateValidator = new DateValidator(inputDate);
+                date = dateValidator.getDate();
+                break;
+            } catch (InvalidDateFormatException e) {
+                System.out.println(ColorManager.RED + e.getMessage() + ColorManager.RESET);
+            }
+        }
 
-        System.out.println("Enter the number of guests: ");
-        numberOfGuests = getChoice();
+        while (true) {
+            System.out.println("Enter the number of guests: ");
+            numberOfGuests = getChoice();
+            try {
+                if (numberOfGuests > 10) {
+                    break;
+                } else {
+                    throw new InvalidNumberOfGuestsException("Number of guests must be greater than 10.");
+                }
+            } catch (InvalidNumberOfGuestsException e) {
+                System.out.println(ColorManager.RED + e.getMessage() + ColorManager.RESET);
+            }
+        }
+
 
         System.out.println("Preferences chosen successfully!");
     }
@@ -259,7 +292,7 @@ public class Navigation {
 
     private void checkBestSuitableRestaurant() {
         if (chosenMenuPreferences.isEmpty() || chosenAmenityPreferences.isEmpty()) {
-            System.out.println("Please choose menu and amenity preferences first.");
+            System.out.println(ColorManager.YELLOW + "Please choose menu and amenity preferences first." + ColorManager.RESET);
             return;
         }
 
@@ -268,10 +301,10 @@ public class Navigation {
 
         if (!suitableRestaurants.isEmpty()) {
             Restaurant bestRestaurant = suitableRestaurants.get(0);
-            System.out.println("Best suitable restaurant: " + bestRestaurant.getName());
+            System.out.println(ColorManager.PURPLE + "Best suitable restaurant: " + bestRestaurant.getName() + ColorManager.RESET);
 
         } else {
-            System.out.println("No suitable restaurant found based on your preferences.");
+            System.out.println(ColorManager.RED + "No suitable restaurant found based on your preferences." + ColorManager.RESET);
         }
     }
 

@@ -29,7 +29,7 @@ public class Register {
         this.confirmPassword = confirmPassword;
     }
 
-    public void saveAccount() throws AccountAlreadyExistsException, PasswordsDoNotMatchException, PasswordCannotBeNullException {
+    public void saveAccount() {
         if (clientId != null) {
             String fileName = "accounts_list.txt";
             String oldLine = username + " : " + password + " : null";
@@ -38,6 +38,10 @@ public class Register {
         } else {
             String usernameInfo = username.trim();
 
+            if (usernameInfo.isEmpty()) {
+                throw new UsernameCannotBeNullException("Username cannot be null.");
+            }
+
             if (accountStorage.accountExists(usernameInfo)) {
                 throw new AccountAlreadyExistsException("An account with username " + username + " is already registered.");
             }
@@ -45,11 +49,6 @@ public class Register {
             if (passwordManager.nullPassword(password)) {
                 throw new PasswordCannotBeNullException("Password cannot be null.");
             }
-
-            if (UsernameValidator.nullUsername(username)) {
-                throw new UsernameCannotBeNullException("Username cannot be null.");
-            }
-
 
             if (!passwordManager.passwordsMatch(password, confirmPassword)) {
                 throw new PasswordsDoNotMatchException("Passwords do not match.");

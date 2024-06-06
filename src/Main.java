@@ -1,21 +1,16 @@
 import account.storage.FileAccountStorage;
 import client.ClientFileSaver;
 import client.IdGenerator;
-import exceptions.account.AccountAlreadyExistsException;
-import exceptions.password.PasswordCannotBeNullException;
-import exceptions.password.PasswordsDoNotMatchException;
-import navigation.AccountService;
-import navigation.ClientService;
-import navigation.Navigation;
+import navigation.*;
 import restaurant.Restaurant;
 import utils.ColorManager;
 import account.PasswordManager;
 
-import java.util.*;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws PasswordsDoNotMatchException, AccountAlreadyExistsException, PasswordCannotBeNullException {
+    public static void main(String[] args) {
         List<Restaurant> restaurants = RestaurantInitializer.initializeRestaurants();
         Scanner scanner = new Scanner(System.in);
 

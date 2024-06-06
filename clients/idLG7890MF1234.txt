@@ -1,0 +1,17 @@
+---------------------------------------------------------------------
+Client ID: idLG7890MF1234
+
+Bride Info: 
+Name: Lina Gilbert
+Email: lina@asd.com
+Phone: 0878907890
+City: Sofia
+
+Groom Info: 
+Name: Max Fox
+Email: fox@asd.com
+Phone: 0812341234
+City: Sofia
+
+Budget: 40000
+---------------------------------------------------------------------

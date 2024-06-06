@@ -32,7 +32,7 @@ public class AccountService {
         accounts.putAll(AccountLoader.loadAccounts(accountStorage, passwordManager));
     }
 
-    public void register(String email, String password, String confirmPassword) throws PasswordsDoNotMatchException, AccountAlreadyExistsException, PasswordCannotBeNullException {
+    public void register(String email, String password, String confirmPassword) {
         Register register = new Register(accountStorage, passwordManager, email, password, confirmPassword);
         register.saveAccount();
         loadAccounts();
