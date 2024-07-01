@@ -12,7 +12,6 @@ import exceptions.password.PasswordsDoNotMatchException;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class AccountService {
     private final AccountStorage accountStorage;
@@ -24,17 +23,17 @@ public class AccountService {
         this.accountStorage = accountStorage;
         this.passwordValidator = passwordValidator;
         this.accounts = new HashMap<>();
-        this.login = new Login(accounts, accountStorage, passwordValidator);
+        this.login = new Login(accounts, accountStorage);
         loadAccounts();
     }
 
     private void loadAccounts() {
         accounts.clear();
-        accounts.putAll(AccountLoader.loadAccounts(accountStorage, passwordValidator));
+        accounts.putAll(AccountLoader.loadAccounts(accountStorage));
     }
 
     public void register(String username, String password, String confirmPassword) throws AccountAlreadyExistsException, PasswordCannotBeNullException, PasswordsDoNotMatchException, UsernameCannotBeNullException {
-        Register register = new Register(accountStorage, passwordValidator, username, password, confirmPassword);
+        Register register = new Register(accountStorage, username, password, confirmPassword);
         register.saveAccount();
         loadAccounts();
     }

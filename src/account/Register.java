@@ -13,16 +13,14 @@ import static utils.FileOperations.updateAccountInfo;
 
 public class Register {
     private final AccountStorage accountStorage;
-    private final PasswordValidator passwordValidator;
     private String username;
     private String password;
     private String confirmPassword;
     private Client client;
     private String clientId;
 
-    public Register(AccountStorage accountStorage, PasswordValidator passwordValidator, String username, String password, String confirmPassword) {
+    public Register(AccountStorage accountStorage, String username, String password, String confirmPassword) {
         this.accountStorage = accountStorage;
-        this.passwordValidator = passwordValidator;
         setUsername(username);
         setPassword(password);
         setConfirmPassword(confirmPassword);

@@ -1,7 +1,6 @@
 package test.account;
 
 import account.storage.InMemoryAccountStorage;
-import validators.PasswordValidator;
 import account.Register;
 import exceptions.UsernameCannotBeNullException;
 import exceptions.password.PasswordCannotBeNullException;
@@ -16,16 +15,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class RegisterTest {
     Register register;
     InMemoryAccountStorage accountStorage;
-    PasswordValidator passwordValidator;
 
     @BeforeEach
     void setUp() {
         accountStorage = new InMemoryAccountStorage();
-        passwordValidator = new PasswordValidator();
         String email = "test";
         String password = "password123";
         String confirmPassword = "password123";
-        register = new Register(accountStorage, passwordValidator, email, password, confirmPassword);
+        register = new Register(accountStorage, email, password, confirmPassword);
     }
 
     @Test
@@ -49,19 +46,38 @@ class RegisterTest {
     }
 
     @Test
-    void testSetUsernameNull() {
+    void testCorrectUsername() {
+        String username = "test";
+        assertDoesNotThrow(() -> register.setUsername(username));
+    }
+
+    @Test
+    void testNullUsername() {
         String emptyUsername = "";
         assertThrows(UsernameCannotBeNullException.class, () -> register.setUsername(emptyUsername));
     }
 
     @Test
-    void testSetPasswordNull() {
+    void testCorrectPassword() {
+        String password = "password123";
+        assertDoesNotThrow(() -> register.setUsername(password));
+    }
+
+    @Test
+    void testNullPassword() {
         String emptyPassword = "";
         assertThrows(PasswordCannotBeNullException.class, () -> register.setPassword(emptyPassword));
     }
 
     @Test
-    void testSetConfirmPasswordDoNotMatch() {
+    void testPasswordsMatch() {
+        String password = "password123";
+        register.setPassword(password);
+        assertDoesNotThrow(() -> register.setConfirmPassword(password));
+    }
+
+    @Test
+    void testPasswordsDoNotMatch() {
         register.setPassword("password123");
         assertThrows(PasswordsDoNotMatchException.class, () -> register.setConfirmPassword("mismatchPassword"));
     }

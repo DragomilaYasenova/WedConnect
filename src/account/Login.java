@@ -2,27 +2,24 @@ package account;
 
 import account.storage.AccountStorage;
 import utils.FileOperations;
-import validators.PasswordValidator;
 
 import java.util.Map;
 
 public class Login {
     private final Map<String, Register> accounts;
     private final AccountStorage accountStorage;
-    private final PasswordValidator passwordValidator;
     private String username;
     private String password;
 
-    public Login(Map<String, Register> accounts, AccountStorage accountStorage, PasswordValidator passwordValidator) {
+    public Login(Map<String, Register> accounts, AccountStorage accountStorage) {
         this.accounts = accounts;
         this.accountStorage = accountStorage;
-        this.passwordValidator = passwordValidator;
         loadAccounts();
     }
 
     private void loadAccounts() {
         accounts.clear();
-        accounts.putAll(AccountLoader.loadAccounts(accountStorage, passwordValidator));
+        accounts.putAll(AccountLoader.loadAccounts(accountStorage));
     }
 
     public Register login(String username, String password) {
