@@ -2,40 +2,36 @@ package account;
 
 import account.storage.AccountStorage;
 import utils.FileOperations;
+import validators.PasswordValidator;
 
 import java.util.Map;
-import java.util.Scanner;
 
 public class Login {
     private final Map<String, Register> accounts;
     private final AccountStorage accountStorage;
-    private final PasswordManager passwordManager;
+    private final PasswordValidator passwordValidator;
     private String username;
     private String password;
 
-    public Login(Map<String, Register> accounts, AccountStorage accountStorage, PasswordManager passwordManager) {
+    public Login(Map<String, Register> accounts, AccountStorage accountStorage, PasswordValidator passwordValidator) {
         this.accounts = accounts;
         this.accountStorage = accountStorage;
-        this.passwordManager = passwordManager;
+        this.passwordValidator = passwordValidator;
         loadAccounts();
     }
 
     private void loadAccounts() {
         accounts.clear();
-        accounts.putAll(AccountLoader.loadAccounts(accountStorage, passwordManager));
+        accounts.putAll(AccountLoader.loadAccounts(accountStorage, passwordValidator));
     }
 
-    public Register login(Scanner scanner) {
-        System.out.println("Enter your username: ");
-        username = scanner.nextLine();
-        System.out.println("Enter your password: ");
-        password = scanner.nextLine();
-
+    public Register login(String username, String password) {
+        this.username = username;
+        this.password = password;
         Register account = accounts.get(username);
         if (account != null && account.getPassword().equals(password)) {
             return account;
         } else {
-            System.out.println("Login failed. Please check your username and password.");
             return null;
         }
     }

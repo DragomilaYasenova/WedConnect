@@ -4,7 +4,7 @@ import client.IdGenerator;
 import navigation.*;
 import restaurant.Restaurant;
 import utils.ColorManager;
-import account.PasswordManager;
+import validators.PasswordValidator;
 
 import java.util.List;
 import java.util.Scanner;
@@ -15,8 +15,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         FileAccountStorage accountStorage = new FileAccountStorage();
-        PasswordManager passwordManager = new PasswordManager();
-        AccountService accountService = new AccountService(accountStorage, passwordManager);
+        PasswordValidator passwordValidator = new PasswordValidator();
+        AccountService accountService = new AccountService(accountStorage, passwordValidator);
 
         IdGenerator idGenerator = new IdGenerator();
         ClientFileSaver clientFileSaver = new ClientFileSaver();

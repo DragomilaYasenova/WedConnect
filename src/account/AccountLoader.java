@@ -1,13 +1,14 @@
 package account;
 
 import account.storage.AccountStorage;
+import validators.PasswordValidator;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 public class AccountLoader {
-    public static Map<String, Register> loadAccounts(AccountStorage accountStorage, PasswordManager passwordManager) {
+    public static Map<String, Register> loadAccounts(AccountStorage accountStorage, PasswordValidator passwordValidator) {
         Map<String, Register> accounts = new HashMap<>();
         Set<String> accountInfo = accountStorage.loadAccounts();
         for (String info : accountInfo) {
@@ -15,7 +16,7 @@ public class AccountLoader {
             if (parts.length == 3) {
                 String username = parts[0].trim();
                 String password = parts[1].trim();
-                accounts.put(username, new Register(accountStorage, passwordManager, username, password, password));
+                accounts.put(username, new Register(accountStorage, passwordValidator, username, password, password));
             }
         }
         return accounts;

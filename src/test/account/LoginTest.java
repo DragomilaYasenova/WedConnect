@@ -6,7 +6,7 @@ import account.storage.AccountStorage;
 import account.storage.InMemoryAccountStorage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import account.PasswordManager;
+import validators.PasswordValidator;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -22,27 +22,25 @@ public class LoginTest {
     private Login login;
     private Map<String, Register> accounts;
     private AccountStorage accountStorage;
-    private PasswordManager passwordManager;
+    private PasswordValidator passwordValidator;
 
     @BeforeEach
     void setUp() {
         accounts = new HashMap<>();
         accountStorage = new InMemoryAccountStorage();
-        passwordManager = new PasswordManager();
-        login = new Login(accounts, accountStorage, passwordManager);
+        passwordValidator = new PasswordValidator();
+        login = new Login(accounts, accountStorage, passwordValidator);
 
-        Register testAccount = new Register(accountStorage, passwordManager, "test_username", "password", "password");
+        Register testAccount = new Register(accountStorage, passwordValidator, "test_username", "password", "password");
         accounts.put("test_username", testAccount);
     }
 
     @Test
     void testSuccessfulLogin() {
-        String input = "test_username\npassword\n";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-        Scanner scanner = new Scanner(System.in);
+        String username = "test_username";
+        String password = "password";
 
-        Register loggedInAccount = login.login(scanner);
+        Register loggedInAccount = login.login(username, password);
 
         assertNotNull(loggedInAccount);
         assertEquals("test_username", loggedInAccount.getUsername());
@@ -50,12 +48,10 @@ public class LoginTest {
 
     @Test
     void testFailedLogin() {
-        String input = "invalid_user\ninvalid_password\n";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-        Scanner scanner = new Scanner(System.in);
+        String username = "invalid_user";
+        String password = "invalid_password";
 
-        Register loggedInAccount = login.login(scanner);
+        Register loggedInAccount = login.login(username, password);
 
         assertNull(loggedInAccount);
     }

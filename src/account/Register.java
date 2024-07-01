@@ -3,60 +3,41 @@ package account;
 import account.storage.AccountStorage;
 import client.Client;
 import exceptions.UsernameCannotBeNullException;
-import exceptions.account.AccountAlreadyExistsException;
 import exceptions.password.PasswordCannotBeNullException;
 import exceptions.password.PasswordsDoNotMatchException;
-import utils.ColorManager;
 import utils.FileOperations;
+import validators.PasswordValidator;
 import validators.UsernameValidator;
 
 import static utils.FileOperations.updateAccountInfo;
 
 public class Register {
     private final AccountStorage accountStorage;
-    private final PasswordManager passwordManager;
+    private final PasswordValidator passwordValidator;
     private String username;
     private String password;
     private String confirmPassword;
     private Client client;
     private String clientId;
 
-    public Register(AccountStorage accountStorage, PasswordManager passwordManager, String username, String password, String confirmPassword) {
+    public Register(AccountStorage accountStorage, PasswordValidator passwordValidator, String username, String password, String confirmPassword) {
         this.accountStorage = accountStorage;
-        this.passwordManager = passwordManager;
-        this.username = username;
-        this.password = password;
-        this.confirmPassword = confirmPassword;
+        this.passwordValidator = passwordValidator;
+        setUsername(username);
+        setPassword(password);
+        setConfirmPassword(confirmPassword);
     }
 
     public void saveAccount() {
         if (clientId != null) {
             String fileName = "accounts_list.txt";
-            String oldLine = username + " : " + password + " : null";
-            String newLine = username + " : " + password + " : " + clientId;
+            String oldLine = getUsername() + " : " + getPassword() + " : null";
+            String newLine = getUsername() + " : " + getPassword() + " : " + clientId;
             updateAccountInfo(fileName, oldLine, newLine);
         } else {
-            String usernameInfo = username.trim();
-
-            if (usernameInfo.isEmpty()) {
-                throw new UsernameCannotBeNullException("Username cannot be null.");
-            }
-
-            if (accountStorage.accountExists(usernameInfo)) {
-                throw new AccountAlreadyExistsException("An account with username " + username + " is already registered.");
-            }
-
-            if (passwordManager.nullPassword(password)) {
-                throw new PasswordCannotBeNullException("Password cannot be null.");
-            }
-
-            if (!passwordManager.passwordsMatch(password, confirmPassword)) {
-                throw new PasswordsDoNotMatchException("Passwords do not match.");
-            }
-
-            String accountInfo = usernameInfo + " : " + password + " : " + "null";
+            String usernameInfo = getUsername().trim();
+            String accountInfo = usernameInfo + " : " + getPassword() + " : " + "null";
             accountStorage.saveAccount(accountInfo);
-            System.out.println(ColorManager.GREEN + "Account successfully registered." + ColorManager.RESET + "\n");
         }
     }
 
@@ -65,7 +46,11 @@ public class Register {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        if (UsernameValidator.nullUsername(username)) {
+            throw new UsernameCannotBeNullException("Username cannot be null.");
+        } else {
+            this.username = username;
+        }
     }
 
     public String getPassword() {
@@ -73,7 +58,11 @@ public class Register {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        if (PasswordValidator.nullPassword(password)){
+            throw new PasswordCannotBeNullException("Password cannot be null.");
+        } else {
+            this.password = password;
+        }
     }
 
     public String getConfirmPassword() {
@@ -81,7 +70,11 @@ public class Register {
     }
 
     public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
+        if (PasswordValidator.passwordsMatch(password,confirmPassword)){
+            this.confirmPassword = confirmPassword;
+        } else {
+            throw new PasswordsDoNotMatchException("Passwords do not match.");
+        }
     }
 
     public Client getClient() {
