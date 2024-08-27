@@ -1,5 +1,6 @@
 package com.example.wed_connect.registration.controller;
 
+import com.example.wed_connect.registration.model.UserType;
 import com.example.wed_connect.registration.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,17 +19,19 @@ public class RegistrationController {
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
+        model.addAttribute("userTypes", UserType.values());
         return "register";
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute User user, Model model) {
-        String result = userService.registerUser(user);
+    public String registerUser(@ModelAttribute User user, @ModelAttribute("userType") UserType userType, Model model) {
+        String result = userService.registerUser(user, userType);
         if (result.equals("User registered successfully")) {
             model.addAttribute("successMessage", result);
         } else {
             model.addAttribute("errorMessage", result);
         }
+        model.addAttribute("userTypes", UserType.values());
         return "register";
     }
 }

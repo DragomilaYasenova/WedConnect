@@ -12,16 +12,21 @@
     </div>
     <div class="form-section">
         <form class="signup-form" th:action="@{/register}" th:object="${user}" method="post">
-                <label for="username">Username</label>
-                <input type="text" id="username" placeholder="username" th:field="*{username}" required>
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="username" th:field="*{username}" required>
 
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="..........." th:field="*{password}" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="..........." th:field="*{password}" required>
 
-                <label for="confirmPassword">Confirm Password</label>
-                <input type="password" id="confirmPassword" placeholder="..........." th:field="*{confirmPassword}" required>
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" placeholder="..........." th:field="*{confirmPassword}" required>
 
-                <button type="submit">Sign Up</button>
+            <label for="type">User Type</label>
+            <select id="type" name="userType">
+                <option th:each="type : ${userTypes}" th:value="${type}" th:text="${type}"></option>
+            </select>
+            <br>
+            <button type="submit">Sign Up</button>
         </form>
 
         <div class = "container-message">

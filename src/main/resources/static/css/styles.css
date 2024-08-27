@@ -57,6 +57,9 @@ body {
     margin-bottom: 5px;
     font-weight: bold;
 }
+.signup-form select {
+    width: 100%;
+}
 
 .signup-form input {
     margin-bottom: 20px;

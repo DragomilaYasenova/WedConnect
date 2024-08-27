@@ -1,7 +1,6 @@
 package com.example.wed_connect.registration.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class User {
@@ -13,13 +12,16 @@ public class User {
 
     private transient String confirmPassword;
 
+    @Enumerated(EnumType.STRING)
+    private UserType type;
 
     public User() {
     }
 
-    public User(String username, String password) {
+    public User(String username, String password, UserType type) {
         this.username = username;
         this.password = password;
+        this.type = type;
     }
 
     public String getUsername() {
@@ -44,5 +46,13 @@ public class User {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public UserType getType() {
+        return type;
+    }
+
+    public void setType(UserType type) {
+        this.type = type;
     }
 }
