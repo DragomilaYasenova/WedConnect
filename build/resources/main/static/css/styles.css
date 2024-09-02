@@ -65,8 +65,30 @@ body {
     margin-bottom: 20px;
     padding: 10px;
     font-size: 14px;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
 }
 
+.signup-form input:focus{
+    border-bottom: 1px solid #FF99CC;
+}
+
+input[type=text], input[type=password] {
+    border: none;
+    border-bottom: 1px solid #D9D9D9;
+}
+
+.signup-form input:-webkit-autofill,
+.signup-form input:-webkit-autofill:focus,
+.signup-form input:-webkit-autofill:hover,
+.signup-form input:-webkit-autofill:active {
+    background-color: #ffe5f1 !important;
+    -webkit-box-shadow: 0 0 0 1000px #ffe5f1 inset;
+    border-radius: 6px;
+    border-image: none;
+    transition: background-color 0.1s ease-in-out;
+}
 .signup-form button {
     padding: 10px;
     font-size: 16px;
@@ -81,10 +103,32 @@ body {
     background-color: #ec86b9;
 }
 
-.message, .error-message {
+select#type {
+    width: 250px;
+    padding: 10px;
+    font-size: 12px;
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+select#type option {
+    font-size: 12px;
+}
+
+select#type:focus {
+    outline: none;
+    border: 1px solid #FF99CC;
+}
+
+.message, .error-message, .no-message {
     text-align: center;
     margin-top: 15px;
     min-height: 20px;
+}
+
+.no-message {
+    color: transparent;
 }
 
 .message {
@@ -93,11 +137,6 @@ body {
 
 .error-message {
     color: red;
-}
-
-input[type=text], input[type=password] {
-    border: none;
-    border-bottom: 1px solid #D9D9D9;
 }
 
 /* Home Page */
@@ -117,7 +156,7 @@ input[type=text], input[type=password] {
     right: 16px;
 }
 
-.center {
+.container-home center {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -125,7 +164,7 @@ input[type=text], input[type=password] {
     text-align: center;
 }
 
-.button {
+.button-home {
     padding: 10px 20px;
     font-size: 16px;
     background-color: #FF99CC;
@@ -137,7 +176,7 @@ input[type=text], input[type=password] {
     margin: 5px;
 }
 
-.button:hover {
+.button-home:hover {
     background-color: #ec86b9;
 }
 
