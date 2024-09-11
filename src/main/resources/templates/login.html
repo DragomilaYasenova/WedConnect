@@ -21,10 +21,7 @@
             <div th:if="${errorMessage}" class="error-message">
                 <p th:text="${errorMessage}"></p>
             </div>
-            <div th:if="${successMessage}" class="message">
-                <p th:text="${successMessage}"></p>
-            </div>
-            <div th:unless="${errorMessage} or ${successMessage}" class="no-message">
+            <div th:unless="${errorMessage}" class="no-message">
                 <p> </p>
             </div>
         </div>

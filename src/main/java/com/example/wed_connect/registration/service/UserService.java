@@ -72,4 +72,17 @@ public class UserService {
 
         return "User logged in successfully";
     }
+
+    public String getUserType(User user) {
+        Long userId = userRepository.findIdByUsername(user.getUsername());
+
+        if (clientRepository.existsByUserId(userId)) {
+            return "Client";
+        }
+        return "No user found";
+    }
+
+    public Long returnUserId(User user) {
+         return userRepository.findIdByUsername(user.getUsername());
+    }
 }

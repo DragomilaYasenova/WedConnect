@@ -180,3 +180,9 @@ select#type:focus {
     background-color: #ec86b9;
 }
 
+/* Info Pages */
+/* Client Info Page */
+.container-info h1 {
+    text-align: center;
+}
+
