@@ -6,24 +6,24 @@
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
-<div class="container-info">
-    <h1>We're thrilled to have you on board.<br>
-        To get the most out of our features, please take a moment to complete your profile.
-    </h1>
-    <form class="info-form" th:action="@{|/client/info/${client.id}|}" th:object="${client}" method="post">
-        <div class="left">
-            <label for="name">Name</label>
-            <input type="text" id="name" placeholder="name" th:field="*{name}" required>
-        </div>
+    <div class="container-info">
+        <h1>We're thrilled to have you on board.<br>
+            To get the most out of our features, please take a moment to complete your profile.
+        </h1>
+        <form class="info-form" th:action="@{|/client/info/${client.id}|}" th:object="${client}" method="post">
+            <div class="left">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="name" th:field="*{name}" required>
+            </div>
 
-        <div class="right">
-            <label for="phone-number">Phone Number</label>
-            <input type="text" id="phone-number" placeholder="00-0000-0000" th:field="*{phoneNumber}" required>
-        </div>
+            <div class="right">
+                <label for="phone-number">Phone Number</label>
+                <input type="text" id="phone-number" placeholder="00-0000-0000" th:field="*{phoneNumber}" required>
+            </div>
 
-        <input type="hidden" th:field="*{id}"/>
-        <button type="submit">Confirm</button>
-    </form>
-</div>
+            <input type="hidden" th:field="*{id}"/>
+            <button type="submit">Confirm</button>
+        </form>
+    </div>
 </body>
 </html>

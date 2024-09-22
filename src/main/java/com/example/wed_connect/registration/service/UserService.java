@@ -22,6 +22,8 @@ public class UserService {
 
     @Autowired
     private RestaurantRepository restaurantRepository;
+    @Autowired
+    private WeddingAgencyService weddingAgencyService;
 
     public String registerUser(User user, UserType userType) {
         if (userRepository.existsByUsername(user.getUsername())) {
@@ -78,6 +80,8 @@ public class UserService {
 
         if (clientRepository.existsByUserId(userId)) {
             return "Client";
+        } else if (weddingAgencyRepository.existsByUserId(userId)){
+            return "Wedding Agency";
         }
         return "No user found";
     }
