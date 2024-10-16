@@ -8,22 +8,29 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/client/info")
+@RequestMapping("/client")
 public class ClientController {
 
     @Autowired
     private ClientService clientService;
 
-    @GetMapping("/{clientId}")
+    @GetMapping("/info/{clientId}")
     public String showClientInfo(@PathVariable Long clientId, Model model) {
         Client client = clientService.findById(clientId);
         model.addAttribute("client", client);
         return "client/info";
     }
 
-    @PostMapping("/{clientId}")
+    @PostMapping("/info/{clientId}")
     public String updateClientInfo(@PathVariable Long clientId, @ModelAttribute Client client) {
         clientService.updateClientInfo(clientId, client.getName(), client.getPhoneNumber());
-        return "redirect:/client/home";
+        return "redirect:/client/home/" + clientId;
+    }
+
+    @GetMapping("/home/{clientId}")
+    public String clientHome(@PathVariable Long clientId, Model model) {
+        Client client = clientService.findById(clientId);
+        model.addAttribute("client", client);
+        return "client/home";
     }
 }
