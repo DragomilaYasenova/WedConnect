@@ -2,20 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="EN">
 <head>
     <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
-<div class="container-home">
+<div class="lace-left">
+    <object data="/svg/lace-vertical-left.svg"> </object>
+</div>
+
+<div class="lace-right">
+    <object data="/svg/lace-vertical-right.svg"> </object>
+</div>
+
+<div class="container-index">
     <div class="upright">
-        <a href="#" th:href="@{/login}" class="button-home">Sign In</a>
-        <a href="#" th:href="@{/register}" class="button-home">Sign Up</a>
+        <a href="#" th:href="@{/login}" class="button-index">Sign In</a>
+        <a href="#" th:href="@{/register}" class="button-index">Sign Up</a>
     </div>
 
     <div class="center">
-        <h1>Welcome to WedConnect</h1>
-        <a href="#" th:href="@{/register}" class="button-home">Get Started</a>
+        <h1 id="text-index">Welcome to WedConnect</h1>
+        <a href="#" th:href="@{/register}" class="button-index" id="button-get-started">Get Started</a>
     </div>
-
 </div>
 
 </body>
