@@ -1,12 +1,96 @@
+@font-face {
+    font-family: 'Poppins-Regular';
+    src: url('/templates/fonts/Poppins-Regular.ttf');
+  }
+
+  @font-face {
+    font-family: 'Poppins-Bold';
+    src: url('/templates/fonts/Poppins-Bold.ttf');
+  }
+
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: Poppins-Regular;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f2f2f2;
+    background-color: #FAF0F8;
 }
+
+/* Home Page */
+.lace-left {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.lace-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+}
+
+
+.rotate-left {
+    transform: rotate(90deg);
+}
+.rotate-right {
+    transform: rotate(-90deg);
+}
+
+
+.container-index {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.upright {
+    position: absolute;
+    top: 20px;
+    right: 70px;
+}
+
+.container-index center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#text-index {
+    font-family: Poppins-Regular;
+    font-size: 48px;
+}
+
+.button-index {
+    font-family: Poppins-Bold;
+    padding: 10px 30px;
+    font-size: 16px;
+    background-color: #B04C7E;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 5px;
+}
+#button-get-started {
+    padding: 10px 50px;
+}
+
+.button-index:hover {
+    background-color: #86355e;
+}
+
+/* register/login pages */
 
 .container {
     display: flex;
@@ -139,46 +223,7 @@ select#type:focus {
     color: red;
 }
 
-/* Home Page */
-.container-home {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-}
 
-.upright {
-    position: absolute;
-    top: 8px;
-    right: 16px;
-}
-
-.container-home center {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.button-home {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #FF99CC;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    text-decoration: none;
-    margin: 5px;
-}
-
-.button-home:hover {
-    background-color: #ec86b9;
-}
 
 /* Info Pages */
 /* Client Info Page */
