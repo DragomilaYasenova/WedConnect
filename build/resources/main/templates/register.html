@@ -7,11 +7,29 @@
 </head>
 <body>
 <div class="container">
-    <div class="text-section">
-        <h2>Ready to start planning your happily ever after?</h2>
-        <a href="#" class="login-link" th:href="@{/login}">I already have an account</a>
+    <div class="lace-top">
+        <object data="../static/svg/lace-horizontal-top.svg"></object>
     </div>
-    <div class="form-section">
+
+    <div class="lace-top">
+        <object data="../static/svg/lace-horizontal-top.svg" id="right"></object>
+    </div>
+
+    <div class="lace-bottom">
+        <object data="../static/svg/lace-horizontal-bottom.svg"></object>
+    </div>
+
+    <div class="lace-bottom">
+        <object data="../static/svg/lace-horizontal-bottom.svg" id="right"></object>
+    </div>
+
+    <div class="border-left"></div>
+    <div class="border-right"></div>
+    
+    <div class="text-section" id="register-text">
+        <h2>Ready to start planning <br> your happily ever after?</h2>
+    </div>
+    <div class="form-section" id="register-form">
         <form class="signup-form" th:action="@{/register}" th:object="${user}" method="post">
             <label for="username">Username</label>
             <input type="text" id="username" placeholder="username" th:field="*{username}" required>
@@ -28,19 +46,21 @@
             </select>
             <br>
             <button type="submit">Sign Up</button>
+            <a href="#" class="login-link" th:href="@{/login}">I already have an account</a>
+
+            <div class = "container-message">
+                <div th:if="${errorMessage}" class="error-message">
+                    <p th:text="${errorMessage}"></p>
+                </div>
+                <div th:if="${successMessage}" class="message">
+                    <p th:text="${successMessage}"></p>
+                </div>
+                <div th:unless="${errorMessage} or ${successMessage}" class="no-message">
+                    <p> </p>
+                </div>
+            </div>
         </form>
 
-        <div class = "container-message">
-            <div th:if="${errorMessage}" class="error-message">
-                <p th:text="${errorMessage}"></p>
-            </div>
-            <div th:if="${successMessage}" class="message">
-                <p th:text="${successMessage}"></p>
-            </div>
-            <div th:unless="${errorMessage} or ${successMessage}" class="no-message">
-                <p> </p>
-            </div>
-        </div>
     </div>
 
 </div>

@@ -2,19 +2,31 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="EN">
 <head>
     <title>Home</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css">
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
-<body>
+<body class="container-index">
+   
+<!-- Left Lace -->
 <div class="lace-left">
-    <object data="/svg/lace-vertical-left.svg"> </object>
+    <object data="../static/svg/lace-vertical-left.svg"></object>
 </div>
 
+<div class="lace-left" id=item2>
+    <object data="../static/svg/lace-vertical-left.svg"></object>
+</div>
+
+<!-- Right Lace -->
 <div class="lace-right">
-    <object data="/svg/lace-vertical-right.svg"> </object>
+    <object data="../static/svg/lace-vertical-right.svg"></object>
 </div>
 
-<div class="container-index">
+<div class="lace-right" id=item2>
+    <object data="../static/svg/lace-vertical-right.svg"></object>
+</div>
+
+
+<div class="content-index">
     <div class="upright">
         <a href="#" th:href="@{/login}" class="button-index">Sign In</a>
         <a href="#" th:href="@{/register}" class="button-index">Sign Up</a>

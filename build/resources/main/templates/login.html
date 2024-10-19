@@ -6,8 +6,27 @@
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
-<div class="container">
-    <div class="form-section">
+<div class="container-login">
+    <div class="lace-top">
+        <object data="../static/svg/lace-horizontal-top.svg"></object>
+    </div>
+
+    <div class="lace-top">
+        <object data="../static/svg/lace-horizontal-top.svg" id="right"></object>
+    </div>
+
+    <div class="lace-bottom">
+        <object data="../static/svg/lace-horizontal-bottom.svg"></object>
+    </div>
+
+    <div class="lace-bottom">
+        <object data="../static/svg/lace-horizontal-bottom.svg" id="right"></object>
+    </div>
+
+    <div class="border-left"></div>
+    <div class="border-right"></div>
+
+    <div class="form-section" id="login-form">
         <form class="signup-form" th:action="@{/login}" th:object="${user}" method="post">
             <label for="username">Username</label>
             <input type="text" id="username" placeholder="username" th:field="*{username}" required>
@@ -16,6 +35,7 @@
             <input type="password" id="password" placeholder="..........." th:field="*{password}" required>
 
             <button type="submit">Sign In</button>
+            <a href="#" class="login-link" th:href="@{/register}">I don't have an account yet</a>
         </form>
 
         <div class = "container-message">
@@ -28,9 +48,8 @@
         </div>
     </div>
 
-    <div class="text-section">
+    <div class="text-section" id="login-text">
         <h2>Welcome Back!</h2>
-        <a href="#" class="login-link" th:href="@{/register}">I don't have an account yet</a>
     </div>
 
 </div>
