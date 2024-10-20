@@ -4,6 +4,8 @@
     <title>Sign Up</title>
     <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/grid.css">
+    <link rel="stylesheet" type="text/css" href="/css/grid.css">
 </head>
 <body>
 <div class="container">
@@ -47,19 +49,19 @@
             <br>
             <button type="submit">Sign Up</button>
             <a href="#" class="login-link" th:href="@{/login}">I already have an account</a>
-
-            <div class = "container-message">
-                <div th:if="${errorMessage}" class="error-message">
-                    <p th:text="${errorMessage}"></p>
-                </div>
-                <div th:if="${successMessage}" class="message">
-                    <p th:text="${successMessage}"></p>
-                </div>
-                <div th:unless="${errorMessage} or ${successMessage}" class="no-message">
-                    <p> </p>
-                </div>
-            </div>
         </form>
+
+        <div class = "container-message">
+            <div th:if="${errorMessage}" class="error-message">
+                <p th:text="${errorMessage}"></p>
+            </div>
+            <div th:if="${successMessage}" class="message">
+                <p th:text="${successMessage}"></p>
+            </div>
+            <div th:unless="${errorMessage} or ${successMessage}" class="no-message">
+                <p> </p>
+            </div>
+        </div>
 
     </div>
 

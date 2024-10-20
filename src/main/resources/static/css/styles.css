@@ -127,30 +127,6 @@ body {
 
 /* register/login pages */
 
-.container {
-    display: grid;
-    grid-template-columns: 50px 400px 400px 50px;
-    grid-template-rows: 50px 600px 50px;
-
-    grid-template-areas: 
-        "   .   lace-top   lace-top   .   "
-        "   border-left   text-section   form-section   border-right   "
-        "   .   lace-bottom   lace-bottom   .   "
-    ;
-}
-
-.container-login {
-    display: grid;
-    grid-template-columns: 50px 400px 400px 50px;
-    grid-template-rows: 50px 600px 50px;
-
-    grid-template-areas: 
-        "   .   lace-top   lace-top   .   "
-        "   border-left   form-section   text-section   border-right   "
-        "   .   lace-bottom   lace-bottom   .   "
-    ;
-    
-}
 
 
 .border-left {
