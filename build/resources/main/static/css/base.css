@@ -1,0 +1,111 @@
+/* Fonts*/
+
+@font-face {
+    font-family: 'Poppins-Regular';
+    src: url('/templates/fonts/Poppins-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Poppins-Bold';
+    src: url('/templates/fonts/Poppins-Bold.ttf');
+}
+
+/* Body*/
+body {
+    margin: 0;
+    font-family: Poppins-Regular;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+    background-color: #FAF0F8;
+}
+
+/* Buttons*/
+.button {
+    font-family: Poppins-Bold;
+    padding: 10px 30px;
+    font-size: 16px;
+    background-color: #B04C7E;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 5px;
+}
+
+.button:hover {
+    background-color: #86355e;
+}
+
+
+/* Lace left-right*/
+
+.lace-left {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.lace-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#item1, #item2{
+    top: 734px;
+}
+
+
+.lace-top, .lace-bottom {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Lace top-bottom*/
+.lace-top {
+    grid-area: lace-top;
+    top: 10px;
+}
+
+.lace-bottom {
+    grid-area: lace-bottom;
+    bottom: 10px;
+}
+
+#item1-right, #item2-right{
+    position: absolute;
+    left: 730px;
+}
+
+.lace-top object,
+.lace-bottom object {
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* Messages */
+.message, .error-message, .no-message {
+    text-align: center;
+    margin-top: 15px;
+    min-height: 20px;
+}
+
+.no-message {
+    color: transparent;
+}
+
+.message {
+    color: green;
+}
+
+.error-message {
+    color: red;
+}

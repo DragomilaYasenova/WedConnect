@@ -1,89 +1,6 @@
-@font-face {
-    font-family: 'Poppins-Regular';
-    src: url('/templates/fonts/Poppins-Regular.ttf');
-  }
-
-  @font-face {
-    font-family: 'Poppins-Bold';
-    src: url('/templates/fonts/Poppins-Bold.ttf');
-  }
-
-body {
-    margin: 0;
-    font-family: Poppins-Regular;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #FAF0F8;
-}
-
+/* Home Page */
 .container-index {
     overflow-y: hidden;
-}
-
-/* Lace */
-
-.lace-left {
-    position: absolute;
-    left: 0;
-    top: 0;
-}
-
-.lace-right {
-    position: absolute;
-    right: 0;
-    top: 0;
-}
-
-#item2{
-    top: 734px;
-}
-
-
-.lace-top, .lace-bottom {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Top lace */
-.lace-top {
-    grid-area: lace-top;
-    top: 10px;
-}
-
-/* Bottom lace */
-.lace-bottom {
-    grid-area: lace-bottom;
-    bottom: 10px;
-}
-
-
-#right {
-    position: absolute;
-    left: 730px;
-}
-
-.lace-top object,
-.lace-bottom object {
-    max-width: 100%;
-    height: auto;
-}
-
-
-/* Home Page */
-
-.content-index {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    text-align: center;
 }
 
 .upright {
@@ -92,42 +9,17 @@ body {
     right: 70px;
 }
 
-.container-index center {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
 #text-index {
-    font-family: Poppins-Regular;
     font-size: 48px;
 }
 
-.button-index {
-    font-family: Poppins-Bold;
-    padding: 10px 30px;
-    font-size: 16px;
-    background-color: #B04C7E;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    text-decoration: none;
-    margin: 5px;
-}
 #button-get-started {
     padding: 10px 50px;
 }
 
-.button-index:hover {
-    background-color: #86355e;
-}
 
 /* register/login pages */
-
-
+/* Border */
 
 .border-left {
     border-right: 4px solid #B04C7E;
@@ -168,7 +60,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
     grid-area: text-section;
     font-size: 16px;
 }
@@ -183,11 +74,12 @@ body {
 }
 
 .form-section {
-
     background-color: white;
     padding: 100px 40px;
     display: flex;
     justify-content: center;
+    text-align: left;
+    align-items: center;
     grid-area: form-section;
 }
 
@@ -203,9 +95,6 @@ body {
     font-weight: bold;
     font-size: 16px;
 }
-.signup-form select {
-    width: 100%;
-}
 
 .signup-form input {
     margin-bottom: 20px;
@@ -215,6 +104,13 @@ body {
     transition: 0.5s;
     outline: none;
 }
+
+.signup-form select {
+    width: 100%;
+}
+
+
+
 
 .signup-form input:focus{
     border-bottom: 1px solid #FF99CC;
@@ -236,19 +132,6 @@ input[type=text], input[type=password] {
     border-image: none;
     transition: background-color 0.1s ease-in-out;
 }
-.signup-form button {
-    padding: 10px;
-    font-size: 16px;
-    background-color: #B04C7E;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-}
-
-.signup-form button:hover {
-    background-color: #86355e;
-}
 
 select#type {
     width: 250px;
@@ -269,29 +152,9 @@ select#type:focus {
     border: 1px solid #FF99CC;
 }
 
-.message, .error-message, .no-message {
-    text-align: center;
-    margin-top: 15px;
-    min-height: 20px;
-}
-
-.no-message {
-    color: transparent;
-}
-
-.message {
-    color: green;
-}
-
-.error-message {
-    color: red;
-}
-
 
 
 /* Info Pages */
 /* Client Info Page */
-.container-info h1 {
-    text-align: center;
-}
+
 
