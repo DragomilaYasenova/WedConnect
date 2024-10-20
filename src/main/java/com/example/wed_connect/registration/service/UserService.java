@@ -64,12 +64,8 @@ public class UserService {
     }
 
     public String authenticateUser(User user) {
-        if (!userRepository.existsByUsername(user.getUsername())) {
-            return "Invalid username";
-        }
-
-        if (!userRepository.existsByPassword(user.getPassword())) {
-            return "Invalid password";
+        if (!userRepository.existsByUsername(user.getUsername()) || !userRepository.existsByPassword(user.getPassword())) {
+            return "Invalid username or password";
         }
 
         return "User logged in successfully";
