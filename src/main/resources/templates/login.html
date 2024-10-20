@@ -38,16 +38,17 @@
 
             <button type="submit">Sign In</button>
             <a href="#" class="login-link" th:href="@{/register}">I don't have an account yet</a>
+
+            <div class = "container-message">
+                <div th:if="${errorMessage}" class="error-message">
+                    <p th:text="${errorMessage}"></p>
+                </div>
+                <div th:unless="${errorMessage}" class="no-message">
+                    <p> </p>
+                </div>
+            </div>
         </form>
 
-        <div class = "container-message">
-            <div th:if="${errorMessage}" class="error-message">
-                <p th:text="${errorMessage}"></p>
-            </div>
-            <div th:unless="${errorMessage}" class="no-message">
-                <p> </p>
-            </div>
-        </div>
     </div>
 
     <div class="text-section" id="login-text">
