@@ -2,18 +2,18 @@
 
 @font-face {
     font-family: 'Poppins-Regular';
-    src: url('/templates/fonts/Poppins-Regular.ttf');
+    src: url('../fonts/Poppins-Regular.ttf');
 }
 
 @font-face {
     font-family: 'Poppins-Bold';
-    src: url('/templates/fonts/Poppins-Bold.ttf');
+    src: url('../fonts/Poppins-Bold.ttf');
 }
 
 /* Body*/
 body {
     margin: 0;
-    font-family: Poppins-Regular;
+    font-family: Poppins-Regular, serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,7 +24,7 @@ body {
 
 /* Buttons*/
 .button {
-    font-family: Poppins-Bold;
+    font-family: Poppins-Bold, serif;
     padding: 10px 30px;
     font-size: 16px;
     background-color: #B04C7E;
