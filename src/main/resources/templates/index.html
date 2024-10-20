@@ -4,39 +4,42 @@
     <title>Home</title>
     <link rel="stylesheet" type="text/css" href="../static/css/styles.css">
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/css/base.css">
 </head>
 <body class="container-index">
+
    
-<!-- Left Lace -->
-<div class="lace-left">
-    <object data="../static/svg/lace-vertical-left.svg"></object>
-</div>
+    <!-- Left Lace -->
+    <div class="lace-left">
+        <object data="../static/svg/lace-vertical-left.svg"></object>
+    </div>
 
-<div class="lace-left" id=item2>
-    <object data="../static/svg/lace-vertical-left.svg"></object>
-</div>
+    <div class="lace-left" id=item1>
+        <object data="../static/svg/lace-vertical-left.svg"></object>
+    </div>
 
-<!-- Right Lace -->
-<div class="lace-right">
-    <object data="../static/svg/lace-vertical-right.svg"></object>
-</div>
+    <!-- Right Lace -->
+    <div class="lace-right">
+        <object data="../static/svg/lace-vertical-right.svg"></object>
+    </div>
 
-<div class="lace-right" id=item2>
-    <object data="../static/svg/lace-vertical-right.svg"></object>
-</div>
+    <div class="lace-right" id=item2>
+        <object data="../static/svg/lace-vertical-right.svg"></object>
+    </div>
 
 
-<div class="content-index">
+
     <div class="upright">
-        <a href="#" th:href="@{/login}" class="button-index">Sign In</a>
-        <a href="#" th:href="@{/register}" class="button-index">Sign Up</a>
+        <a href="#" th:href="@{/login}" class="button">Sign In</a>
+        <a href="#" th:href="@{/register}" class="button">Sign Up</a>
     </div>
 
     <div class="center">
         <h1 id="text-index">Welcome to WedConnect</h1>
-        <a href="#" th:href="@{/register}" class="button-index" id="button-get-started">Get Started</a>
+        <a href="#" th:href="@{/register}" class="button" id="button-get-started">Get Started</a>
     </div>
-</div>
+
 
 </body>
 </html>

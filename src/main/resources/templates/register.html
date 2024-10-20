@@ -6,6 +6,8 @@
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
     <link rel="stylesheet" type="text/css" href="/static/css/grid.css">
     <link rel="stylesheet" type="text/css" href="/css/grid.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/css/base.css">
 </head>
 <body>
 <div class="container">
@@ -14,7 +16,7 @@
     </div>
 
     <div class="lace-top">
-        <object data="../static/svg/lace-horizontal-top.svg" id="right"></object>
+        <object data="../static/svg/lace-horizontal-top.svg" id="item1-right"></object>
     </div>
 
     <div class="lace-bottom">
@@ -22,7 +24,7 @@
     </div>
 
     <div class="lace-bottom">
-        <object data="../static/svg/lace-horizontal-bottom.svg" id="right"></object>
+        <object data="../static/svg/lace-horizontal-bottom.svg" id="item2-right"></object>
     </div>
 
     <div class="border-left"></div>
@@ -47,7 +49,7 @@
                 <option th:each="type : ${userTypes}" th:value="${type}" th:text="${type}"></option>
             </select>
             <br>
-            <button type="submit">Sign Up</button>
+            <button type="submit" class="button">Sign Up</button>
             <a href="#" class="login-link" th:href="@{/login}">I already have an account</a>
 
             <div class = "container-message">
