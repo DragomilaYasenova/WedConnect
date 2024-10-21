@@ -2,12 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="EN">
 <head>
     <title>Sign In</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/grid.css">
-    <link rel="stylesheet" type="text/css" href="/css/grid.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/grid.css">
     <link rel="stylesheet" type="text/css" href="../static/css/base.css">
-    <link rel="stylesheet" type="text/css" href="/css/base.css">
 </head>
 <body class="height-100vh">
 <div class="container-login">
@@ -39,18 +36,16 @@
             <input type="password" id="password" placeholder="..........." th:field="*{password}" required>
 
             <button type="submit" class="button">Sign In</button>
-            <a href="#" class="login-link font-size-14px" th:href="@{/register}">I don't have an account yet</a>
+            <a href="#" class="login-link" th:href="@{/register}">I don't have an account yet</a>
 
-            <div class = "container-message">
-                <div th:if="${errorMessage}" class="error-message">
-                    <p th:text="${errorMessage}"></p>
-                </div>
-                <div th:unless="${errorMessage}" class="no-message">
-                    <p> </p>
-                </div>
+        <div class = "container-message">
+            <div th:if="${errorMessage}" class="error-message">
+                <p th:text="${errorMessage}"></p>
             </div>
-        </form>
-
+            <div th:unless="${errorMessage}" class="no-message">
+                <p> </p>
+            </div>
+        </div>
     </div>
 
     <div class="text-section" id="login-text">
@@ -59,5 +54,6 @@
 
 </div>
 
+<script src="/js/pathAdjuster.js"></script>
 </body>
 </html>
