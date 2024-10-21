@@ -9,10 +9,6 @@
     right: 70px;
 }
 
-#text-index {
-    font-size: 48px;
-}
-
 #button-get-started {
     padding: 10px 50px;
 }
@@ -69,7 +65,6 @@
     color: #331625;
     margin-top: 5px;
     text-decoration: none;
-    font-size: 14px;
     text-align: center;
 }
 
@@ -157,7 +152,19 @@ select#type:focus {
     display: block;
 }
 
-/* Info Pages */
-/* Client Info Page */
+/* Home Pages */
+/* Client Home Page */
+.home {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-color: var(--base-clr);
+    color: var(--text-clr);
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
 
+.container-home {
+    margin-bottom: 20px;
+    padding: min(10em, 15%);
+}
 

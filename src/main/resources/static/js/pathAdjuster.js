@@ -7,16 +7,25 @@ document.addEventListener("DOMContentLoaded", function() {
     links.forEach(function(link) {
         let href = link.getAttribute('href');
 
-        if (isLocalhost && href && href.startsWith('../static')) {
-            link.setAttribute('href', href.replace('../static', ''));
+        if (isLocalhost && href) {
+            if (href.startsWith('../static')) {
+                link.setAttribute('href', href.replace('../static', ''));
+            } else if (href.startsWith('../../static')) {
+                link.setAttribute('href', href.replace('../../static', ''));
+            }
         }
     });
 
     objects.forEach(function(obj) {
         let data = obj.getAttribute('data');
 
-        if (isLocalhost && data && data.startsWith('../static')) {
-            obj.setAttribute('data', data.replace('../static', ''));
+        if (isLocalhost && data) {
+            if (data.startsWith('../static')) {
+                obj.setAttribute('data', data.replace('../static', ''));
+            } else if (data.startsWith('../../static')) {
+                obj.setAttribute('data', data.replace('../../static', ''));
+            }
         }
     });
+
 });

@@ -6,22 +6,22 @@
     <link rel="stylesheet" type="text/css" href="../static/css/grid.css">
     <link rel="stylesheet" type="text/css" href="../static/css/base.css">
 </head>
-<body>
-<div class="container">
+<body class="height-100vh">
+<div class="container-register">
     <div class="lace-top">
-        <object data="../static/svg/lace-horizontal-top.svg"></object>
+        <object data="../static/svg/lace/lace-horizontal-top.svg"></object>
     </div>
 
     <div class="lace-top">
-        <object data="../static/svg/lace-horizontal-top.svg" id="item1-right"></object>
+        <object data="../static/svg/lace/lace-horizontal-top.svg" id="item1-right"></object>
     </div>
 
     <div class="lace-bottom">
-        <object data="../static/svg/lace-horizontal-bottom.svg"></object>
+        <object data="../static/svg/lace/lace-horizontal-bottom.svg"></object>
     </div>
 
     <div class="lace-bottom">
-        <object data="../static/svg/lace-horizontal-bottom.svg" id="item2-right"></object>
+        <object data="../static/svg/lace/lace-horizontal-bottom.svg" id="item2-right"></object>
     </div>
 
     <div class="border-left"></div>
@@ -48,7 +48,6 @@
             <br>
             <button type="submit" class="button">Sign Up</button>
             <a href="#" class="login-link" th:href="@{/login}">I already have an account</a>
-        </form>
 
         <div class = "container-message">
             <div th:if="${errorMessage}" class="error-message">

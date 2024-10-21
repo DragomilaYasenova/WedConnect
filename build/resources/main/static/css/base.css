@@ -10,6 +10,40 @@
     src: url('../fonts/Poppins-Bold.ttf');
 }
 
+.font-size-48px {
+    font-size: 48px;
+}
+
+.font-size-16px {
+    font-size: 16px;
+}
+
+.font-size-14px {
+    font-size: 14px;
+}
+
+:root{
+    --base-clr: #FAF0F8;
+    --main-clr: #B04C7E;
+    --hover-clr: #86355e;
+    --text-clr: #331625;
+    --elements-clr: #FFFFFF;
+    --accent-clr: #F2CFE1;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.padding20px {
+    padding: 20px;
+}
+
+.height-100vh {
+    height: 100vh;
+}
+
 /* Body*/
 body {
     margin: 0;
@@ -18,8 +52,7 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: 100vh;
-    background-color: #FAF0F8;
+    background-color: var(--base-clr);
 }
 
 /* Buttons*/
@@ -27,7 +60,7 @@ body {
     font-family: Poppins-Bold, serif;
     padding: 10px 30px;
     font-size: 16px;
-    background-color: #B04C7E;
+    background-color: var(--main-clr);
     color: white;
     border: none;
     border-radius: 30px;
@@ -37,7 +70,7 @@ body {
 }
 
 .button:hover {
-    background-color: #86355e;
+    background-color: var(--hover-clr);
 }
 
 
@@ -55,10 +88,24 @@ body {
     top: 0;
 }
 
-#item1, #item2{
-    top: 734px;
+#item1, #item2 {
+    top: 733px;
 }
 
+.lace-position-nav {
+    position: fixed;
+    top: 0;
+    align-self: start;
+}
+
+.second-lace {
+    position: fixed;
+    top: 733px;
+}
+
+.right {
+    right: 0;
+}
 
 .lace-top, .lace-bottom {
     display: flex;
