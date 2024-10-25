@@ -5,25 +5,26 @@ import com.example.wed_connect.registration.repository.ClientRepository;
 import com.example.wed_connect.registration.repository.RestaurantRepository;
 import com.example.wed_connect.registration.repository.UserRepository;
 import com.example.wed_connect.registration.repository.WeddingAgencyRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final ClientRepository clientRepository;
+    private final WeddingAgencyRepository weddingAgencyRepository;
+    private final RestaurantRepository restaurantRepository;
+    private final WeddingAgencyService weddingAgencyService;
 
-    @Autowired
-    private ClientRepository clientRepository;
-
-    @Autowired
-    private WeddingAgencyRepository weddingAgencyRepository;
-
-    @Autowired
-    private RestaurantRepository restaurantRepository;
-    @Autowired
-    private WeddingAgencyService weddingAgencyService;
+    public UserService(UserRepository userRepository, ClientRepository clientRepository,
+                       WeddingAgencyRepository weddingAgencyRepository, RestaurantRepository restaurantRepository,
+                       WeddingAgencyService weddingAgencyService) {
+        this.userRepository = userRepository;
+        this.clientRepository = clientRepository;
+        this.weddingAgencyRepository = weddingAgencyRepository;
+        this.restaurantRepository = restaurantRepository;
+        this.weddingAgencyService = weddingAgencyService;
+    }
 
     public String registerUser(User user, UserType userType) {
         if (userRepository.existsByUsername(user.getUsername())) {

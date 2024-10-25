@@ -6,7 +6,6 @@ import com.example.wed_connect.registration.service.ClientService;
 import com.example.wed_connect.registration.service.UserService;
 import com.example.wed_connect.registration.model.User;
 import com.example.wed_connect.registration.service.WeddingAgencyService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,17 +15,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class LoginController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private final ClientService clientService;
+    private final WeddingAgencyService weddingAgencyService;
 
-    @Autowired
-    private ClientService clientService;
-
-    @Autowired
-    private WeddingAgencyService weddingAgencyService;
+    public LoginController(UserService userService, ClientService clientService, WeddingAgencyService weddingAgencyService) {
+        this.userService = userService;
+        this.clientService = clientService;
+        this.weddingAgencyService = weddingAgencyService;
+    }
 
     @GetMapping("/login")
-    public String showLoginForm(Model model) {
+    public String showLogprofilerm(Model model) {
         model.addAttribute("user", new User());
         return "login";
     }
@@ -44,7 +44,7 @@ public class LoginController {
                 Client client = clientService.findByUserId(userId);
 
                 if (client.getName() == null || client.getPhoneNumber() == null) {
-                    redirectUrl = "/client/info/" + client.getId();
+                    redirectUrl = "/client/profile/" + client.getId();
                 } else {
                     redirectUrl = "/client/home/" + client.getId();
                 }
@@ -53,7 +53,7 @@ public class LoginController {
                 WeddingAgency weddingAgency = weddingAgencyService.findByUserId(userId);
 
                 if (weddingAgency.getName() == null || weddingAgency.getPhoneNumber() == null || weddingAgency.getAddress() == null || weddingAgency.getMaxDistanceKm() == null) {
-                    redirectUrl = "/wedding_agency/info/" + weddingAgency.getId();
+                    redirectUrl = "/wedding_agency/profile/" + weddingAgency.getId();
                 } else {
                     redirectUrl = "/wedding_agency/home/" + weddingAgency.getId();
                 }

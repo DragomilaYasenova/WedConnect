@@ -2,7 +2,6 @@ package com.example.wed_connect.registration.service;
 
 import com.example.wed_connect.registration.model.Client;
 import com.example.wed_connect.registration.repository.ClientRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -10,8 +9,11 @@ import java.util.Optional;
 @Service
 public class ClientService {
 
-    @Autowired
-    private ClientRepository clientRepository;
+    private final ClientRepository clientRepository;
+
+    public ClientService(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
+    }
 
     public Client findById(Long clientId) {
         Optional<Client> client = clientRepository.findById(clientId);
@@ -32,7 +34,7 @@ public class ClientService {
     }
 
 
-    public Client updateClientInfo(Long clientId, String name, String phoneNumber) {
+    public Client updateClientProfile(Long clientId, String name, String phoneNumber) {
         Client client = findById(clientId);
         client.setName(name);
         client.setPhoneNumber(phoneNumber);

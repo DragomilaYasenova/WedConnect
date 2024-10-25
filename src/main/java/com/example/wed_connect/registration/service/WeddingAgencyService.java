@@ -2,14 +2,16 @@ package com.example.wed_connect.registration.service;
 
 import com.example.wed_connect.registration.model.WeddingAgency;
 import com.example.wed_connect.registration.repository.WeddingAgencyRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class WeddingAgencyService {
 
-    @Autowired
-    private WeddingAgencyRepository weddingAgencyRepository;
+    private final WeddingAgencyRepository weddingAgencyRepository;
+
+    public WeddingAgencyService(WeddingAgencyRepository weddingAgencyRepository) {
+        this.weddingAgencyRepository = weddingAgencyRepository;
+    }
 
     public WeddingAgency findById(Long weddingAgencyId) {
         return weddingAgencyRepository.findById(String.valueOf(weddingAgencyId)).orElse(null);

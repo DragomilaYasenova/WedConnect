@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Client Additional Information</title>
+    <title>Client Additional Profile</title>
     <link rel="stylesheet" type="text/css" href="../../static/css/styles.css">
 </head>
 <body>
-    <div class="container-info">
+    <div class="container-profile">
         <h1>We're thrilled to have you on board.<br>
             To get the most out of our features, please take a moment to complete your profile.
         </h1>
-        <form class="info-form" th:action="@{|/client/info/${client.id}|}" th:object="${client}" method="post">
+        <form class="profile-form" th:action="@{|/client/profile/${client.id}|}" th:object="${client}" method="post">
             <div class="left">
                 <label for="name">Name</label>
                 <input type="text" id="name" placeholder="name" th:field="*{name}" required>

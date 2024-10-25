@@ -2,7 +2,6 @@ package com.example.wed_connect.registration.controller;
 
 import com.example.wed_connect.registration.model.WeddingAgency;
 import com.example.wed_connect.registration.service.WeddingAgencyService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +10,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/wedding_agency/info")
 public class WeddingAgencyController {
 
+    private final WeddingAgencyService weddingAgencyService;
 
-    @Autowired
-    private WeddingAgencyService weddingAgencyService;
+    public WeddingAgencyController(WeddingAgencyService weddingAgencyService) {
+        this.weddingAgencyService = weddingAgencyService;
+    }
 
     @GetMapping("/{wedding_agencyId}")
     public String showClientInfo(@PathVariable Long wedding_agencyId, Model model) {
