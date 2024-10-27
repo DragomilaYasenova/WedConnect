@@ -21,12 +21,12 @@ public class WeddingAgencyService {
         return weddingAgencyRepository.findByUserId(userId).orElse(null);
     }
 
-    public WeddingAgency updateWeddingAgencyInfo(Long weddingAgencyId, String name, String phoneNumber, String address, Double max_distance_km) {
+    public void updateWeddingAgencyInfo(Long weddingAgencyId, String name, String phoneNumber, String address, Double max_distance_km) {
         WeddingAgency weddingAgency = findById(weddingAgencyId);
         weddingAgency.setName(name);
         weddingAgency.setPhoneNumber(phoneNumber);
         weddingAgency.setAddress(address);
         weddingAgency.setMaxDistanceKm(max_distance_km);
-        return weddingAgencyRepository.save(weddingAgency);
+        weddingAgencyRepository.save(weddingAgency);
     }
 }

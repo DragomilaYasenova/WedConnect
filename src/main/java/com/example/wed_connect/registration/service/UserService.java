@@ -79,6 +79,8 @@ public class UserService {
             return "Client";
         } else if (weddingAgencyRepository.existsByUserId(userId)){
             return "Wedding Agency";
+        } else if (restaurantRepository.existsByUserId(userId)){
+            return "Restaurant";
         }
         return "No user found";
     }

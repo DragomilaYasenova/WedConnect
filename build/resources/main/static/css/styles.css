@@ -154,7 +154,7 @@ select#type:focus {
 
 /* Home Pages */
 /* Client Home Page */
-.home {
+.home, .profile {
     min-height: 100vh;
     min-height: 100dvh;
     background-color: var(--base-clr);
@@ -163,7 +163,7 @@ select#type:focus {
     grid-template-columns: auto 1fr;
 }
 
-.container-home {
+.container-home, .container-profile {
     margin-bottom: 20px;
     padding: min(10em, 15%);
 }

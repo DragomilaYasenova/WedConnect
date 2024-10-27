@@ -34,10 +34,10 @@ public class ClientService {
     }
 
 
-    public Client updateClientProfile(Long clientId, String name, String phoneNumber) {
+    public void updateClientProfile(Long clientId, String name, String phoneNumber) {
         Client client = findById(clientId);
         client.setName(name);
         client.setPhoneNumber(phoneNumber);
-        return clientRepository.save(client);
+        clientRepository.save(client);
     }
 }
