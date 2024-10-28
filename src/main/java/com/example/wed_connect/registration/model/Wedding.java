@@ -2,6 +2,7 @@ package com.example.wed_connect.registration.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -19,7 +20,7 @@ public class Wedding {
 
     private String phoneNumberGroom;
 
-    private Date dateWedding;
+    private LocalDate dateWedding;
 
     private String location;
 
@@ -77,11 +78,11 @@ public class Wedding {
         this.phoneNumberGroom = phoneNumberGroom;
     }
 
-    public Date getDateWedding() {
+    public LocalDate getDateWedding() {
         return dateWedding;
     }
 
-    public void setDateWedding(Date dateWedding) {
+    public void setDateWedding(LocalDate dateWedding) {
         this.dateWedding = dateWedding;
     }
 
@@ -99,5 +100,29 @@ public class Wedding {
 
     public void setNumberOfGuests(int numberOfGuests) {
         this.numberOfGuests = numberOfGuests;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public WeddingAgency getWeddingAgency() {
+        return weddingAgency;
+    }
+
+    public void setWeddingAgency(WeddingAgency weddingAgency) {
+        this.weddingAgency = weddingAgency;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 }

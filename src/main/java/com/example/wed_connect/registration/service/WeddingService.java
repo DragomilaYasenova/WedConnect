@@ -4,6 +4,7 @@ import com.example.wed_connect.registration.model.Wedding;
 import com.example.wed_connect.registration.repository.WeddingRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Service
@@ -23,7 +24,7 @@ public class WeddingService {
         return weddingRepository.findByClientId(clientId).orElse(null);
     }
 
-    public void updateWeddingInfo(Long weddingId, String nameBride, String nameGroom, String phoneNumberBride, String phoneNumberGroom, Date dateWedding, String location, int numberOfGuests) {
+    public void updateWeddingInfo(Long weddingId, String nameBride, String nameGroom, String phoneNumberBride, String phoneNumberGroom, LocalDate dateWedding, String location, int numberOfGuests) {
         Wedding wedding = findById(weddingId);
         wedding.setNameBride(nameBride);
         wedding.setNameGroom(nameGroom);

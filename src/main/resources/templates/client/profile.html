@@ -11,7 +11,7 @@
 <body class="profile">
     <nav id="sidebar">
         <ul>
-            <li th:classappend="${currentPage == 'home'} ? 'active'">
+            <li>
                 <span class="logo">WedConnect</span>
                 <button onclick=toggleSidebar() id="toggle-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M440-240 200-480l240-240 56 56-183 184 183 184-56 56Zm264 0L464-480l240-240 56 56-183 184 183 184-56 56Z"/></svg>
@@ -128,8 +128,36 @@
                 </div>
 
                 <input type="hidden" th:field="*{id}"/>
+
+                <div class="wedding-info">
+                    <h3>Wedding Information</h3>
+                    <label for="nameBride">Bride's Name</label>
+                    <input type="text" id="nameBride" placeholder="Bride's Name" th:field="${wedding.nameBride}" required>
+
+                    <label for="nameGroom">Groom's Name</label>
+                    <input type="text" id="nameGroom" placeholder="Groom's Name" th:field="${wedding.nameGroom}" required>
+
+                    <label for="phone-number-bride">Bride's Phone Number</label>
+                    <input type="text" id="phone-number-bride" placeholder="00-0000-0000" th:field="${wedding.phoneNumberBride}" required>
+
+                    <label for="phone-number-groom">Groom's Phone Number</label>
+                    <input type="text" id="phone-number-groom" placeholder="00-0000-0000" th:field="${wedding.phoneNumberGroom}" required>
+
+                    <label for="dateWedding">Wedding Date</label>
+                    <input type="date" id="dateWedding" th:field="${wedding.dateWedding}" required>
+
+                    <label for="location">Location</label>
+                    <input type="text" id="location" placeholder="Location" th:field="${wedding.location}" required>
+
+                    <label for="numberOfGuests">Number of Guests</label>
+                    <input type="number" id="numberOfGuests" th:field="${wedding.numberOfGuests}" required>
+                </div>
+
                 <button type="submit">Confirm</button>
             </form>
+
+
+
         </div>
     </main>
 

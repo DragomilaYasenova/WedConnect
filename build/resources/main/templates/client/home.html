@@ -12,7 +12,7 @@
 <body class="home">
   <nav id="sidebar">
     <ul>
-      <li th:classappend="${currentPage == 'home'} ? 'active'">
+      <li>
         <span class="logo">WedConnect</span>
         <button onclick=toggleSidebar() id="toggle-btn">
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M440-240 200-480l240-240 56 56-183 184 183 184-56 56Zm264 0L464-480l240-240 56 56-183 184 183 184-56 56Z"/></svg>
@@ -116,7 +116,14 @@
     </div>
 
     <div class="container-home">
+      <h1>Welcome, <span th:text="${client.name}"></span>!</h1>
 
+      <h2>Your Wedding Details</h2>
+      <p>Bride's Name: <span th:text="${wedding.nameBride}"></span></p>
+      <p>Groom's Name: <span th:text="${wedding.nameGroom}"></span></p>
+      <p>Date of Wedding: <span th:text="${formattedDate}"></span></p>
+      <p>Location: <span th:text="${wedding.location}"></span></p>
+      <p>Number of Guests: <span th:text="${wedding.numberOfGuests}"></span></p>
     </div>
 
   </main>
