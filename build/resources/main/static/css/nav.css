@@ -128,11 +128,14 @@
 .img-icon {
     width: 40px;
     height: 40px;
-    background: url("../img/shapes/ellipse.png");
-    background-size: auto 100%;
-    background-blend-mode: multiply;
-    mask-image: url("../img/shapes/ellipse.png");
-    mask-size: auto 100%;
+    background: url("../img/shapes/ellipse.png") no-repeat center / cover;
+
+    -webkit-mask-image: url('data:image/svg+xml;utf8,<svg width="185" height="185" viewBox="0 0 185 185" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="92.5" cy="92.5" r="92.5" fill="%23D9D9D9"/></svg>');
+
+    mask-image: url('data:image/svg+xml;utf8,<svg width="185" height="185" viewBox="0 0 185 185" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="92.5" cy="92.5" r="92.5" fill="%23D9D9D9"/></svg>');
+
+    mask-size: cover;
+    -webkit-mask-size: cover;
     transition: 350ms ease;
 }
 

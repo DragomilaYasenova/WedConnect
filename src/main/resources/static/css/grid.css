@@ -22,3 +22,18 @@
     ;   
 }
 
+.container-home {
+    display:grid;
+    grid-template-columns: auto 100px auto;
+    grid-template-rows: 100px auto 100px auto auto;
+
+    grid-template-areas:
+        "   text-grid-top   text-grid-top   text-grid-top   "
+        "   img-grid-left   text-grid-center   img-grid-right   "
+        "   text-grid-left   .   text-grid-right   "
+        "   information-grid   information-grid   information-grid   "
+        "   content-grid   content-grid   content-grid   "
+    ;
+    justify-items: center;
+    align-items: center;
+}

@@ -10,8 +10,21 @@
     src: url('../fonts/Poppins-Bold.ttf');
 }
 
+@font-face {
+    font-family: 'Parisienne-Regular';
+    src: url('../fonts/Parisienne-Regular.ttf');
+}
+
 .font-size-48px {
     font-size: 48px;
+}
+
+.font-size-36px {
+    font-size: 36px;
+}
+
+.font-size-24px {
+    font-size: 24px;
 }
 
 .font-size-16px {
@@ -21,6 +34,11 @@
 .font-size-14px {
     font-size: 14px;
 }
+
+.text-left {
+    text-align: left;
+}
+
 
 :root{
     --base-clr: #FAF0F8;
