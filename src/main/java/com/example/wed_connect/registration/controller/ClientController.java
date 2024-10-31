@@ -59,7 +59,7 @@ public class ClientController {
         Client client = clientService.findById(clientId);
         Wedding wedding = weddingService.findByClientId(clientId);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd / MM / yyyy");
         String formattedDate = wedding.getDateWedding().format(formatter);
 
         model.addAttribute("client", client);

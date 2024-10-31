@@ -1,9 +1,9 @@
 package com.example.wed_connect.registration.model;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table (name = "wedding")
@@ -20,6 +20,7 @@ public class Wedding {
 
     private String phoneNumberGroom;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateWedding;
 
     private String location;

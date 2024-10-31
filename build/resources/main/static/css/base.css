@@ -15,6 +15,15 @@
     src: url('../fonts/Parisienne-Regular.ttf');
 }
 
+@font-face {
+    font-family: 'Mon-Amour-Two';
+    src: url('../fonts/Mon-Amour-Two.ttf');
+}
+
+.bolder-font {
+    font-weight: bolder;
+}
+
 .font-size-48px {
     font-size: 48px;
 }
@@ -25,6 +34,10 @@
 
 .font-size-24px {
     font-size: 24px;
+}
+
+.font-size-20px {
+    font-size: 20px;
 }
 
 .font-size-16px {

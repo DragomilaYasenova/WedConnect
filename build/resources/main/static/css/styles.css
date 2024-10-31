@@ -79,20 +79,20 @@
     grid-area: form-section;
 }
 
-.signup-form {
+.signup-form, .profile-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.signup-form label {
+.signup-form label, .profile-form label {
     color: #331625;
     margin-bottom: 5px;
     font-weight: bold;
     font-size: 16px;
 }
 
-.signup-form input {
+.signup-form input, .profile-form input {
     margin-bottom: 20px;
     padding: 10px;
     font-size: 14px;
@@ -101,27 +101,42 @@
     outline: none;
 }
 
-.signup-form select {
+.signup-form select, .profile-form select {
     width: 100%;
 }
 
 
 
 
-.signup-form input:focus{
+.signup-form input:focus {
     border-bottom: 1px solid #FF99CC;
 }
 
-input[type=text], input[type=password] {
+.signup-form input[type=text], .signup-form input[type=password] {
     border: none;
     border-bottom: 1px solid #D9D9D9;
     font-size: 14px;
 }
 
+.profile-form input {
+    border: 1px solid #D9D9D9;
+    font-size: 14px;
+}
+
+.profile-form input:focus {
+    border: 1px solid #FF99CC;
+    font-size: 14px;
+}
+
+
 .signup-form input:-webkit-autofill,
 .signup-form input:-webkit-autofill:focus,
 .signup-form input:-webkit-autofill:hover,
-.signup-form input:-webkit-autofill:active {
+.signup-form input:-webkit-autofill:active,
+.profile-form input:-webkit-autofill,
+.profile-form input:-webkit-autofill:focus,
+.profile-form input:-webkit-autofill:hover,
+.profile-form input:-webkit-autofill:active{
     background-color: #ffe5f1 !important;
     -webkit-box-shadow: 0 0 0 1000px #ffe5f1 inset;
     border-radius: 6px;
@@ -168,7 +183,7 @@ select#type:focus {
     padding: min(2em, 15%) min(3em, 15%) min(1em, 15%) min(4em, 15%);
 }
 
-#text-grid-top {
+.text-grid-top {
     grid-area: text-grid-top;
 
 }
@@ -182,7 +197,7 @@ select#type:focus {
 }
 
 #text-grid-left, #text-grid-right, #text-grid-center {
-    font-family: Parisienne-Regular, serif;
+    font-family: Mon-Amour-Two, serif;
     font-size: 64px;
     text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
 }
@@ -202,6 +217,7 @@ select#type:focus {
 
 #text-grid-center {
     grid-area: text-grid-center;
+    font-family: Parisienne-Regular, serif;
     font-size: 96px;
 }
 
@@ -226,4 +242,94 @@ select#type:focus {
 
 .content-list svg {
     padding-right: 10px;
+}
+
+.client-form {
+    margin-bottom: 50px;
+}
+
+.wedding-form, .client-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.profile-form input {
+    border-radius: 10px;
+}
+
+.profile-form {
+    padding: 80px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    align-items: center;
+    grid-area: profile-form;
+}
+
+.form-title {
+    display: flex;
+    justify-content: left;
+}
+
+#client-name-grid {
+    grid-area: client-name-grid;
+}
+
+#client-number-grid {
+    grid-area: client-number-grid;
+}
+
+#bride-name-grid {
+    grid-area: bride-name-grid;
+}
+
+#groom-name-grid {
+    grid-area: groom-name-grid;
+}
+
+#bride-phone-number-grid {
+    grid-area: bride-phone-number-grid;
+}
+
+#groom-phone-number-grid {
+    grid-area: groom-phone-number-grid;
+}
+
+#profile-content-grid {
+    display: flex;
+    grid-area: profile-content-grid;
+}
+
+#date-grid {
+    grid-area: date-grid;
+}
+
+#location-grid {
+    grid-area: location-grid;
+}
+
+#number-of-guests-grid {
+    grid-area: number-of-guests-grid;
+}
+
+#date-grid,
+#location-grid,
+#number-of-guests-grid {
+    display: flex;
+    flex-direction: column
+}
+
+#client-name-grid, #client-number-grid,
+#bride-name-grid, #groom-name-grid,
+#bride-phone-number-grid, #groom-phone-number-grid {
+    display: flex;
+    flex-direction: column
+}
+
+#button-profile {
+    display: flex;
+
+    margin-top: 30px;
 }

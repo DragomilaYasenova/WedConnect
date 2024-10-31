@@ -112,52 +112,68 @@
             <object data="../../static/svg/lace/lace-vertical-right.svg"></object>
         </div>
 
-        <div class="container-content">
-            <p>We're thrilled to have you on board.<br>
+        <div class="container-profile container-content">
+            <p class="bolder-font font-size-20px"> <br> We're thrilled to have you on board.<br>
                 To get the most out of our features, please take a moment to complete your profile.
             </p>
             <form class="profile-form" th:action="@{|/client/profile/${client.id}|}" th:object="${client}" method="post">
-                <div class="left">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" placeholder="name" th:field="*{name}" required>
+                <div class="client-form">
+                    <p class="text-grid-top bolder-font font-size-24px form-title">Client Information</p>
+                    <div id="client-name-grid">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" placeholder="name" th:field="*{name}" required>
+                    </div>
+
+                    <div id="client-number-grid">
+                        <label for="phone-number">Phone Number</label>
+                        <input type="text" id="phone-number" placeholder="00-0000-0000" th:field="*{phoneNumber}" required>
+                    </div>
                 </div>
 
-                <div class="right">
-                    <label for="phone-number">Phone Number</label>
-                    <input type="text" id="phone-number" placeholder="00-0000-0000" th:field="*{phoneNumber}" required>
+                <div class="wedding-form">
+                    <p class="text-grid-top bolder-font font-size-24px form-title">Wedding Information</p>
+
+                    <div id="bride-name-grid">
+                        <label for="nameBride">Bride's Name</label>
+                        <input type="text" id="nameBride" placeholder="Bride's Name" th:field="${wedding.nameBride}" required>
+                    </div>
+
+                    <div id="groom-name-grid">
+                        <label for="nameGroom">Groom's Name</label>
+                        <input type="text" id="nameGroom" placeholder="Groom's Name" th:field="${wedding.nameGroom}" required>
+                    </div>
+
+                    <div id="bride-phone-number-grid">
+                        <label for="phone-number-bride">Bride's Phone Number</label>
+                        <input type="text" id="phone-number-bride" placeholder="00-0000-0000" th:field="${wedding.phoneNumberBride}" required>
+                    </div>
+
+                    <div id="groom-phone-number-grid">
+                        <label for="phone-number-groom">Groom's Phone Number</label>
+                        <input type="text" id="phone-number-groom" placeholder="00-0000-0000" th:field="${wedding.phoneNumberGroom}" required>
+                    </div>
+
+                    <div id="profile-content-grid">
+                        <div id="date-grid">
+                            <label for="dateWedding">Wedding Date</label>
+                            <input type="date" id="dateWedding" th:field="${wedding.dateWedding}" required>
+                        </div>
+
+                        <div id="location-grid">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" placeholder="Location" th:field="${wedding.location}" required>
+                        </div>
+
+                        <div id="number-of-guests-grid">
+                            <label for="numberOfGuests">Number of Guests</label>
+                            <input type="number" id="numberOfGuests" th:field="${wedding.numberOfGuests}" required>
+                        </div>
+                    </div>
+
                 </div>
 
-                <input type="hidden" th:field="*{id}"/>
-
-                <div class="wedding-info">
-                    <h3>Wedding Information</h3>
-                    <label for="nameBride">Bride's Name</label>
-                    <input type="text" id="nameBride" placeholder="Bride's Name" th:field="${wedding.nameBride}" required>
-
-                    <label for="nameGroom">Groom's Name</label>
-                    <input type="text" id="nameGroom" placeholder="Groom's Name" th:field="${wedding.nameGroom}" required>
-
-                    <label for="phone-number-bride">Bride's Phone Number</label>
-                    <input type="text" id="phone-number-bride" placeholder="00-0000-0000" th:field="${wedding.phoneNumberBride}" required>
-
-                    <label for="phone-number-groom">Groom's Phone Number</label>
-                    <input type="text" id="phone-number-groom" placeholder="00-0000-0000" th:field="${wedding.phoneNumberGroom}" required>
-
-                    <label for="dateWedding">Wedding Date</label>
-                    <input type="date" id="dateWedding" th:field="${wedding.dateWedding}" required>
-
-                    <label for="location">Location</label>
-                    <input type="text" id="location" placeholder="Location" th:field="${wedding.location}" required>
-
-                    <label for="numberOfGuests">Number of Guests</label>
-                    <input type="number" id="numberOfGuests" th:field="${wedding.numberOfGuests}" required>
-                </div>
-
-                <button type="submit">Confirm</button>
+                <button type="submit" class="button" id="button-profile">Confirm</button>
             </form>
-
-
-
         </div>
     </main>
 
