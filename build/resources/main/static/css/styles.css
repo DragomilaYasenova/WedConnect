@@ -108,7 +108,7 @@
 
 
 
-.signup-form input:focus {
+.signup-form input:focus{
     border-bottom: 1px solid #FF99CC;
 }
 

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table (name = "wedding")
@@ -38,6 +40,9 @@ public class Wedding {
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
+
+    @OneToMany(mappedBy = "wedding", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Guest> guests = new HashSet<>();
 
     public Long getId() {
         return id;
