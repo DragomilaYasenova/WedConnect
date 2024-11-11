@@ -18,7 +18,7 @@ public class GuestController {
         this.guestService = guestService;
     }
 
-    @GetMapping("/guests/{weddingId}")
+    @GetMapping("/guests")
     public String getAllGuests(Model model) {
         List<Guest> guests = guestService.getAllGuests();
         model.addAttribute("guests", guests);

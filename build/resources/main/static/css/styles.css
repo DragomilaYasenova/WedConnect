@@ -169,7 +169,7 @@ select#type:focus {
 
 /* Home Pages */
 /* Client Home Page */
-.home, .profile {
+.home, .profile, .guests {
     min-height: 100vh;
     min-height: 100dvh;
     background-color: var(--base-clr);

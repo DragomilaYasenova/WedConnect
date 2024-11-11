@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.wed_connect.WedConnectApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-10-20T07:58:39" hostname="Dragomilas-MacBook-Air.local" time="0.86">
+<testsuite name="com.example.wed_connect.WedConnectApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-11-07T14:07:38" hostname="Dragomilas-MacBook-Air.local" time="0.923">
   <properties/>
-  <testcase name="contextLoads()" classname="com.example.wed_connect.WedConnectApplicationTests" time="0.86"/>
-  <system-out><![CDATA[10:58:32.023 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.wed_connect.WedConnectApplicationTests]: WedConnectApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-10:58:32.158 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.wed_connect.WedConnectApplication for test class com.example.wed_connect.WedConnectApplicationTests
+  <testcase name="contextLoads()" classname="com.example.wed_connect.WedConnectApplicationTests" time="0.923"/>
+  <system-out><![CDATA[16:07:30.087 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.wed_connect.WedConnectApplicationTests]: WedConnectApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+16:07:30.225 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.wed_connect.WedConnectApplication for test class com.example.wed_connect.WedConnectApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -14,23 +14,41 @@
 
  :: Spring Boot ::                (v3.3.1)
 
-2024-10-20T10:58:32.723+03:00  INFO 23357 --- [wed_connect] [    Test worker] c.e.w.WedConnectApplicationTests         : Starting WedConnectApplicationTests using Java 21.0.3 with PID 23357 (started by dragomila in /Users/dragomila/GITHUB/WedConnect)
-2024-10-20T10:58:32.725+03:00  INFO 23357 --- [wed_connect] [    Test worker] c.e.w.WedConnectApplicationTests         : No active profile set, falling back to 1 default profile: "default"
-2024-10-20T10:58:33.962+03:00  INFO 23357 --- [wed_connect] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-10-20T10:58:34.065+03:00  INFO 23357 --- [wed_connect] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 82 ms. Found 4 JPA repository interfaces.
-2024-10-20T10:58:34.865+03:00  INFO 23357 --- [wed_connect] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-10-20T10:58:34.906+03:00  INFO 23357 --- [wed_connect] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
-2024-10-20T10:58:34.941+03:00  INFO 23357 --- [wed_connect] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2024-10-20T10:58:35.396+03:00  INFO 23357 --- [wed_connect] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-10-20T10:58:35.458+03:00  INFO 23357 --- [wed_connect] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2024-10-20T10:58:36.022+03:00  INFO 23357 --- [wed_connect] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@238ad211
-2024-10-20T10:58:36.025+03:00  INFO 23357 --- [wed_connect] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2024-10-20T10:58:37.236+03:00  INFO 23357 --- [wed_connect] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2024-10-20T10:58:37.471+03:00  INFO 23357 --- [wed_connect] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-10-20T10:58:38.122+03:00  INFO 23357 --- [wed_connect] [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2024-10-20T10:58:38.886+03:00  WARN 23357 --- [wed_connect] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2024-10-20T10:58:38.934+03:00  INFO 23357 --- [wed_connect] [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2024-10-20T10:58:39.833+03:00  INFO 23357 --- [wed_connect] [    Test worker] c.e.w.WedConnectApplicationTests         : Started WedConnectApplicationTests in 7.486 seconds (process running for 9.093)
+2024-11-07T16:07:30.839+02:00  INFO 9850 --- [wed_connect] [    Test worker] c.e.w.WedConnectApplicationTests         : Starting WedConnectApplicationTests using Java 21.0.3 with PID 9850 (started by dragomila in /Users/dragomila/GITHUB/WedConnect)
+2024-11-07T16:07:30.842+02:00  INFO 9850 --- [wed_connect] [    Test worker] c.e.w.WedConnectApplicationTests         : No active profile set, falling back to 1 default profile: "default"
+2024-11-07T16:07:32.147+02:00  INFO 9850 --- [wed_connect] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-07T16:07:32.236+02:00  INFO 9850 --- [wed_connect] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 82 ms. Found 6 JPA repository interfaces.
+2024-11-07T16:07:33.079+02:00  INFO 9850 --- [wed_connect] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-07T16:07:33.116+02:00  INFO 9850 --- [wed_connect] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-11-07T16:07:33.149+02:00  INFO 9850 --- [wed_connect] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-11-07T16:07:33.618+02:00  INFO 9850 --- [wed_connect] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-07T16:07:33.683+02:00  INFO 9850 --- [wed_connect] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-11-07T16:07:34.252+02:00  INFO 9850 --- [wed_connect] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7d685f4e
+2024-11-07T16:07:34.254+02:00  INFO 9850 --- [wed_connect] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-11-07T16:07:35.691+02:00  INFO 9850 --- [wed_connect] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: create table guest (id bigint not null auto_increment, email varchar(255), family_role enum ('BESTMAN','BRIDESMAID','EXTENDED_FAMILY','GRANDPARENT','GUEST','MAID_OF_HONOR','PARENT','SIBLING'), family_side enum ('BRIDES_SIDE','GROOMS_SIDE'), first_name varchar(255), gender varchar(255), last_name varchar(255), menu enum ('DAIRY_FREE','NUT_FREE','STANDARD','VEGAN','VEGETARIAN'), table_number varchar(255), guest_group_id bigint, user_id bigint, wedding_id bigint not null, primary key (id)) engine=InnoDB
+Hibernate: create table guest_group (id bigint not null auto_increment, group_name varchar(255), primary key (id)) engine=InnoDB
+Hibernate: create table rsvp (id bigint not null auto_increment, status enum ('ACCEPTED','DECLINED','PENDING'), guest_id bigint, primary key (id)) engine=InnoDB
+Hibernate: alter table guest drop index UKchdaocwoknpkpjjcb6dyv8os8
+Hibernate: alter table guest add constraint UKchdaocwoknpkpjjcb6dyv8os8 unique (user_id)
+Hibernate: alter table rsvp drop index UKoey24yed52eyhdtblf5mjtil5
+Hibernate: alter table rsvp add constraint UKoey24yed52eyhdtblf5mjtil5 unique (guest_id)
+Hibernate: alter table guest add constraint FK5g5tb6y0xcyf5pffk5kvd6ucy foreign key (guest_group_id) references guest_group (id)
+Hibernate: alter table guest add constraint FKake2867xxr6o753o6kqc4rott foreign key (user_id) references user (id)
+Hibernate: alter table guest add constraint FK5n52dtvsccqby2xlo44mi8kvj foreign key (wedding_id) references wedding (id)
+Hibernate: alter table rsvp add constraint FKkdsy8vqg04fjyvrtvq21qfaw7 foreign key (guest_id) references guest (id)
+2024-11-07T16:07:36.057+02:00  INFO 9850 --- [wed_connect] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-07T16:07:36.780+02:00  INFO 9850 --- [wed_connect] [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-11-07T16:07:37.832+02:00  WARN 9850 --- [wed_connect] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-07T16:07:37.884+02:00  INFO 9850 --- [wed_connect] [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-11-07T16:07:38.460+02:00  WARN 9850 --- [wed_connect] [    Test worker] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: c8b715bb-ddb1-4761-9cda-70e475958dc9
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-11-07T16:07:38.484+02:00  INFO 9850 --- [wed_connect] [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-11-07T16:07:38.813+02:00  INFO 9850 --- [wed_connect] [    Test worker] c.e.w.WedConnectApplicationTests         : Started WedConnectApplicationTests in 8.344 seconds (process running for 10.038)
 ]]></system-out>
   <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (/Users/dragomila/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.14.17/e3c251a39dc90badaf71c83427ba46840f219d8d/byte-buddy-agent-1.14.17.jar)
 WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning

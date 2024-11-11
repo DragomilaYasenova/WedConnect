@@ -1,6 +1,7 @@
 package com.example.wed_connect.registration.service;
 
 import com.example.wed_connect.registration.model.Client;
+import com.example.wed_connect.registration.model.Guest;
 import com.example.wed_connect.registration.repository.ClientRepository;
 import org.springframework.stereotype.Service;
 

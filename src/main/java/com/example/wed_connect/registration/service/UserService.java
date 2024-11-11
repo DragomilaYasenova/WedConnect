@@ -2,7 +2,11 @@ package com.example.wed_connect.registration.service;
 
 import com.example.wed_connect.registration.model.*;
 import com.example.wed_connect.registration.repository.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -11,18 +15,18 @@ public class UserService {
     private final ClientRepository clientRepository;
     private final WeddingAgencyRepository weddingAgencyRepository;
     private final RestaurantRepository restaurantRepository;
-    private final WeddingAgencyService weddingAgencyService;
     private final WeddingRepository weddingRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     public UserService(UserRepository userRepository, ClientRepository clientRepository,
                        WeddingAgencyRepository weddingAgencyRepository, RestaurantRepository restaurantRepository,
-                       WeddingAgencyService weddingAgencyService, WeddingRepository weddingRepository) {
+                       WeddingRepository weddingRepository, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.clientRepository = clientRepository;
         this.weddingAgencyRepository = weddingAgencyRepository;
         this.restaurantRepository = restaurantRepository;
-        this.weddingAgencyService = weddingAgencyService;
         this.weddingRepository = weddingRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public String registerUser(User user, UserType userType) {
@@ -34,6 +38,9 @@ public class UserService {
             return "Passwords do not match";
         }
 
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+
         user.setType(userType);
         userRepository.save(user);
 
@@ -44,6 +51,7 @@ public class UserService {
                 clientRepository.save(client);
                 Wedding wedding = new Wedding();
                 wedding.setClient(client);
+                wedding.setDateWedding(LocalDate.now());
                 weddingRepository.save(wedding);
                 break;
 
@@ -67,11 +75,23 @@ public class UserService {
     }
 
     public String authenticateUser(User user) {
-        if (!userRepository.existsByUsername(user.getUsername()) || !userRepository.existsByPassword(user.getPassword())) {
+        Optional<User> foundUserOptional = userRepository.findByUsername(user.getUsername());
+
+        if (foundUserOptional.isEmpty()) {
+            return "Invalid username or password";
+        }
+
+        User foundUser = foundUserOptional.get();
+
+        if (!authenticate(user.getPassword(), foundUser)) {
             return "Invalid username or password";
         }
 
         return "User logged in successfully";
+    }
+
+    public boolean authenticate(String rawPassword, User user) {
+        return passwordEncoder.matches(rawPassword, user.getPassword());
     }
 
     public String getUserType(User user) {
@@ -79,15 +99,19 @@ public class UserService {
 
         if (clientRepository.existsByUserId(userId)) {
             return "Client";
-        } else if (weddingAgencyRepository.existsByUserId(userId)){
+        } else if (weddingAgencyRepository.existsByUserId(userId)) {
             return "Wedding Agency";
-        } else if (restaurantRepository.existsByUserId(userId)){
+        } else if (restaurantRepository.existsByUserId(userId)) {
             return "Restaurant";
         }
         return "No user found";
     }
 
     public Long returnUserId(User user) {
-         return userRepository.findIdByUsername(user.getUsername());
+        return userRepository.findIdByUsername(user.getUsername());
+    }
+
+    public Long returnUserIdByUsername(String username) {
+        return userRepository.findIdByUsername(username);
     }
 }

@@ -30,6 +30,7 @@ public class RegistrationController {
         String result = userService.registerUser(user, userType);
         if (result.equals("User registered successfully")) {
             model.addAttribute("successMessage", result);
+            return "redirect:/login";
         } else {
             model.addAttribute("errorMessage", result);
         }

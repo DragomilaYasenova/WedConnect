@@ -26,7 +26,7 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    public String showLogprofilerm(Model model) {
+    public String showLoginForm(Model model) {
         model.addAttribute("user", new User());
         return "login";
     }
@@ -40,28 +40,27 @@ public class LoginController {
         if ("User logged in successfully".equals(result)) {
             String redirectUrl;
             if ("Client".equals(userType)) {
-                System.out.println("Client");
                 Client client = clientService.findByUserId(userId);
 
                 if (client.getName() == null || client.getPhoneNumber() == null) {
-                    redirectUrl = "/client/profile/" + client.getId();
+                    redirectUrl = "/client/profile";
                 } else {
-                    redirectUrl = "/client/home/" + client.getId();
+                    redirectUrl = "/client/home";
                 }
+
             } else if ("Wedding Agency".equals(userType)) {
-                System.out.println("Wedding Agency");
                 WeddingAgency weddingAgency = weddingAgencyService.findByUserId(userId);
 
-                if (weddingAgency.getName() == null || weddingAgency.getPhoneNumber() == null || weddingAgency.getAddress() == null || weddingAgency.getMaxDistanceKm() == null) {
-                    redirectUrl = "/wedding_agency/profile/" + weddingAgency.getId();
+                if (weddingAgency.getName() == null || weddingAgency.getPhoneNumber() == null ||
+                        weddingAgency.getAddress() == null || weddingAgency.getMaxDistanceKm() == null) {
+                    redirectUrl = "/wedding_agency/profile";
                 } else {
-                    redirectUrl = "/wedding_agency/home/" + weddingAgency.getId();
+                    redirectUrl = "/wedding_agency/home";
                 }
+            } else {
+                redirectUrl = "/";
             }
 
-            else {
-                redirectUrl = "";
-            }
             return "redirect:" + redirectUrl;
         } else {
             model.addAttribute("errorMessage", result);
