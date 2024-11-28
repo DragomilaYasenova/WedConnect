@@ -117,12 +117,111 @@
     </div>
 
     <div class="container-content">
+      <h2>Guest List</h2>
 
-      
+        <table id="guest-wedding-table">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Table</th>
+            <th>Menu</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <th:block th:each="guestWedding : ${guestWeddings}">
+            <tr>
+              <td th:text="${guestWedding.nickname + ' ' + guestWedding.lastNameNick}"></td>
+
+              <td th:text="${guestWedding.tableNumber}"></td>
+              <td th:text="${guestWedding.menuChoice}"></td>
+
+              <td>
+                <form th:action="@{/client/guests/edit}" method="get">
+                  <input type="hidden" name="guestWeddingId" th:value="${guestWedding.id}" />
+                  <button type="submit" class="btn btn-edit">Edit</button>
+                </form>
+              </td>
+            </tr>
+          </th:block>
+          </tbody>
+        </table>
     </div>
+
+
+
+
+
+    <button type="button" onclick=showForm()>Add Guest</button>
+
+
+      <form th:action="@{/client/guests}" method="post" id="guestForm" class="hidden">
+
+        <div class="form-group">
+          <label for="firstName">First Name:</label>
+          <input type="text" id="firstName" name="firstName" required/>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name:</label>
+          <input type="text" id="lastName" name="lastName" required/>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required/>
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender:</label>
+          <input type="text" id="gender" name="gender"/>
+        </div>
+
+
+
+        <div class="form-group">
+          <label for="familyRole">Family Role</label>
+          <select id="familyRole" name="familyRole">
+            <option th:each="role : ${familyRole}" th:value="${role}" th:text="${role}"></option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="familySide">Family Side:</label>
+          <select id="familySide" name="familySide">
+            <option th:each="side : ${familySide}" th:value="${side}" th:text="${side}"></option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="rsvpStatus">RSVP Status:</label>
+          <select id="rsvpStatus" name="rsvpStatus">
+            <option th:each="status : ${rsvpStatus}" th:value="${status}" th:text="${status}"></option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="tableNumber">Table Number</label>
+          <input type="number" id="tableNumber" name="tableNumber"/>
+        </div>
+
+        <div class="form-group">
+          <label for="menuChoice">Menu Choice</label>
+          <select id="menuChoice" name="menuChoice">
+            <option th:each="menu : ${menuChoice}" th:value="${menu}" th:text="${menu}"></option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="guestGroup">Guest Group</label>
+          <input type="text" id="guestGroup" name="guestGroup"/>
+        </div>
+
+        <button onclick=hideForm() type="submit">Add Guest</button>
+      </form>
 
   </main>
 
+
+  <script src="/js/showForm.js"></script>
+  <script src="/js/handleEdit.js"></script>
   <script src="../../static/js/buttons.js"></script>
   <script src="/js/buttons.js"></script>
 

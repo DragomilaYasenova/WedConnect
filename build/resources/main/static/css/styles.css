@@ -333,3 +333,7 @@ select#type:focus {
 
     margin-top: 30px;
 }
+
+.guest-form, .guest-list {
+    margin: 20px 0;
+}

@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -41,8 +42,8 @@ public class Wedding {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    @OneToMany(mappedBy = "wedding", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Guest> guests = new HashSet<>();
+    @OneToMany(mappedBy = "wedding")
+    private List<GuestWedding> guestWeddings;
 
     public Long getId() {
         return id;
@@ -130,5 +131,13 @@ public class Wedding {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    public List<GuestWedding> getGuestWeddings() {
+        return guestWeddings;
+    }
+
+    public void setGuestWeddings(List<GuestWedding> guestWeddings) {
+        this.guestWeddings = guestWeddings;
     }
 }

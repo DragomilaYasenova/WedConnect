@@ -1,13 +1,13 @@
 package com.example.wed_connect.registration.repository;
 
 import com.example.wed_connect.registration.model.Guest;
+import com.example.wed_connect.registration.model.Wedding;
 import org.springframework.data.jpa.repository.JpaRepository;
-
+import org.springframework.stereotype.Repository;
 import java.util.List;
-import java.util.Optional;
 
+@Repository
 public interface GuestRepository extends JpaRepository<Guest, Long> {
-    List<Guest> findByWeddingId(Long weddingId);
-
-    Optional<Guest> findByEmail(String email);
+    Guest findByEmail(String email);
+    List<Guest> findByGuestWeddingsWeddingId(Long weddingId);
 }

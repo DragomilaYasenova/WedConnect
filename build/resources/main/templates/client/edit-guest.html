@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Guest</title>
+</head>
+<body>
+<h1>Edit Guest Details</h1>
+<form th:action="@{/client/guests/edit}" method="post">
+    <input type="hidden" name="id" th:value="${guestWedding.id}" />
+
+    <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="nickname" th:value="${guestWedding.nickname}" required />
+    </div>
+
+    <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastNameNick" th:value="${guestWedding.lastNameNick}" required />
+    </div>
+
+
+    <div class="form-group">
+        <label for="familyRole">Family Role:</label>
+        <select id="familyRole" name="familyRole" th:field="${guestWedding.familyRole}">
+            <option th:each="role : ${familyRole}" th:value="${role}" th:text="${role}"></option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="familySide">Family Side:</label>
+        <select id="familySide" name="familySide" th:field="${guestWedding.familySide}">
+            <option th:each="side : ${familySide}" th:value="${side}" th:text="${side}"></option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="rsvpStatus">RSVP Status:</label>
+        <select id="rsvpStatus" name="rsvpStatus" th:field="${guestWedding.rsvpStatus}" required>
+            <option th:each="status : ${rsvpStatus}" th:value="${status}" th:text="${status}"></option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="tableNumber">Table Number</label>
+        <input type="number" id="tableNumber" th:value="${guestWedding.tableNumber}" name="tableNumber"/>
+    </div>
+
+    <div class="form-group">
+        <label for="menuChoice">Menu Choice:</label>
+        <select id="menuChoice" name="menuChoice" th:field="${guestWedding.menuChoice}">
+            <option th:each="menu : ${menuChoice}" th:value="${menu}" th:text="${menu}"></option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="guestGroup">Guest Group</label>
+        <input type="text" id="guestGroup" th:value="${guestWedding.guestGroup}" name="guestGroup"/>
+    </div>
+
+
+
+    <button type="submit" class="btn btn-save">Save</button>
+</form>
+</body>
+</html>
