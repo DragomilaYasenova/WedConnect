@@ -17,20 +17,17 @@ public class UserService {
     private final RestaurantRepository restaurantRepository;
     private final WeddingRepository weddingRepository;
     private final BCryptPasswordEncoder passwordEncoder;
-    private final GuestRepository guestRepository;
-    private final GuestWeddingRepository guestWeddingRepository;
+
 
     public UserService(UserRepository userRepository, ClientRepository clientRepository,
                        WeddingAgencyRepository weddingAgencyRepository, RestaurantRepository restaurantRepository,
-                       WeddingRepository weddingRepository, BCryptPasswordEncoder passwordEncoder, GuestRepository guestRepository, GuestWeddingRepository guestWeddingRepository) {
+                       WeddingRepository weddingRepository, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.clientRepository = clientRepository;
         this.weddingAgencyRepository = weddingAgencyRepository;
         this.restaurantRepository = restaurantRepository;
         this.weddingRepository = weddingRepository;
         this.passwordEncoder = passwordEncoder;
-        this.guestRepository = guestRepository;
-        this.guestWeddingRepository = guestWeddingRepository;
     }
 
     public String registerUser(User user, UserType userType) {
@@ -57,12 +54,7 @@ public class UserService {
                 wedding.setClient(client);
                 wedding.setDateWedding(LocalDate.now());
                 weddingRepository.save(wedding);
-                Guest guest = new Guest();
-                guestRepository.save(guest);
-                GuestWedding guestWedding = new GuestWedding();
-                guestWedding.setGuest(guest);
-                guestWedding.setWedding(wedding);
-                guestWeddingRepository.save(guestWedding);
+
                 break;
 
             case WEDDING_AGENCY:
