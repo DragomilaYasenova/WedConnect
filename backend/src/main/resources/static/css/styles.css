@@ -1,0 +1,339 @@
+/* Home Page */
+.container-index {
+    overflow-y: hidden;
+}
+
+.upright {
+    position: absolute;
+    top: 20px;
+    right: 70px;
+}
+
+#button-get-started {
+    padding: 10px 50px;
+}
+
+
+/* register/login pages */
+/* Border */
+
+.border-left {
+    border-right: 4px solid #B04C7E;
+    grid-area: border-left;
+    margin-right: 5px;
+
+}
+
+.border-right {
+    border-left: 4px solid #B04C7E;
+    grid-area: border-right;
+    margin-left: 5px;
+}
+
+#login-text {
+    border-right: 4px solid #B04C7E; 
+    font-size: 20px;
+}
+
+#register-text {
+    border-left: 4px solid #B04C7E;
+}
+
+#login-form {
+    border-left: 4px solid #B04C7E;
+}
+
+#register-form {
+    border-right: 4px solid #B04C7E;
+}
+
+
+.text-section {
+    color: #331625;
+    background-color: #F2CFE1;
+    padding: 100px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-area: text-section;
+    font-size: 16px;
+}
+
+
+.login-link {
+    color: #331625;
+    margin-top: 5px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.form-section {
+    background-color: white;
+    padding: 100px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    align-items: center;
+    grid-area: form-section;
+}
+
+.signup-form, .profile-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.signup-form label, .profile-form label {
+    color: #331625;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.signup-form input, .profile-form input {
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 14px;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+.signup-form select, .profile-form select {
+    width: 100%;
+}
+
+
+
+
+.signup-form input:focus{
+    border-bottom: 1px solid #FF99CC;
+}
+
+.signup-form input[type=text], .signup-form input[type=password] {
+    border: none;
+    border-bottom: 1px solid #D9D9D9;
+    font-size: 14px;
+}
+
+.profile-form input {
+    border: 1px solid #D9D9D9;
+    font-size: 14px;
+}
+
+.profile-form input:focus {
+    border: 1px solid #FF99CC;
+    font-size: 14px;
+}
+
+
+.signup-form input:-webkit-autofill,
+.signup-form input:-webkit-autofill:focus,
+.signup-form input:-webkit-autofill:hover,
+.signup-form input:-webkit-autofill:active,
+.profile-form input:-webkit-autofill,
+.profile-form input:-webkit-autofill:focus,
+.profile-form input:-webkit-autofill:hover,
+.profile-form input:-webkit-autofill:active{
+    background-color: #ffe5f1 !important;
+    -webkit-box-shadow: 0 0 0 1000px #ffe5f1 inset;
+    border-radius: 6px;
+    border-image: none;
+    transition: background-color 0.1s ease-in-out;
+}
+
+select#type {
+    width: 250px;
+    padding: 10px;
+    font-size: 12px;
+    border: 1px solid #D9D9D9;
+    color: #331625;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+select#type option {
+    font-size: 12px;
+}
+
+select#type:focus {
+    outline: none;
+    border: 1px solid #FF99CC;
+}
+
+.container-message {
+    display: block;
+}
+
+/* Home Pages */
+/* Client Home Page */
+.home, .profile, .guests {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-color: var(--base-clr);
+    color: var(--text-clr);
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+
+.container-content {
+    margin-bottom: 20px;
+    padding: min(2em, 15%) min(3em, 15%) min(1em, 15%) min(4em, 15%);
+}
+
+.text-grid-top {
+    grid-area: text-grid-top;
+
+}
+
+#text-grid-right {
+    grid-area: text-grid-right;
+}
+
+#text-grid-left {
+    grid-area: text-grid-left;
+}
+
+#text-grid-left, #text-grid-right, #text-grid-center {
+    font-family: Mon-Amour-Two, serif;
+    font-size: 64px;
+    text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#img-grid-right {
+    grid-area: img-grid-right;
+}
+
+#img-grid-left {
+    grid-area: img-grid-left;
+}
+
+#img-grid-left, #img-grid-right {
+    height: 200px;
+    width: 200px;
+}
+
+#text-grid-center {
+    grid-area: text-grid-center;
+    font-family: Parisienne-Regular, serif;
+    font-size: 96px;
+}
+
+#information-grid {
+    padding-top: 30px;
+    grid-area: information-grid;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+}
+
+#content-grid {
+    grid-area: content-grid;
+}
+
+.content-list {
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.content-list svg {
+    padding-right: 10px;
+}
+
+.client-form {
+    margin-bottom: 50px;
+}
+
+.wedding-form, .client-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.profile-form input {
+    border-radius: 10px;
+}
+
+.profile-form {
+    padding: 80px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    align-items: center;
+    grid-area: profile-form;
+}
+
+.form-title {
+    display: flex;
+    justify-content: left;
+}
+
+#client-name-grid {
+    grid-area: client-name-grid;
+}
+
+#client-number-grid {
+    grid-area: client-number-grid;
+}
+
+#bride-name-grid {
+    grid-area: bride-name-grid;
+}
+
+#groom-name-grid {
+    grid-area: groom-name-grid;
+}
+
+#bride-phone-number-grid {
+    grid-area: bride-phone-number-grid;
+}
+
+#groom-phone-number-grid {
+    grid-area: groom-phone-number-grid;
+}
+
+#profile-content-grid {
+    display: flex;
+    grid-area: profile-content-grid;
+}
+
+#date-grid {
+    grid-area: date-grid;
+}
+
+#location-grid {
+    grid-area: location-grid;
+}
+
+#number-of-guests-grid {
+    grid-area: number-of-guests-grid;
+}
+
+#date-grid,
+#location-grid,
+#number-of-guests-grid {
+    display: flex;
+    flex-direction: column
+}
+
+#client-name-grid, #client-number-grid,
+#bride-name-grid, #groom-name-grid,
+#bride-phone-number-grid, #groom-phone-number-grid {
+    display: flex;
+    flex-direction: column
+}
+
+#button-profile {
+    display: flex;
+
+    margin-top: 30px;
+}
+
+.guest-form, .guest-list {
+    margin: 20px 0;
+}

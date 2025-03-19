@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="EN">
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/base.css">
+</head>
+<body class="container-index height-100vh">
+
+
+    <div class="lace-left">
+        <img src="/svg/lace/lace-vertical-left.svg" alt="Left Lace" draggable="false">
+    </div>
+
+    <div class="lace-right">
+        <img src="/svg/lace/lace-vertical-right.svg" alt="Right Lace" draggable="false">
+    </div>
+
+
+    <div class="upright">
+        <a href="#" th:href="@{/login}" class="button">Sign In</a>
+        <a href="#" th:href="@{/register}" class="button">Sign Up</a>
+    </div>
+
+    <div class="center">
+        <h1 class="font-size-48px padding20px">Welcome to WedConnect test</h1>
+        <a href="#" th:href="@{/register}" class="button" id="button-get-started">Get Started</a>
+    </div>
+
+    <script src="/js/pathAdjuster.js"></script>
+</body>
+</html>

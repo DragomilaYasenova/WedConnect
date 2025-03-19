@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="EN">
+<head>
+    <title>Sign In</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/grid.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/base.css">
+</head>
+<body class="height-100vh">
+<div class="container-login">
+    <div class="lace-top">
+        <img src="/svg/lace/lace-horizontal-top.svg" alt="Top Lace" draggable="false">
+    </div>
+
+    <div class="lace-top">
+        <img src="/svg/lace/lace-horizontal-top.svg" alt="Top Lace" draggable="false" id="item1-right">
+    </div>
+
+    <div class="lace-bottom">
+        <img src="/svg/lace/lace-horizontal-bottom.svg" alt="Bottom Lace" draggable="false">
+    </div>
+
+    <div class="lace-bottom">
+        <img src="/svg/lace/lace-horizontal-bottom.svg" alt="Bottom Lace" draggable="false" id="item2-right">
+    </div>
+
+    <div class="border-left"></div>
+    <div class="border-right"></div>
+
+    <div class="form-section" id="login-form">
+        <form class="signup-form" th:action="@{/login}" th:object="${user}" method="post">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="username" th:field="*{username}" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="..........." th:field="*{password}" required>
+
+            <button type="submit" class="button">Sign In</button>
+            <a href="#" class="login-link" th:href="@{/register}">I don't have an account yet</a>
+        </form>
+
+        <div class = "container-message">
+            <div th:if="${errorMessage}" class="error-message">
+                <p th:text="${errorMessage}"></p>
+            </div>
+            <div th:unless="${errorMessage}" class="no-message">
+                <p> </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-section" id="login-text">
+        <h2>Welcome Back!</h2>
+    </div>
+
+</div>
+
+<script src="/js/pathAdjuster.js"></script>
+</body>
+</html>

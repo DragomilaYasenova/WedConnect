@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wedding Agency Additional Information</title>
+</head>
+<body>
+    <div class="container-info">
+        <h1>We're thrilled to have you on board.<br>
+            To get the most out of our features, please take a moment to complete your profile.
+        </h1>
+        <form class="info-form" th:action="@{|/wedding_agency/info/${wedding_agency.id}|}" th:object="${wedding_agency}" method="post">
+            <div class="left">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="name" th:field="*{name}" required>
+
+                <label for="phone-number">Phone Number</label>
+                <input type="text" id="phone-number" placeholder="00-0000-0000" th:field="*{phoneNumber}" required>
+            </div>
+
+            <div class="right">
+                <label for="address">Address</label>
+                <input type="text" id="address" placeholder="address" th:field="*{address}" required>
+
+                <label for="max_distance_km">Maximum distance service</label>
+                <input type="text" id="max_distance_km" placeholder="maximum distance service" th:field="*{maxDistanceKm}" required>
+            </div>
+
+            <input type="hidden" th:field="*{id}"/>
+            <button type="submit">Confirm</button>
+        </form>
+    </div>
+
+</body>
+</html>

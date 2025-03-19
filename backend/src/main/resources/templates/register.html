@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="EN">
+<head>
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/grid.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/base.css">
+</head>
+<body class="height-100vh">
+<div class="container-register">
+    <div class="lace-top">
+        <img src="/svg/lace/lace-horizontal-top.svg" alt="Top Lace" draggable="false">
+    </div>
+
+    <div class="lace-top">
+        <img src="/svg/lace/lace-horizontal-top.svg" alt="Top Lace" draggable="false" id="item1-right">
+    </div>
+
+    <div class="lace-bottom">
+        <img src="/svg/lace/lace-horizontal-bottom.svg" alt="Bottom Lace" draggable="false">
+    </div>
+
+    <div class="lace-bottom">
+        <img src="/svg/lace/lace-horizontal-bottom.svg" alt="Bottom Lace" draggable="false" id="item2-right">
+    </div>
+
+    <div class="border-left"></div>
+    <div class="border-right"></div>
+    
+    <div class="text-section" id="register-text">
+        <h2>Ready to start planning <br> your happily ever after?</h2>
+    </div>
+    <div class="form-section" id="register-form">
+        <form class="signup-form" th:action="@{/register}" th:object="${user}" method="post">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="username" th:field="*{username}" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="..........." th:field="*{password}" required>
+
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" placeholder="..........." th:field="*{confirmPassword}" required>
+
+            <label for="type">User Type</label>
+            <select id="type" name="userType">
+                <option th:each="type : ${userTypes}" th:value="${type}" th:text="${type}"></option>
+            </select>
+            <br>
+            <button type="submit" class="button">Sign Up</button>
+            <a href="#" class="login-link" th:href="@{/login}">I already have an account</a>
+        </form>
+
+        <div class = "container-message">
+            <div th:if="${errorMessage}" class="error-message">
+                <p th:text="${errorMessage}"></p>
+            </div>
+            <div th:if="${successMessage}" class="message">
+                <p th:text="${successMessage}"></p>
+            </div>
+            <div th:unless="${errorMessage} or ${successMessage}" class="no-message">
+                <p> </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="/js/pathAdjuster.js"></script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+/* Fonts*/
+
+@font-face {
+    font-family: 'Poppins-Regular';
+    src: url('../fonts/Poppins-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Poppins-Bold';
+    src: url('../fonts/Poppins-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Parisienne-Regular';
+    src: url('../fonts/Parisienne-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Mon-Amour-Two';
+    src: url('../fonts/Mon-Amour-Two.ttf');
+}
+
+.bolder-font {
+    font-weight: bolder;
+}
+
+.font-size-48px {
+    font-size: 48px;
+}
+
+.font-size-36px {
+    font-size: 36px;
+}
+
+.font-size-24px {
+    font-size: 24px;
+}
+
+.font-size-20px {
+    font-size: 20px;
+}
+
+.font-size-16px {
+    font-size: 16px;
+}
+
+.font-size-14px {
+    font-size: 14px;
+}
+
+.text-left {
+    text-align: left;
+}
+
+
+:root{
+    --base-clr: #FAF0F8;
+    --main-clr: #B04C7E;
+    --hover-clr: #86355e;
+    --text-clr: #331625;
+    --elements-clr: #FFFFFF;
+    --accent-clr: #F2CFE1;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.padding20px {
+    padding: 20px;
+}
+
+.height-100vh {
+    height: 100vh;
+}
+
+/* Body*/
+body {
+    margin: 0;
+    font-family: Poppins-Regular, serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: var(--base-clr);
+}
+
+/* Buttons*/
+.button {
+    font-family: Poppins-Bold, serif;
+    padding: 10px 30px;
+    font-size: 16px;
+    background-color: var(--main-clr);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 5px;
+}
+
+.button:hover {
+    background-color: var(--hover-clr);
+}
+
+
+/* Lace left-right*/
+
+.lace-left {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.lace-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#item1, #item2 {
+    top: 733px;
+}
+
+.lace-position-nav {
+    position: fixed;
+    top: 0;
+    align-self: start;
+}
+
+.second-lace {
+    position: fixed;
+    top: 733px;
+}
+
+.right {
+    right: 0;
+}
+
+.lace-top, .lace-bottom {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Lace top-bottom*/
+.lace-top {
+    grid-area: lace-top;
+    top: 10px;
+}
+
+.lace-bottom {
+    grid-area: lace-bottom;
+    bottom: 10px;
+}
+
+#item1-right, #item2-right{
+    position: absolute;
+    left: 730px;
+}
+
+.lace-top object,
+.lace-bottom object {
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* Messages */
+.message, .error-message, .no-message {
+    text-align: center;
+    margin-top: 15px;
+    min-height: 20px;
+}
+
+.no-message {
+    color: transparent;
+}
+
+.message {
+    color: green;
+}
+
+.error-message {
+    color: red;
+}
+
+.hidden {
+    display: none;
+}

@@ -1,0 +1,77 @@
+.container-register {
+    display: grid;
+    grid-template-columns: 50px 400px 400px 50px;
+    grid-template-rows: 50px 600px 50px;
+
+    grid-template-areas: 
+        "   .   lace-top   lace-top   .   "
+        "   border-left   text-section   form-section   border-right   "
+        "   .   lace-bottom   lace-bottom   .   "
+    ;
+}
+
+.container-login {
+    display: grid;
+    grid-template-columns: 50px 400px 400px 50px;
+    grid-template-rows: 50px 600px 50px;
+
+    grid-template-areas: 
+        "   .   lace-top   lace-top   .   "
+        "   border-left   form-section   text-section   border-right   "
+        "   .   lace-bottom   lace-bottom   .   "
+    ;   
+}
+
+.container-home {
+    display:grid;
+    grid-template-columns: auto 100px auto;
+    grid-template-rows: 100px auto 100px auto auto;
+
+    grid-template-areas:
+        "   text-grid-top   text-grid-top   text-grid-top   "
+        "   img-grid-left   text-grid-center   img-grid-right   "
+        "   text-grid-left   .   text-grid-right   "
+        "   information-grid   information-grid   information-grid   "
+        "   content-grid   content-grid   content-grid   "
+    ;
+    justify-items: center;
+    align-items: center;
+}
+
+.client-form {
+    display:grid;
+    gap: 20px 50px;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+
+    grid-template-areas:
+        "   text-grid-top   text-grid-top   "
+        "   client-name-grid   client-number-grid   "
+    ;
+}
+
+.wedding-form {
+    display:grid;
+    gap: 20px 50px;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto auto;
+
+    grid-template-areas:
+        "   text-grid-top   text-grid-top   "
+        "   bride-name-grid   groom-name-grid   "
+        "   bride-phone-number-grid   groom-phone-number-grid   "
+        "   profile-content-grid    profile-content-grid   "
+;
+}
+
+#profile-content-grid {
+    display:grid;
+    gap: 20px 50px;
+    grid-template-columns: repeat(auto-fill, auto);
+    grid-template-rows: auto;
+
+    grid-template-areas:
+        "   date-grid   location-grid   number-of-guests-grid   "
+;
+
+}
