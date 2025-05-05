@@ -31,21 +31,26 @@
         <h2>Ready to start planning <br> your happily ever after?</h2>
     </div>
     <div class="form-section" id="register-form">
-        <form class="signup-form" th:action="@{/register}" th:object="${user}" method="post">
+        <form class="signup-form" th:action="@{/register}" th:object="${userDTO}" method="post">
             <label for="username">Username</label>
-            <input type="text" id="username" placeholder="username" th:field="*{username}" required>
+            <input type="text" id="username" th:field="*{username}" required>
+            <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error"></div>
 
             <label for="password">Password</label>
-            <input type="password" id="password" placeholder="..........." th:field="*{password}" required>
+            <input type="password" id="password" th:field="*{password}" required>
+            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></div>
 
             <label for="confirmPassword">Confirm Password</label>
-            <input type="password" id="confirmPassword" placeholder="..........." th:field="*{confirmPassword}" required>
+            <input type="password" id="confirmPassword" th:field="*{confirmPassword}" required>
+            <div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="error"></div>
 
             <label for="type">User Type</label>
-            <select id="type" name="userType">
-                <option th:each="type : ${userTypes}" th:value="${type}" th:text="${type}"></option>
+            <select id="type" th:field="*{type}">
+                <option th:each="type : ${userTypes}"
+                        th:value="${type}"
+                        th:text="${type.displayName}"></option>
             </select>
-            <br>
+
             <button type="submit" class="button">Sign Up</button>
             <a href="#" class="login-link" th:href="@{/login}">I already have an account</a>
         </form>

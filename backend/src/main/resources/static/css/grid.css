@@ -75,3 +75,40 @@
 ;
 
 }
+
+.guest-form-edit-grid, .guest-form-grid {
+    display:grid;
+    gap: 20px 50px;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: auto auto auto auto auto auto;
+
+    grid-template-areas:
+        "   .   guest-first-name-grid   guest-last-name-grid   .   "
+        "   .   guest-email-grid   guest-gender-grid   .   "
+        "   .   guest-wedding-family-role-grid   guest-wedding-family-side-grid   .   "
+        "   .   guest-wedding-rsvp-status-grid   table-number-grid   .   "
+        "   .   guest-wedding-menu-choice-grid   guest-group-grid   .   "
+        "   .   button-guests   button-guests   .   "
+;
+}
+
+#container-guests {
+    display:grid;
+    gap: 20px 50px;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+
+    grid-template-areas:
+        "   guest-table-grid   guest-table-grid   guest-table-grid   "
+        "   .   guest-add-button-grid   .   "
+        "   guest-forms-grid   guest-forms-grid   guest-forms-grid   "
+;
+    justify-content: center;
+}
+
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}

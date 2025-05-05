@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant Profile</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/grid.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/base.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/nav.css">
+</head>
+<body class="profile">
+<nav id="sidebar">
+    <ul>
+        <li>
+            <span class="logo">WedConnect</span>
+            <button onclick=toggleSidebar() id="toggle-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M440-240 200-480l240-240 56 56-183 184 183 184-56 56Zm264 0L464-480l240-240 56 56-183 184 183 184-56 56Z"/></svg>
+            </button>
+        </li>
+        <li>
+            <a th:href="@{/restaurant/home}">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg>
+                <span>Home</span>
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/restaurant/reservations}">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z"/></svg>
+                <span>Reservations</span>
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/restaurant/menu}">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M160-200q-17 0-28.5-11.5T120-240q0-17 11.5-28.5T160-280h640q17 0 28.5 11.5T840-240q0 17-11.5 28.5T800-200H160Zm0-240q-17 0-28.5-11.5T120-480q0-17 11.5-28.5T160-520h640q17 0 28.5 11.5T840-480q0 17-11.5 28.5T800-440H160Zm0-240q-17 0-28.5-11.5T120-720q0-17 11.5-28.5T160-760h640q17 0 28.5 11.5T840-720q0 17-11.5 28.5T800-680H160Z"/></svg>
+                <span>Menu</span>
+            </a>
+        </li>
+
+        <div class="spacer"></div>
+        <li class="active">
+            <a th:href="@{/restaurant/profile}">
+                <img class="img-icon" src="../../static/img/profile/restaurant.png" alt="restaurant">
+                <span>Profile</span>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M240-80q-33 0-56.5-23.5T160-160v-560q0-33 23.5-56.5T240-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T880-640v560q0 33-23.5 56.5T800-80H240Zm0-80h560v-400H240v400Zm0-480h560v-80H240v80Zm0 0v-80 80Z"/></svg>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<main>
+    <div class="lace-position-nav">
+        <img src="/svg/lace/lace-vertical-left.svg" alt="Left Lace" draggable="false">
+    </div>
+
+    <div class="second-lace">
+        <img src="/svg/lace/lace-vertical-left.svg" alt="Left Lace" draggable="false">
+    </div>
+
+    <div class="lace-position-nav right">
+        <img src="/svg/lace/lace-vertical-right.svg" alt="Right Lace" draggable="false">
+    </div>
+
+    <div class="second-lace right">
+        <img src="/svg/lace/lace-vertical-right.svg" alt="Right Lace" draggable="false">
+    </div>
+
+    <div class="container-profile container-content">
+        <p class="bolder-font font-size-20px"> <br> Keep your restaurant profile updated to attract more clients.
+        </p>
+        <form class="profile-form" th:action="@{/restaurant/profile}" th:object="${restaurantDTO}" method="post">
+            <div class="restaurant-form">
+                <p class="text-grid-top bolder-font font-size-24px form-title">Restaurant Information</p>
+
+                <div id="name-grid">
+                    <label for="name">Restaurant Name</label>
+                    <input type="text" id="name" placeholder="Restaurant Name" th:field="*{name}" required>
+                    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                </div>
+
+                <div id="address-grid">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" placeholder="Address" th:field="*{address}" required>
+                    <div th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
+                </div>
+
+                <div id="phone-number-grid">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input type="text" id="phoneNumber" placeholder="Phone Number" th:field="*{phoneNumber}" required>
+                    <div th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></div>
+                </div>
+
+
+
+                <div id="capacity-grid">
+                    <label for="capacity">Maximum Capacity</label>
+                    <input type="number" id="capacity" placeholder="Capacity" th:field="*{capacity}" required>
+                    <div th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></div>
+                </div>
+
+
+            </div>
+
+            <button type="submit" class="button" id="button-profile">Update Profile</button>
+        </form>
+
+        <form action="#" th:action="@{/logout}" method="post" style="display: inline;">
+            <button type="submit" class="button logout-btn">Logout</button>
+        </form>
+    </div>
+</main>
+
+<script src="../../static/js/buttons.js"></script>
+<script src="/js/buttons.js"></script>
+<script src="/js/pathAdjuster.js"></script>
+</body>
+</html>

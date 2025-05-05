@@ -79,20 +79,20 @@
     grid-area: form-section;
 }
 
-.signup-form, .profile-form {
+.signup-form, .profile-form, #guestForm {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.signup-form label, .profile-form label {
+.signup-form label, .profile-form label, #guestForm label {
     color: #331625;
     margin-bottom: 5px;
     font-weight: bold;
     font-size: 16px;
 }
 
-.signup-form input, .profile-form input {
+.signup-form input, .profile-form input, #guestForm input {
     margin-bottom: 20px;
     padding: 10px;
     font-size: 14px;
@@ -101,7 +101,7 @@
     outline: none;
 }
 
-.signup-form select, .profile-form select {
+.signup-form select, .profile-form select, #guestForm select {
     width: 100%;
 }
 
@@ -118,12 +118,12 @@
     font-size: 14px;
 }
 
-.profile-form input {
+.profile-form input, #guestForm input {
     border: 1px solid #D9D9D9;
     font-size: 14px;
 }
 
-.profile-form input:focus {
+.profile-form input:focus, #guestForm input:focus {
     border: 1px solid #FF99CC;
     font-size: 14px;
 }
@@ -136,7 +136,11 @@
 .profile-form input:-webkit-autofill,
 .profile-form input:-webkit-autofill:focus,
 .profile-form input:-webkit-autofill:hover,
-.profile-form input:-webkit-autofill:active{
+.profile-form input:-webkit-autofill:active,
+#guestForm input:-webkit-autofill,
+#guestForm input:-webkit-autofill:focus,
+#guestForm input:-webkit-autofill:hover,
+#guestForm input:-webkit-autofill:active {
     background-color: #ffe5f1 !important;
     -webkit-box-shadow: 0 0 0 1000px #ffe5f1 inset;
     border-radius: 6px;
@@ -144,8 +148,11 @@
     transition: background-color 0.1s ease-in-out;
 }
 
-select#type {
+.signup-form select#type {
     width: 250px;
+}
+
+.signup-form select#type, #guestForm select#type {
     padding: 10px;
     font-size: 12px;
     border: 1px solid #D9D9D9;
@@ -154,11 +161,11 @@ select#type {
     box-sizing: border-box;
 }
 
-select#type option {
+.signup-form select#type option, #guestForm select#type option{
     font-size: 12px;
 }
 
-select#type:focus {
+.signup-form select#type:focus, #guestForm select#type:focus {
     outline: none;
     border: 1px solid #FF99CC;
 }
@@ -248,13 +255,13 @@ select#type:focus {
     margin-bottom: 50px;
 }
 
-.wedding-form, .client-form {
+.wedding-form, .client-form, #guestForm {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-.profile-form input {
+.profile-form input, #guestForm input {
     border-radius: 10px;
 }
 
@@ -337,3 +344,347 @@ select#type:focus {
 .guest-form, .guest-list {
     margin: 20px 0;
 }
+
+
+.guest-first-name-grid,
+.guest-last-name-grid,
+.guest-email-grid,
+.guest-gender-grid,
+.guest-wedding-family-role-grid,
+.guest-wedding-family-side-grid,
+.guest-wedding-rsvp-status-grid,
+.table-number-grid,
+.guest-wedding-menu-choice-grid,
+.guest-group-grid {
+    display: flex;
+    flex-direction: column;
+}
+.guest-first-name-grid {
+    grid-area: guest-first-name-grid;
+}
+
+.guest-last-name-grid {
+    grid-area: guest-last-name-grid;
+}
+
+.guest-email-grid {
+    grid-area: guest-email-grid;
+}
+
+.guest-gender-grid {
+    grid-area: guest-gender-grid;
+}
+
+.guest-wedding-family-role-grid {
+    grid-area: guest-wedding-family-role-grid;
+}
+
+.guest-wedding-family-side-grid {
+    grid-area: guest-wedding-family-side-grid;
+}
+
+.guest-wedding-rsvp-status-grid {
+    grid-area: guest-wedding-rsvp-status-grid;
+}
+
+.table-number-grid {
+    grid-area: table-number-grid;
+}
+
+.guest-wedding-menu-choice-grid {
+    grid-area: guest-wedding-menu-choice-grid;
+}
+
+.guest-group-grid {
+    grid-area: guest-group-grid;
+}
+
+.button-guests {
+    grid-area: button-guests;
+}
+
+#guest-forms-grid {
+    grid-area: guest-forms-grid;
+}
+
+#guest-table-grid {
+    grid-area: guest-table-grid;
+}
+
+.guest-add-button-grid {
+    grid-area: guest-add-button-grid;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*------------------------------------------------------------------------------------*/
+
+ #guest-wedding-table {
+     width: 100%;
+     border-collapse: separate;
+     border-spacing: 0;
+     margin: 20px 0;
+     font-family: 'Arial', sans-serif;
+     background: #fff;
+     border-radius: 12px;
+     overflow: hidden;
+     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+ }
+
+#guest-wedding-table th {
+    background-color: var(--main-clr);
+    color: var(--elements-clr);
+    padding: 15px;
+    text-align: center;
+    font-weight: 600;
+}
+
+#guest-wedding-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f0e6eb;
+    vertical-align: middle;
+}
+
+#guest-wedding-table tr:last-child td {
+    border-bottom: none;
+}
+
+#guest-wedding-table tr:hover {
+    background-color: #fdf5f9;
+}
+
+.btn {
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    margin: 2px;
+}
+
+.btn-edit {
+    background-color: #e8c8e0;
+    color: #5a3d5a;
+}
+
+.btn-edit:hover {
+    background-color: #d8b0d0;
+    transform: translateY(-1px);
+}
+
+form[action*="/delete"] .btn {
+    background-color: #f8e0e0;
+    color: #a05050;
+}
+
+form[action*="/delete"] .btn:hover {
+    background-color: #f0c8c8;
+}
+
+#guest-wedding-table form {
+    display: inline-block;
+    margin: 0 4px;
+}
+
+#guest-wedding-table tr:nth-child(even) {
+    background-color: #faf5f9;
+}
+
+#guest-wedding-table tr:nth-child(even):hover {
+    background-color: #fdf0f7;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Service */
+
+ .service-type-section {
+     margin-bottom: 40px;
+     padding: 20px;
+     background-color: #f9f3f7;
+     border-radius: 8px;
+ }
+
+.service-type-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0c9d6;
+}
+
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.service-card {
+    border: 1px solid #e0c9d6;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: white;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(134, 53, 94, 0.1);
+}
+
+.service-card h3 {
+    color: var(--main-clr);
+    margin-top: 0;
+}
+
+.service-card p {
+    margin: 8px 0;
+    color: #555;
+}
+
+.select-button {
+    margin-top: 15px;
+    width: 100%;
+    background-color: var(--main-clr);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.select-button:hover {
+    background-color: var(--hover-clr);
+}
+
+.service-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e0c9d6;
+}
+
+.service-tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+}
+
+.service-tab.active {
+    border-bottom-color: var(--main-clr);
+    font-weight: bold;
+    color: var(--main-clr);
+}
+
+
+
+
+
+
+
+
+
+/* Guest Form Container */
+ #guest-forms-grid {
+     width: 100%;
+     max-width: 600px;
+     margin: 20px auto;
+ }
+
+/* Form Styling */
+#guestForm {
+    padding: 30px;
+    margin-top: 20px;
+}
+
+.guest-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+/* Form Group Styling */
+.form-group {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #5a3d5a;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e0c8d8;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background-color: #fdf9fb;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #d8b0d0;
+    box-shadow: 0 0 0 2px rgba(216, 176, 208, 0.2);
+}
+
+/* Submit Button */
+.button-guests {
+    grid-column: span 2;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button-guests button {
+    background-color: #e8c8e0;
+    color: #5a3d5a;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.button-guests button:hover {
+    background-color: #d8b0d0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+

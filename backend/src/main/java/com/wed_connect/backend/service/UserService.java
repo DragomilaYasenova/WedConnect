@@ -1,5 +1,6 @@
 package com.wed_connect.backend.service;
 
+import com.wed_connect.backend.dto.UserDTO;
 import com.wed_connect.backend.model.*;
 import com.wed_connect.backend.repository.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,26 +31,28 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public String registerUser(User user, UserType userType) {
-        if (userRepository.existsByUsername(user.getUsername())) {
+    public String registerUser(UserDTO userDTO) {
+        if (userRepository.existsByUsername(userDTO.getUsername())) {
             return "Username is already taken";
         }
 
-        if (!user.getPassword().equals(user.getConfirmPassword())) {
+        if (!userDTO.getPassword().equals(userDTO.getConfirmPassword())) {
             return "Passwords do not match";
         }
 
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
+        User user = new User();
+        user.setUsername(userDTO.getUsername());
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        user.setType(userDTO.getType());
 
-        user.setType(userType);
         userRepository.save(user);
 
-        switch (userType) {
+        switch (userDTO.getType()) {
             case CLIENT:
                 Client client = new Client();
                 client.setUser(user);
                 clientRepository.save(client);
+
                 Wedding wedding = new Wedding();
                 wedding.setClient(client);
                 wedding.setDateWedding(LocalDate.now());
@@ -76,8 +79,8 @@ public class UserService {
         return "User registered successfully";
     }
 
-    public String authenticateUser(User user) {
-        Optional<User> foundUserOptional = userRepository.findByUsername(user.getUsername());
+    public String authenticateUser(UserDTO userDTO) {
+        Optional<User> foundUserOptional = userRepository.findByUsername(userDTO.getUsername());
 
         if (foundUserOptional.isEmpty()) {
             return "Invalid username or password";
@@ -85,19 +88,20 @@ public class UserService {
 
         User foundUser = foundUserOptional.get();
 
-        if (!authenticate(user.getPassword(), foundUser)) {
+        if (!passwordEncoder.matches(userDTO.getPassword(), foundUser.getPassword())) {
             return "Invalid username or password";
         }
 
         return "User logged in successfully";
     }
 
+
     public boolean authenticate(String rawPassword, User user) {
         return passwordEncoder.matches(rawPassword, user.getPassword());
     }
 
-    public String getUserType(User user) {
-        Long userId = userRepository.findIdByUsername(user.getUsername());
+    public String getUserType(String username) {
+        Long userId = userRepository.findIdByUsername(username);
 
         if (clientRepository.existsByUserId(userId)) {
             return "Client";

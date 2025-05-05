@@ -1,9 +1,12 @@
 package com.wed_connect.backend.controller;
 
+import com.wed_connect.backend.dto.UserDTO;
 import com.wed_connect.backend.model.UserType;
 import com.wed_connect.backend.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import com.wed_connect.backend.model.User;
@@ -23,21 +26,29 @@ public class RegistrationController {
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("userDTO", new UserDTO());
         model.addAttribute("userTypes", UserType.values());
         return "register";
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute User user, @ModelAttribute("userType") UserType userType, Model model) {
-        String result = userService.registerUser(user, userType);
-        if (result.equals("User registered successfully")) {
+    public String registerUser(@Valid @ModelAttribute("userDTO") UserDTO userDTO,
+                               BindingResult bindingResult,
+                               Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("userTypes", UserType.values());
+            return "register";
+        }
+
+        String result = userService.registerUser(userDTO);
+        if ("User registered successfully".equals(result)) {
             model.addAttribute("successMessage", result);
             return "redirect:/login";
         } else {
             model.addAttribute("errorMessage", result);
+            model.addAttribute("userTypes", UserType.values());
+            return "register";
         }
-        model.addAttribute("userTypes", UserType.values());
-        return "register";
     }
 }

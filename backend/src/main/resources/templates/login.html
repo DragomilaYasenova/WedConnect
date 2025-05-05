@@ -28,7 +28,7 @@
     <div class="border-right"></div>
 
     <div class="form-section" id="login-form">
-        <form class="signup-form" th:action="@{/login}" th:object="${user}" method="post">
+        <form class="signup-form" th:action="@{/login}" th:object="${userDTO}" method="post">
             <label for="username">Username</label>
             <input type="text" id="username" placeholder="username" th:field="*{username}" required>
 

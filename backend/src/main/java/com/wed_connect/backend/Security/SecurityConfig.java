@@ -19,12 +19,24 @@ public class SecurityConfig {
                         .requestMatchers("/","/index", "/login", "/register").permitAll()
                         .requestMatchers("/client/**").hasRole("CLIENT")
                         .requestMatchers("/client/**").hasAuthority("CLIENT")
+                        .requestMatchers("/restaurant/**").hasRole("RESTAURANT")
+                        .requestMatchers("/restaurant/**").hasAuthority("RESTAURANT")
 
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/client/home", true)
+                        .successHandler((request, response, authentication) -> {
+                            var authorities = authentication.getAuthorities().toString();
+
+                            if (authorities.contains("RESTAURANT")) {
+                                response.sendRedirect("/restaurant/home");
+                            } else if (authorities.contains("CLIENT")) {
+                                response.sendRedirect("/client/home");
+                            } else {
+                                response.sendRedirect("/");
+                            }
+                        })
                         .permitAll()
                 )
                 .logout(logout -> logout

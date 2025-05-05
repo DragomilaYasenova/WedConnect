@@ -9,6 +9,11 @@
 <form th:action="@{/client/guests/edit}" method="post">
     <input type="hidden" name="id" th:value="${guestWedding.id}" />
 
+    <input type="hidden" name="guest.id" th:value="${guestWedding.guest.id}" />
+
+    <input type="hidden" name="wedding.id" th:value="${guestWedding.wedding.id}" />
+
+
     <div class="form-group">
         <label for="firstName">First Name:</label>
         <input type="text" id="firstName" name="nickname" th:value="${guestWedding.nickname}" required />
