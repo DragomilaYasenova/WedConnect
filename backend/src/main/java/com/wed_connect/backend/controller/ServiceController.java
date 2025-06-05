@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/services")
@@ -35,13 +37,24 @@ public class ServiceController {
     @GetMapping("/find-services")
     public String findAllRestaurants(Model model,
                                      @AuthenticationPrincipal UserDetails userDetails) {
-        List<RestaurantDTO> restaurants = restaurantService.getAllRestaurants();
-        model.addAttribute("restaurants", restaurants);
-
         Long clientId = clientService.getClientIdByUsername(userDetails.getUsername());
         Wedding wedding = weddingService.findByClientId(clientId);
+        LocalDate weddingDate = wedding.getDateWedding();
+
+        List<RestaurantDTO> restaurants = restaurantService.getAllRestaurants().stream()
+                .map(r -> {
+                    boolean isAvailable = !r.getBookedDates().contains(weddingDate) ||
+                            (wedding.getRestaurant() != null &&
+                                    wedding.getRestaurant().getId().equals(r.getId()));
+                    r.setAvailable(isAvailable);
+                    return r;
+                })
+                .collect(Collectors.toList());
+
+        model.addAttribute("restaurants", restaurants);
         model.addAttribute("selectedRestaurantId", wedding.getRestaurant() != null ?
                 wedding.getRestaurant().getId() : null);
+        model.addAttribute("weddingDate", weddingDate);
 
         return "services/find-services";
     }
@@ -56,6 +69,20 @@ public class ServiceController {
             redirectAttributes.addFlashAttribute("success", "Restaurant selected successfully!");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Failed to select restaurant: " + e.getMessage());
+        }
+        return "redirect:/services/find-services";
+    }
+
+    @PostMapping("/remove-restaurant")
+    public String removeRestaurant(@AuthenticationPrincipal UserDetails userDetails,
+                                   RedirectAttributes redirectAttributes) {
+        try {
+            Long clientId = clientService.getClientIdByUsername(userDetails.getUsername());
+            Wedding wedding = weddingService.findByClientId(clientId);
+            weddingService.removeRestaurantFromWedding(wedding.getId());
+            redirectAttributes.addFlashAttribute("success", "Restaurant removed successfully!");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Failed to remove restaurant: " + e.getMessage());
         }
         return "redirect:/services/find-services";
     }

@@ -10,6 +10,8 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+
 @Service
 public class WeddingService {
 
@@ -32,6 +34,9 @@ public class WeddingService {
     @Transactional
     public void updateWedding(Long clientId, WeddingDTO weddingDTO) {
         Wedding wedding = findByClientId(clientId);
+        LocalDate originalDate = wedding.getDateWedding();
+        Restaurant originalRestaurant = wedding.getRestaurant();
+
         wedding.setNameBride(weddingDTO.getNameBride());
         wedding.setNameGroom(weddingDTO.getNameGroom());
         wedding.setPhoneNumberBride(weddingDTO.getPhoneNumberBride());
@@ -41,14 +46,37 @@ public class WeddingService {
         wedding.setNumberOfGuests(weddingDTO.getNumberOfGuests());
 
         if (weddingDTO.getRestaurantId() != null) {
-            Restaurant restaurant = restaurantService.findById(weddingDTO.getRestaurantId());
-            wedding.setRestaurant(restaurant);
+            Restaurant newRestaurant = restaurantService.findById(weddingDTO.getRestaurantId());
+
+            boolean isChangingRestaurant = originalRestaurant == null ||
+                    !originalRestaurant.getId().equals(newRestaurant.getId());
+            boolean isChangingDate = !originalDate.equals(wedding.getDateWedding());
+
+            if (isChangingRestaurant || isChangingDate) {
+                if (originalRestaurant != null) {
+                    originalRestaurant.getBookedDates().remove(originalDate);
+                    restaurantRepository.save(originalRestaurant);
+                }
+
+                if (newRestaurant.getBookedDates().contains(wedding.getDateWedding())) {
+                    throw new IllegalStateException("Restaurant is already booked for the selected date");
+                }
+
+                newRestaurant.getBookedDates().add(wedding.getDateWedding());
+                restaurantRepository.save(newRestaurant);
+                wedding.setRestaurant(newRestaurant);
+            }
         } else {
-            wedding.setRestaurant(null);
+            if (originalRestaurant != null) {
+                originalRestaurant.getBookedDates().remove(originalDate);
+                restaurantRepository.save(originalRestaurant);
+                wedding.setRestaurant(null);
+            }
         }
 
         weddingRepository.save(wedding);
     }
+
 
     public WeddingDTO getWeddingDTOByClientId(Long clientId) {
         Wedding wedding = findByClientId(clientId);
@@ -72,14 +100,38 @@ public class WeddingService {
 
     @Transactional
     public void setRestaurantForWedding(Long clientId, Long restaurantId) {
-
         Wedding wedding = weddingRepository.findByClientId(clientId)
                 .orElseThrow(() -> new EntityNotFoundException("Wedding not found for client"));
-
-        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+        Restaurant newRestaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(() -> new EntityNotFoundException("Restaurant not found"));
 
-        wedding.setRestaurant(restaurant);
+        if (newRestaurant.getBookedDates().contains(wedding.getDateWedding())) {
+            throw new IllegalStateException("Restaurant is already booked for the selected date");
+        }
+
+        if (wedding.getRestaurant() != null && !wedding.getRestaurant().getId().equals(restaurantId)) {
+            wedding.getRestaurant().getBookedDates().remove(wedding.getDateWedding());
+            restaurantRepository.save(wedding.getRestaurant());
+        }
+
+        newRestaurant.getBookedDates().add(wedding.getDateWedding());
+        restaurantRepository.save(newRestaurant);
+
+        wedding.setRestaurant(newRestaurant);
         weddingRepository.save(wedding);
     }
+
+    @Transactional
+    public void removeRestaurantFromWedding(Long weddingId) {
+        Wedding wedding = weddingRepository.findById(weddingId)
+                .orElseThrow(() -> new EntityNotFoundException("Wedding not found"));
+
+        if (wedding.getRestaurant() != null) {
+            wedding.getRestaurant().getBookedDates().remove(wedding.getDateWedding());
+            restaurantRepository.save(wedding.getRestaurant());
+            wedding.setRestaurant(null);
+            weddingRepository.save(wedding);
+        }
+    }
+
 }

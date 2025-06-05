@@ -1,7 +1,7 @@
 package com.wed_connect.backend.service;
 
 import com.wed_connect.backend.dto.ClientDTO;
-import com.wed_connect.backend.exception.ClientNotFoundException;
+import com.wed_connect.backend.exception.client.ClientNotFoundException;
 import com.wed_connect.backend.model.Client;
 import com.wed_connect.backend.repository.ClientRepository;
 import org.springframework.stereotype.Service;

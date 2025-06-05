@@ -61,12 +61,13 @@ public class RestaurantService {
 
     private RestaurantDTO convertToRestaurantDTO(Restaurant restaurant) {
         if (restaurant == null) return null;
-        return new RestaurantDTO(
-                restaurant.getId(),
-                restaurant.getName(),
-                restaurant.getPhoneNumber(),
-                restaurant.getAddress(),
-                restaurant.getCapacity()
-        );
+        RestaurantDTO dto = new RestaurantDTO();
+        dto.setId(restaurant.getId());
+        dto.setName(restaurant.getName());
+        dto.setPhoneNumber(restaurant.getPhoneNumber());
+        dto.setAddress(restaurant.getAddress());
+        dto.setCapacity(restaurant.getCapacity());
+        dto.setBookedDates(restaurant.getBookedDates());
+        return dto;
     }
 }

@@ -5,6 +5,9 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.util.Set;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,5 +28,15 @@ public class RestaurantDTO {
     private String address;
 
     private String capacity;
+    private Set<LocalDate> bookedDates;
 
+    private boolean available;
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
 }
